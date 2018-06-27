@@ -5,9 +5,11 @@ public class Plate {
 	private HashMap<String, Integer> ingredients;
 	private Inventory inventory;
 	private String name;
+	private double price;
 	
-	public Plate(String name, Inventory inv){
+	public Plate(String name,double price, Inventory inv){
 		this.name = name;
+		this.price=price;
 		ingredients = new HashMap<>();
 		inventory = inv;
 		
@@ -32,6 +34,10 @@ public class Plate {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public double getPrice() {
+		return price;
 	}
 	
 	//PRICE
