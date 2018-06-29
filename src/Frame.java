@@ -23,12 +23,14 @@ import javax.swing.JScrollBar;
 
 public class Frame extends JFrame implements ActionListener {
 
-	Inventory inv;
+	private Inventory inv;
 	private Menu men;
 
 	private JPanel mainMenu;
-	private JPanel adminMenu;
-	private JPanel inventoryMenu;
+	private AdminMenu adminMenu = new AdminMenu(inv, this);
+	private PlatesMenu platesMenu = new PlatesMenu(inv, this);
+	private InventoryMenu inventoryMenu = new InventoryMenu(inv, this);
+	
 
 	/**
 	 * Launch the application.
@@ -43,12 +45,11 @@ public class Frame extends JFrame implements ActionListener {
 				}
 				catch (Exception e) {
 					e.printStackTrace();
-					
+
 				}
 			}
 		});
-		
-		
+
 	}
 
 	/**
@@ -58,25 +59,25 @@ public class Frame extends JFrame implements ActionListener {
 
 		Inventory inv = new Inventory();
 		Menu men = new Menu();
-		
-		
-		
+
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		
+
 		mainMenu = new JPanel();
 		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 		mainMenu.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton btnCustomer = new JButton("Customer");
 		mainMenu.add(btnCustomer, BorderLayout.WEST);
 
 		JButton btnAdmin = new JButton("Admin");
 		mainMenu.add(btnAdmin, BorderLayout.EAST);
-		
-		
-		
-		
+
+
+
+
 		btnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Admin clicked");
@@ -85,98 +86,15 @@ public class Frame extends JFrame implements ActionListener {
 				revalidate(); 
 			}
 		});
-		
-	//	setContentPane(mainMenu);  //Starting Panel
 
-		//comienza adminMenu
-		adminMenu = new JPanel();
-		adminMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
-		adminMenu.setLayout(new BorderLayout(0, 0));
+		//	setContentPane(mainMenu);  //Starting Panel
 
 		
 
-		JButton btnMenu = new JButton("Menu");
-		adminMenu.add(btnMenu, BorderLayout.WEST);
-
-		JButton btnInventory = new JButton("Inventory");
-		adminMenu.add(btnInventory, BorderLayout.EAST);
+	
 		
-		JButton btnMainMenu = new JButton("Main Menu");
-		adminMenu.add(btnMainMenu, BorderLayout.NORTH);
-		
-		btnInventory.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("I was clicked");
-				setContentPane(inventoryMenu); //panel = panel you want to change too.
-				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				revalidate(); 
-			}
-		});
-		
-		btnMainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("mainMenu was clicked");
-				setContentPane(mainMenu); //panel = panel you want to change too.
-				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				revalidate(); 
-			}
-		});
 
-		
-		// Comienza inventoryMenu
-		 inventoryMenu = new JPanel();
-		inventoryMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
-		inventoryMenu.setLayout(new GridLayout(0, 1, 0, 0));
-
-		JButton btnAdminMenu = new JButton("Admin Menu");
-		inventoryMenu.add(btnAdminMenu);
-
-		btnAdminMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				setContentPane(adminMenu); //panel = panel you want to change too.
-				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				revalidate(); 
-
-			}
-		});
-
-		JPanel editPanel =new JPanel();
-		editPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		inventoryMenu.add(editPanel);
-
-		JButton btnAdd = new JButton("Add");
-		editPanel.add(btnAdd);
-
-		JTextField inventoryString = new JTextField();
-		editPanel.add(inventoryString);
-		
-		JTextField inventoryInteger = new JTextField();
-		editPanel.add(inventoryInteger);
-		
-		DefaultListModel<String> model = new DefaultListModel<>();
-		
-		JScrollPane scrollPane = new JScrollPane();
-		inventoryMenu.add(scrollPane);
-		JList<String> invList = new JList<>(model);
-		scrollPane.setViewportView(invList);
-		
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Add was clicked");
-				inv.addItemToInventory(inventoryString.getText(), Integer.parseInt( inventoryInteger.getText()));
-				inv.printInventory();
-				model.clear();
-				for (Map.Entry<String, Integer> entry : inv.getInventoryList().entrySet())
-				{
-				    model.addElement(entry.getKey() + "/" + entry.getValue());
-				}
-				
-			
-			}
-		});
-
-		setContentPane(mainMenu); 
+		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
 	public Inventory getInventory() {
@@ -195,5 +113,18 @@ public class Frame extends JFrame implements ActionListener {
 		//		revalidate(); 
 		//	
 	}
-//hola
+	
+	public AdminMenu getAdminMenu(){
+		return adminMenu;
+	}
+	public JPanel getMainMenu(){
+		return mainMenu;
+	}
+	public PlatesMenu getPlatesMenu(){
+		return platesMenu;
+	}
+	public InventoryMenu getInventoryMenu(){
+		return inventoryMenu;
+	}
+
 }
