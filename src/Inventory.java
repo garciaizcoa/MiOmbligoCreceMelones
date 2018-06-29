@@ -12,7 +12,12 @@ public class Inventory{
 	}
 
 	public void addItemToInventory(String item, int amount){
-		inventoryList.put(item, amount);
+		if(inventoryList.containsKey(item)){
+			this.restock(item, amount);
+		}
+		else{
+			inventoryList.put(item, amount);
+		}	
 	}
 
 	public void useIngredient(String item, int amount){
@@ -42,7 +47,7 @@ public class Inventory{
 	}
 	
 	
-	public Map getInventoryList() {
+	public Map<String, Integer> getInventoryList() {
 		return inventoryList;
 	}
 	
@@ -52,6 +57,7 @@ public class Inventory{
 		    System.out.println(entry.getKey() + "/" + entry.getValue());
 		}
 	}
+	
 	
 	
 }

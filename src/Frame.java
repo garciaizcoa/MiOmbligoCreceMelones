@@ -166,7 +166,12 @@ public class Frame extends JFrame implements ActionListener {
 				System.out.println("Add was clicked");
 				inv.addItemToInventory(inventoryString.getText(), Integer.parseInt( inventoryInteger.getText()));
 				inv.printInventory();
-				model.addElement(inventoryString.getText()+" "+ inventoryInteger.getText());
+				model.clear();
+				for (Map.Entry<String, Integer> entry : inv.getInventoryList().entrySet())
+				{
+				    model.addElement(entry.getKey() + "/" + entry.getValue());
+				}
+				
 			
 			}
 		});
