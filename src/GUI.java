@@ -113,6 +113,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		JTextField inventoryString = new JTextField();
 		editPanel.add(inventoryString);
+		
 
 		JTextField inventoryInteger = new JTextField();
 		editPanel.add(inventoryInteger);
