@@ -1,11 +1,14 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Inventory{
 
-	private HashMap<String, Integer> inventoryList  = new HashMap<>();
+	private Map<String, Integer> inventoryList  = new HashMap<>();
 
 	public Inventory(){
-		inventoryList = new HashMap<>();
+		//inventoryList = new Map<>();
 	}
 
 	public void addItemToInventory(String item, int amount){
@@ -38,5 +41,17 @@ public class Inventory{
 		inventoryList.remove(item);
 	}
 	
-
+	
+	public Map getInventoryList() {
+		return inventoryList;
+	}
+	
+	public void printInventory() {
+		for (Map.Entry<String, Integer> entry : inventoryList.entrySet())
+		{
+		    System.out.println(entry.getKey() + "/" + entry.getValue());
+		}
+	}
+	
+	
 }
