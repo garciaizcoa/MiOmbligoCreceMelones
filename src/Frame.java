@@ -19,6 +19,7 @@ import javax.swing.JToolBar;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import javax.swing.JScrollBar;
 
 public class Frame extends JFrame implements ActionListener {
 
@@ -154,8 +155,11 @@ public class Frame extends JFrame implements ActionListener {
 		editPanel.add(inventoryInteger);
 		
 		DefaultListModel<String> model = new DefaultListModel<>();
+		
+		JScrollPane scrollPane = new JScrollPane();
+		inventoryMenu.add(scrollPane);
 		JList<String> invList = new JList<>(model);
-		inventoryMenu.add(invList);
+		scrollPane.setViewportView(invList);
 		
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
