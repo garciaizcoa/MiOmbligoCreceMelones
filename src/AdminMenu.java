@@ -18,7 +18,7 @@ public class AdminMenu extends JPanel {
 	 * Create the panel.
 	 */
 	
-	public AdminMenu(Inventory inv, Frame frame) {
+	public AdminMenu(Frame frame) {
 		
 		setLayout(new GridLayout(1, 0, 0, 0));
 		

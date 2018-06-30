@@ -18,7 +18,7 @@ public class PlatesMenu extends JPanel {
 	private Inventory inv; 
 	private Frame frame;
 	
-	public PlatesMenu(Inventory inv, Frame frame) {
+	public PlatesMenu(Frame frame) {
 		this.inv = inv;
 		this.frame = frame;
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -31,13 +31,19 @@ public class PlatesMenu extends JPanel {
 				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
-
-			
 			}
 		});
 		
 		JButton btnAdd = new JButton("Add");
 		add(btnAdd);
+		
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setContentPane(frame.getAddPlateMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane);

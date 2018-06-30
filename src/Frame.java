@@ -27,10 +27,11 @@ public class Frame extends JFrame implements ActionListener {
 	private Menu men;
 
 	private JPanel mainMenu;
-	private AdminMenu adminMenu = new AdminMenu(inv, this);
-	private PlatesMenu platesMenu = new PlatesMenu(inv, this);
-	private InventoryMenu inventoryMenu = new InventoryMenu(inv, this);
-	
+	private AdminMenu adminMenu = new AdminMenu(this);
+	private PlatesMenu platesMenu = new PlatesMenu(this);
+	private AddPlateMenu addPlateMenu = new AddPlateMenu(this);
+	private InventoryMenu inventoryMenu = new InventoryMenu(this);
+
 
 	/**
 	 * Launch the application.
@@ -40,7 +41,7 @@ public class Frame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Frame frame = new Frame();
+					Frame frame = new Frame(new Inventory(), new Menu() );
 					frame.setVisible(true);	
 				}
 				catch (Exception e) {
@@ -55,12 +56,10 @@ public class Frame extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public Frame() {
+	public Frame(Inventory inv, Menu men) {
 
-		Inventory inv = new Inventory();
-		Menu men = new Menu();
-
-
+		this.inv = inv;
+		this.men = men;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -89,16 +88,20 @@ public class Frame extends JFrame implements ActionListener {
 
 		//	setContentPane(mainMenu);  //Starting Panel
 
-		
 
-	
-		
+
+
+
 
 		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
 	public Inventory getInventory() {
 		return inv;
+	}
+
+	public void setInventory(Inventory inv) {
+		this.inv=inv;
 	}
 
 	public Menu getMenu() {
@@ -113,7 +116,7 @@ public class Frame extends JFrame implements ActionListener {
 		//		revalidate(); 
 		//	
 	}
-	
+
 	public AdminMenu getAdminMenu(){
 		return adminMenu;
 	}
@@ -127,4 +130,7 @@ public class Frame extends JFrame implements ActionListener {
 		return inventoryMenu;
 	}
 
+	public AddPlateMenu getAddPlateMenu() {
+		return addPlateMenu;
+	}
 }

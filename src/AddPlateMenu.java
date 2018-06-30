@@ -9,20 +9,22 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
 
 public class AddPlateMenu extends JPanel {
 	
-	private Inventory inv; 
-	private Menu men;
+
 	private Frame frame;
 	/**
 	 * Create the panel.
 	 */
-	public AddPlateMenu(Inventory inv, Menu men,Frame frame){
-		this.inv = inv;
-		this.men= men;
+	public AddPlateMenu(Frame frame){
+		
 		this.frame = frame;
+		
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JButton btnCancel = new JButton("Cancel");
 		add(btnCancel);
@@ -44,9 +46,10 @@ public class AddPlateMenu extends JPanel {
 		
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//anadir al menu
+			//Añadir al menu
 			}
-		});
+		}); 
+		
 
 		JTextField plateString = new JTextField();
 		plateString.setToolTipText("Insert Item");
