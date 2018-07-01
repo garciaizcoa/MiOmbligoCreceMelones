@@ -21,16 +21,16 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JScrollBar;
 
-public class Frame extends JFrame implements ActionListener {
+public class Frame extends JFrame  {
 
 	private Inventory inv;
 	private Menu men;
 
 	private JPanel mainMenu;
-	private AdminMenu adminMenu = new AdminMenu(this);
-	private PlatesMenu platesMenu = new PlatesMenu(this);
-	private AddPlateMenu addPlateMenu = new AddPlateMenu(this);
-	private InventoryMenu inventoryMenu = new InventoryMenu(this);
+	private AdminMenu adminMenu;
+	private PlatesMenu platesMenu; 
+	private AddPlateMenu addPlateMenu; 
+	private InventoryMenu inventoryMenu; 
 
 
 	/**
@@ -43,6 +43,7 @@ public class Frame extends JFrame implements ActionListener {
 				try {
 					Frame frame = new Frame(new Inventory(), new Menu() );
 					frame.setVisible(true);	
+
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -61,6 +62,14 @@ public class Frame extends JFrame implements ActionListener {
 		this.inv = inv;
 		this.men = men;
 
+		this.adminMenu = new AdminMenu(this);
+		this.platesMenu = new PlatesMenu(this);
+		this.addPlateMenu = new AddPlateMenu(this);
+		this.inventoryMenu = new InventoryMenu(this);
+
+
+		System.out.println("frame "+this.getInventory());
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
@@ -74,9 +83,6 @@ public class Frame extends JFrame implements ActionListener {
 		JButton btnAdmin = new JButton("Admin");
 		mainMenu.add(btnAdmin, BorderLayout.EAST);
 
-
-
-
 		btnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Admin clicked");
@@ -86,13 +92,7 @@ public class Frame extends JFrame implements ActionListener {
 			}
 		});
 
-		//	setContentPane(mainMenu);  //Starting Panel
-
-
-
-
-
-
+		//starting pane
 		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
@@ -108,15 +108,7 @@ public class Frame extends JFrame implements ActionListener {
 		return men;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		//		System.out.println("I was clicked");
-		//		setContentPane(inventoryMenu); //panel = panel you want to change too.
-		//		repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-		//		revalidate(); 
-		//	
-	}
-
+	// menu getters
 	public AdminMenu getAdminMenu(){
 		return adminMenu;
 	}
@@ -129,7 +121,6 @@ public class Frame extends JFrame implements ActionListener {
 	public InventoryMenu getInventoryMenu(){
 		return inventoryMenu;
 	}
-
 	public AddPlateMenu getAddPlateMenu() {
 		return addPlateMenu;
 	}

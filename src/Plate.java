@@ -1,8 +1,9 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Plate {
 	
-	private HashMap<String, Integer> ingredients;
+	private Map<String, Integer> ingredients;
 	private Inventory inventory;
 	private String name;
 	private double price;
@@ -10,8 +11,8 @@ public class Plate {
 	public Plate(String name,double price, Inventory inv){
 		this.name = name;
 		this.price=price;
-		ingredients = new HashMap<>();
-		inventory = inv;
+		this.ingredients = new HashMap<>();
+		this.inventory = inv;
 		
 	}
 	
@@ -28,7 +29,7 @@ public class Plate {
 		ingredients.put(name, amount);
 	}
 	
-	public HashMap<String, Integer> getPlateIngredients(){
+	public Map<String, Integer> getPlateIngredients(){
 		return ingredients;
 	}
 	
