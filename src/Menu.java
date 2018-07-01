@@ -33,6 +33,9 @@ public class Menu {
 		return false;
 	}
 	
+	public ArrayList<Plate> getAvailablePlates() {
+		return availablePlates;
+	}
 	public void printMenu(){
 		for(Plate e: availablePlates){
 			System.out.println(e.getName());
