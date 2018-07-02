@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -46,6 +47,9 @@ public class AdminMenu extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println("Inventory was clicked");
 						frame.setContentPane(frame.getInventoryMenu()); //panel = panel you want to change too.
+
+						frame.getInventoryMenu().getScrollPane().setViewportView(frame.getInventoryMenu().getPanel());
+						
 						frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 						frame.revalidate(); 
 					}

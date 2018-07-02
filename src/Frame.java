@@ -41,7 +41,9 @@ public class Frame extends JFrame  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Frame frame = new Frame(new Inventory(), new Menu() );
+					Inventory initialInventory = new Inventory();
+					Save.readInitialInventory(initialInventory);
+					Frame frame = new Frame(initialInventory, new Menu());
 					frame.setVisible(true);	
 
 				}
