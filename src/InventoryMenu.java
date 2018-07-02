@@ -74,7 +74,7 @@ public class InventoryMenu extends JPanel {
 		{
 			model.addElement(entry.getKey() + "/" + entry.getValue());
 		}
-		//
+		////
 
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
