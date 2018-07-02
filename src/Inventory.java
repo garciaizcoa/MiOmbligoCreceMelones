@@ -8,7 +8,7 @@ public class Inventory{
 	private Map<String, Integer> inventoryList  = new HashMap<>();
 
 	public Inventory(){
-		//inventoryList = new Map<>();
+		inventoryList = new HashMap<>();
 	}
 
 	public void addItemToInventory(String item, int amount){
