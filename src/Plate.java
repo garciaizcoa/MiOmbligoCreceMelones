@@ -40,6 +40,14 @@ public class Plate {
 	public double getPrice() {
 		return price;
 	}
+
+	public void printIngredients() {
+		for (Map.Entry<String, Integer> entry : ingredients.entrySet())
+		{
+		    System.out.println("The ingredients in: "+ this.getName()+" "+entry.getKey() + "/" + entry.getValue());
+		}
+		
+	}
 	
 	//PRICE
 	//Kitchen Ticket

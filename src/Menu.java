@@ -9,7 +9,8 @@ public class Menu {
 	}
 
 	public void addPlate(Plate newPlate){
-		availablePlates.add(newPlate);
+		if(!isOnMenu(newPlate)) 
+			availablePlates.add(newPlate); //no sirve
 	}
 
 	//Si el dueño quiere remover un plato
@@ -19,20 +20,26 @@ public class Menu {
 
 	public void updateMenu(){
 		for(int i=0; i< availablePlates.size(); i++){
-				if(!availablePlates.get(i).checkAvailability()){
-					availablePlates.remove(i);
-				}
+			if(!availablePlates.get(i).checkAvailability()){
+				availablePlates.remove(i);
 			}
 		}
-	
+	}
 
-	public boolean isOnMenu(Plate food){
-		if (availablePlates.contains(food)){
-			return true;
+
+	public boolean isOnMenu(Plate food){ 
+//		if (availablePlates.contains(food)){      ///////no sirve
+//			return true;
+//		}
+//		return false;
+		for(int i=0;i<availablePlates.size();i++) {
+			if(food.getName().equals(availablePlates.get(i).getName())) {
+				return true;
+			}
 		}
 		return false;
 	}
-	
+
 	public ArrayList<Plate> getAvailablePlates() {
 		return availablePlates;
 	}
@@ -41,7 +48,5 @@ public class Menu {
 			System.out.println(e.getName());
 		}
 	}
-
-
 
 }
