@@ -29,9 +29,6 @@ public class AddPlateMenu extends JPanel {
 	 */
 	public AddPlateMenu(Frame frame){
 
-
-
-
 		System.out.println("AddPlateMenu "+frame.getInventory());
 
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,8 +74,6 @@ public class AddPlateMenu extends JPanel {
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
 			panel.add(opt);
 			
-//			JCheckBox checkBox = new JCheckBox(entry.getKey());
-//			panel.add(checkBox);
 
 		}
 
@@ -93,11 +88,7 @@ public class AddPlateMenu extends JPanel {
 					if(((IngredientOption) opt).getCheck().isSelected())
 						plate.addIngredient(((IngredientOption) opt).getCheck().getText(), ((IngredientOption) opt).getSelectedInt()); // no existe opcion todavia
 				}
-				
-				
-
 				plate.printIngredients();
-
 
 				frame.getMenu().printMenu();
 				frame.getPlatesMenu().getModel().clear();
@@ -122,11 +113,9 @@ public class AddPlateMenu extends JPanel {
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
 			panel.add(opt);
 			
-			
-
-
 		}
 	}
+	//hola
 
 	public Frame getFrame() {
 		return frame;
@@ -135,7 +124,4 @@ public class AddPlateMenu extends JPanel {
 	public JPanel getPanel() {
 		return panel;
 	}
-
-
-
 }

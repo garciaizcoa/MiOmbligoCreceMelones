@@ -19,6 +19,7 @@ public class InventoryMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Frame frame;
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
@@ -63,18 +64,24 @@ public class InventoryMenu extends JPanel {
 		inventoryInteger.setToolTipText("Insert Amount");
 		editPanel.add(inventoryInteger);
 
-		DefaultListModel<String> model = new DefaultListModel<>();
+//		DefaultListModel<String> model = new DefaultListModel<>();
 
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane);
-		JList<String> invList = new JList<>(model);
-		scrollPane.setViewportView(invList);
+		
+//		JList<String> invList = new JList<>(model);
+//		scrollPane.setViewportView(invList);
+		
+		panel = new JPanel();
+		scrollPane.add(panel);
+		
 		
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
 		{
-			model.addElement(entry.getKey() + "/" + entry.getValue());
+			
+			InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
+			panel.add(item);
 		}
-		////
 
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,19 +89,37 @@ public class InventoryMenu extends JPanel {
 				System.out.println(frame.getInventory());
 				frame.getInventory().addItemToInventory(inventoryString.getText(), Integer.parseInt(inventoryInteger.getText()));
 				frame.getInventory().printInventory();
-				model.clear();
+				//model.clear();
+				panel.removeAll();
 				for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
 				{
-					model.addElement(entry.getKey() + "/" + entry.getValue());
+				//	model.addElement(entry.getKey() + "/" + entry.getValue());
+					InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
+					panel.add(item);
+					
 				}
+				
+				scrollPane.setViewportView(panel);
+				
 				getFrame().getAddPlateMenu().refresh(frame.getInventory());
 				
 			}
 		});
 	}
 	
+	public void refresh(Inventory inv) {
+		panel.removeAll();
+		for (Map.Entry<String, Integer> entry : inv.getInventoryList().entrySet()){
+			InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
+			panel.add(item);
+		}
+	}
+	
 	public Frame getFrame() {
 		return frame;
+	}
+	public JPanel getPanel() {
+		return panel;
 	}
 
 }
