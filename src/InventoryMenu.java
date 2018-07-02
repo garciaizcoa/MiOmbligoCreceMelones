@@ -1,6 +1,7 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
@@ -20,6 +21,7 @@ public class InventoryMenu extends JPanel {
 	
 	private Frame frame;
 	private JPanel panel;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
@@ -66,7 +68,7 @@ public class InventoryMenu extends JPanel {
 
 //		DefaultListModel<String> model = new DefaultListModel<>();
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		add(scrollPane);
 		
 //		JList<String> invList = new JList<>(model);
@@ -81,6 +83,7 @@ public class InventoryMenu extends JPanel {
 			
 			InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
 			panel.add(item);
+			panel.repaint();
 		}
 
 		btnAdd.addActionListener(new ActionListener() {
@@ -96,7 +99,14 @@ public class InventoryMenu extends JPanel {
 				//	model.addElement(entry.getKey() + "/" + entry.getValue());
 					InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
 					panel.add(item);
-					
+						
+				}
+				
+				try {
+					Save.saveToInventory(frame.getInventory());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				
 				scrollPane.setViewportView(panel);
@@ -120,6 +130,10 @@ public class InventoryMenu extends JPanel {
 	}
 	public JPanel getPanel() {
 		return panel;
+	}
+	
+	public JScrollPane getScrollPane(){
+		return scrollPane;
 	}
 
 }

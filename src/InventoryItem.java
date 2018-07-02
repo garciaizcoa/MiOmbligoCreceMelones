@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Map;
 import java.awt.FlowLayout;
 
@@ -40,6 +41,16 @@ public class InventoryItem extends JPanel {
 				frame.getAddPlateMenu().refresh(frame.getInventory());
 				frame.getInventory().printInventory();
 				frame.getInventoryMenu().getPanel().repaint();
+				
+				
+
+				try {
+					Save.saveToInventory(frame.getInventory());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				
 			}
 		});
