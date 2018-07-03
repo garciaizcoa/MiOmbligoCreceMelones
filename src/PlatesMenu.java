@@ -21,11 +21,14 @@ public class PlatesMenu extends JPanel {
 	private Frame frame;
 	private JPanel panel;
 	
+	
 	private DefaultListModel<String> model;
 	
 	public PlatesMenu(Frame frame) {
 		
 		this.frame = frame;
+		
+		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JButton btnAdminMenu = new JButton("Admin Menu");
@@ -44,6 +47,7 @@ public class PlatesMenu extends JPanel {
 		
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.getAddPlateMenu().refresh(frame.getInventory());
 				frame.setContentPane(frame.getAddPlateMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
@@ -86,6 +90,8 @@ public class PlatesMenu extends JPanel {
 		return panel;
 		
 	}
+	
+	
 	
 	public void refresh(Menu men) {
 		panel.removeAll();

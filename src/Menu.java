@@ -9,8 +9,10 @@ public class Menu {
 	}
 
 	public void addPlate(Plate newPlate){
-		if(!isOnMenu(newPlate)) 
-			availablePlates.add(newPlate); //no sirve
+		if(!isOnMenu(newPlate)) { 
+			availablePlates.add(newPlate); 
+		}
+		
 	}
 
 	//Si el dueño quiere remover un plato
@@ -46,7 +48,7 @@ public class Menu {
 	
 	public Plate getPlate(String name) {
 		for(Plate plate: availablePlates) {
-			if(plate.getName()==name) {
+			if(plate.getName().equals(name)) {
 				return plate;
 			}
 		}
