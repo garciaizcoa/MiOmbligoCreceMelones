@@ -48,7 +48,7 @@ public class InventoryItem extends JPanel {
 					PlateItem item = new PlateItem(frame, plate.getName(),String.valueOf(plate.getPrice()));
 					
 					for(int i=0;i<plate.getPlateIngredients().size();i++) {
-						if(plate.getPlateIngredients().get(i))
+					//	if(plate.getPlateIngredients().get(i))
 					}
 					
 					frame.getPlatesMenu().getPanel().add(item);
