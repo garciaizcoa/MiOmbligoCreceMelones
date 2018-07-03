@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPopupMenu;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -53,11 +56,36 @@ public class AddPlateMenu extends JPanel {
 		editPanel.add(btnDone);
 
 		JTextField plateString = new JTextField();
-		plateString.setToolTipText("Insert Item");
+		plateString.setText("Name of Plate");
+		plateString.setForeground(Color.GRAY);
+		plateString.setHorizontalAlignment(WIDTH/2);
+		
+		
 		editPanel.add(plateString);
 
 		JTextField plateDouble = new JTextField();
-		plateDouble.setToolTipText("Insert Amount");
+		plateDouble.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(plateString.getText().equals("")){
+					plateString.setText("Name of Plate");
+				}
+				plateDouble.setText("");
+			}
+		});
+		plateDouble.setText("Price");
+		plateDouble.setHorizontalAlignment(WIDTH/2);
+		plateDouble.setForeground(Color.GRAY);
+		plateString.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(plateDouble.getText().equals("")){
+					plateDouble.setText("Price");
+				}
+				plateString.setText("");
+			}
+		});
+		
 		editPanel.add(plateDouble);
 
 		JScrollPane scrollPane = new JScrollPane();
