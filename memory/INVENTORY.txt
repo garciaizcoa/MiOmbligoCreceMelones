@@ -1,3 +1,2 @@
-jamonilla 2
-pan 15
-pollo 9
+sal 2
+ketchup 2

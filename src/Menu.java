@@ -1,16 +1,22 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Menu {
 
 	private ArrayList<Plate> availablePlates; 
 
 	public Menu(){
+		
 		availablePlates = new ArrayList<>();
+		
 	}
 
 	public void addPlate(Plate newPlate){
-		if(!isOnMenu(newPlate)) 
-			availablePlates.add(newPlate); //no sirve
+		if(!isOnMenu(newPlate)) { 
+			availablePlates.add(newPlate); 
+		}
+		
 	}
 
 	//Si el dueño quiere remover un plato
@@ -44,15 +50,16 @@ public class Menu {
 		return availablePlates;
 	}
 	
-	public Plate getPlate(String name) {
-		for(Plate plate: availablePlates) {
-			if(plate.getName()==name) {
-				return plate;
+	public Plate getPlate(Plate plate) {
+		for(Plate plato: availablePlates) {
+			if(plate.equals(plato)) {
+				return plato;
 			}
 		}
 		System.out.println("plate doesnt exist");
 		return null; ////////no me  gusta
 	}
+	
 	
 	public void printMenu(){
 		for(Plate e: availablePlates){

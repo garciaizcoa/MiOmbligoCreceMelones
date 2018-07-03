@@ -38,6 +38,7 @@ public class AddPlateMenu extends JPanel {
 	public AddPlateMenu(Frame frame){
 
 		System.out.println("AddPlateMenu "+frame.getInventory());
+		System.out.println("hola "+frame.getAddPlateMenu());
 
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
@@ -47,6 +48,8 @@ public class AddPlateMenu extends JPanel {
 
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				plateString.setText("Name of Plate");
+				plateDouble.setText("Price");
 				frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
@@ -107,6 +110,7 @@ public class AddPlateMenu extends JPanel {
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet()){
 
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
+			opt.getCheck().setSelected(false);
 			panel.add(opt);
 			//
 
@@ -116,6 +120,12 @@ public class AddPlateMenu extends JPanel {
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {											
 				System.out.println("Done was clicked");
+				
+				
+			
+				
+				
+				
 				Plate plate = new Plate(plateString.getText(), Double.parseDouble(plateDouble.getText()), frame.getInventory());
 				frame.getMenu().addPlate(plate);
 
@@ -127,19 +137,27 @@ public class AddPlateMenu extends JPanel {
 
 				frame.getMenu().printMenu();
 				
-//				frame.getPlatesMenu().getModel().clear();
+			
 				for (Plate plato : frame.getMenu().getAvailablePlates()){
 
-				PlateItem item = new PlateItem(frame, plato.getName(),String.valueOf(plato.getPrice()));
+				PlateItem item = new PlateItem(frame,plato, plato.getName(),String.valueOf(plato.getPrice()));
 				frame.getPlatesMenu().getPanel().add(item);
-				//	frame.getPlatesMenu().getModel().addElement(plato.getName()+" $"+plato.getPrice());
+				
 				}
+				plateString.setText("Name of Plate");
+				plateDouble.setText("Price");
 				frame.getPlatesMenu().refresh(frame.getMenu());
 				frame.setContentPane(frame.getPlatesMenu());
 			}
 		});
+		
 
 	}
+	
+	
+		
+
+	
 
 
 	public void refresh(Inventory inv) {
@@ -150,11 +168,12 @@ public class AddPlateMenu extends JPanel {
 //			panel.add(checkBox);
 			
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
+			opt.getCheck().setSelected(false);
 			panel.add(opt);
 			
 		}
 	}
-	//hola
+	
 
 	public Frame getFrame() {
 		return frame;

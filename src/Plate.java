@@ -29,6 +29,10 @@ public class Plate {
 		ingredients.put(name, amount);
 	}
 	
+//	public void resetIngredients() {
+//		for
+//	}
+	
 	public Map<String, Integer> getPlateIngredients(){
 		return ingredients;
 	}
@@ -37,9 +41,18 @@ public class Plate {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name=name;
+	}
+	
 	public double getPrice() {
 		return price;
 	}
+
+	public void setPrice(double price) {
+		this.price=price;
+	}
+	
 
 	public void printIngredients() {
 		for (Map.Entry<String, Integer> entry : ingredients.entrySet())
