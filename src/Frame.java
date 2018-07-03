@@ -31,6 +31,7 @@ public class Frame extends JFrame  {
 	private PlatesMenu platesMenu; 
 	private AddPlateMenu addPlateMenu; 
 	private InventoryMenu inventoryMenu; 
+	private CustomerMenu customerMenu;
 
 
 	/**
@@ -68,6 +69,7 @@ public class Frame extends JFrame  {
 		this.platesMenu = new PlatesMenu(this);
 		this.addPlateMenu = new AddPlateMenu(this);
 		this.inventoryMenu = new InventoryMenu(this);
+		this.customerMenu = new CustomerMenu(this);
 
 
 		System.out.println("frame "+this.getInventory());
@@ -93,6 +95,16 @@ public class Frame extends JFrame  {
 				revalidate(); 
 			}
 		});
+		
+		btnCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Customer clicked");
+				setContentPane(customerMenu); //panel = panel you want to change too.
+				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				revalidate(); 
+			}
+		});
+
 
 		//starting pane
 		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,5 +137,8 @@ public class Frame extends JFrame  {
 	}
 	public AddPlateMenu getAddPlateMenu() {
 		return addPlateMenu;
+	}
+	public CustomerMenu getCustomerMenu(){
+		return customerMenu;
 	}
 }
