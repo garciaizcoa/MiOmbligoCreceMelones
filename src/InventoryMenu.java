@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.BoxLayout;
 
 public class InventoryMenu extends JPanel {
 
@@ -69,6 +71,8 @@ public class InventoryMenu extends JPanel {
 //		DefaultListModel<String> model = new DefaultListModel<>();
 
 		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
 		
 //		JList<String> invList = new JList<>(model);
@@ -76,6 +80,7 @@ public class InventoryMenu extends JPanel {
 		
 		panel = new JPanel();
 		scrollPane.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
