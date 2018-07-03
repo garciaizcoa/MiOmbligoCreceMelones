@@ -1,6 +1,8 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.MouseAdapter;
 
 public class InventoryMenu extends JPanel {
 
@@ -58,12 +61,36 @@ public class InventoryMenu extends JPanel {
 		JButton btnAdd = new JButton("Add");
 		editPanel.add(btnAdd);
 
-		JTextField inventoryString = new JTextField();
-		inventoryString.setToolTipText("Insert Item");
+		JTextField inventoryString = new JTextField("Insert Item");
+		inventoryString.setForeground(Color.GRAY);
+		inventoryString.setHorizontalAlignment(WIDTH/2);
+		
 		editPanel.add(inventoryString);
 
 		JTextField inventoryInteger = new JTextField();
-		inventoryInteger.setToolTipText("Insert Amount");
+		inventoryInteger.setForeground(Color.GRAY);
+		inventoryInteger.setHorizontalAlignment(WIDTH/2);
+		inventoryInteger.setText("Insert Amount");
+		
+		inventoryInteger.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(inventoryString.getText().equals("")){
+					inventoryString.setText("Insert Item");
+				}
+				inventoryInteger.setText("");
+			}
+		});
+		
+		inventoryString.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(inventoryInteger.getText().equals("")){
+					inventoryInteger.setText("Insert Amount");
+				}
+				inventoryString.setText("");
+			}
+		});
 		editPanel.add(inventoryInteger);
 
 //		DefaultListModel<String> model = new DefaultListModel<>();
