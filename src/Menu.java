@@ -43,6 +43,17 @@ public class Menu {
 	public ArrayList<Plate> getAvailablePlates() {
 		return availablePlates;
 	}
+	
+	public Plate getPlate(String name) {
+		for(Plate plate: availablePlates) {
+			if(plate.getName()==name) {
+				return plate;
+			}
+		}
+		System.out.println("plate doesnt exist");
+		return null; ////////no me  gusta
+	}
+	
 	public void printMenu(){
 		for(Plate e: availablePlates){
 			System.out.println(e.getName());

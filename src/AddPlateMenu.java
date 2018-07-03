@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.AbstractButton;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -25,6 +27,9 @@ public class AddPlateMenu extends JPanel {
 
 	private Frame frame;
 	private JPanel panel;
+	
+	private JTextField plateString;
+	private JTextField plateDouble;
 	
 
 	/**
@@ -55,7 +60,7 @@ public class AddPlateMenu extends JPanel {
 		JButton btnDone = new JButton("Done");
 		editPanel.add(btnDone);
 
-		JTextField plateString = new JTextField();
+		plateString = new JTextField();
 		plateString.setText("Name of Plate");
 		plateString.setForeground(Color.GRAY);
 		plateString.setHorizontalAlignment(WIDTH/2);
@@ -63,7 +68,7 @@ public class AddPlateMenu extends JPanel {
 		
 		editPanel.add(plateString);
 
-		JTextField plateDouble = new JTextField();
+		plateDouble = new JTextField();
 		plateDouble.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -89,11 +94,13 @@ public class AddPlateMenu extends JPanel {
 		editPanel.add(plateDouble);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
 
 		panel = new JPanel();
 		scrollPane.setViewportView(panel);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		
 
@@ -119,14 +126,18 @@ public class AddPlateMenu extends JPanel {
 				plate.printIngredients();
 
 				frame.getMenu().printMenu();
-				frame.getPlatesMenu().getModel().clear();
+				
+//				frame.getPlatesMenu().getModel().clear();
 				for (Plate plato : frame.getMenu().getAvailablePlates()){
 
-					frame.getPlatesMenu().getModel().addElement(plato.getName()+" $"+plato.getPrice());
+				PlateItem item = new PlateItem(frame, plato.getName(),String.valueOf(plato.getPrice()));
+				frame.getPlatesMenu().getPanel().add(item);
+				//	frame.getPlatesMenu().getModel().addElement(plato.getName()+" $"+plato.getPrice());
 				}
+				frame.getPlatesMenu().refresh(frame.getMenu());
 				frame.setContentPane(frame.getPlatesMenu());
 			}
-		}); 
+		});
 
 	}
 
@@ -151,5 +162,13 @@ public class AddPlateMenu extends JPanel {
 
 	public JPanel getPanel() {
 		return panel;
+	}
+	
+	public JTextField getPlateString() {
+		return plateString;
+	}
+	
+	public JTextField getPlateDouble() {
+		return plateDouble;
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -18,6 +19,8 @@ public class PlatesMenu extends JPanel {
 	 */
 	
 	private Frame frame;
+	private JPanel panel;
+	
 	private DefaultListModel<String> model;
 	
 	public PlatesMenu(Frame frame) {
@@ -48,13 +51,28 @@ public class PlatesMenu extends JPanel {
 			}
 		});
 		
+		//model = new DefaultListModel<>();
+		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
+
+		panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		model = new DefaultListModel<>();
+//		JList list = new JList(model);
+//		scrollPane.setViewportView(list);
 		
-		JList list = new JList(model);
-		scrollPane.setViewportView(list);
+		for (Plate plate : frame.getMenu().getAvailablePlates())
+		{
+			
+			PlateItem item = new PlateItem(frame, plate.getName(),String.valueOf(plate.getPrice()));
+			panel.add(item);
+			panel.repaint();
+		}
+	
 		
 		
 		
@@ -63,9 +81,19 @@ public class PlatesMenu extends JPanel {
 	public DefaultListModel<String> getModel() {
 		return model;
 	}
-	
-	
-	
-	
 
+	public JPanel getPanel() {
+		return panel;
+		
+	}
+	
+	public void refresh(Menu men) {
+		panel.removeAll();
+		for (Plate plate : men.getAvailablePlates()){	
+			PlateItem item = new PlateItem(frame, plate.getName(),String.valueOf(plate.getPrice()));
+			panel.add(item);
+			panel.repaint();
+		}
+		frame.revalidate();
+	}	
 }
