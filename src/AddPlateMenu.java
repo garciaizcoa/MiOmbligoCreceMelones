@@ -108,7 +108,7 @@ public class AddPlateMenu extends JPanel {
 
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
 			panel.add(opt);
-			
+			//
 
 		}
 
