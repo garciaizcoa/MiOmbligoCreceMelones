@@ -1,5 +1,2 @@
-queso 10
-pan 10
-pollo 9
-lechuga 5
-sal 1
+sal 2
+ketchup 2

@@ -19,9 +19,12 @@ public class PlateItem extends JPanel {
 	private JLabel amountLabel;
 	private JButton editButton;
 	private JButton removeButton;
+	private Plate plate;
 
-	public PlateItem(Frame frame, String name, String amount) {
+	public PlateItem(Frame frame, Plate plate, String name, String amount) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		this.plate=plate;
 
 		nameLabel= new JLabel(name);
 		add(nameLabel);
@@ -37,40 +40,35 @@ public class PlateItem extends JPanel {
 				System.out.println("Edit was clicked");
 				
 
-				frame.getAddPlateMenu().getPlateString().setText(name);
-				frame.getAddPlateMenu().getPlateDouble().setText(amount);
+				frame.getEditPlateMenu().getPlateString().setText(name);
+				frame.getEditPlateMenu().getPlateDouble().setText(amount);
 
-				frame.getAddPlateMenu().getPanel().removeAll();
+				frame.getEditPlateMenu().getPanel().removeAll();
 
 				for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet()){
 
-					IngredientOption opt = new IngredientOption(frame.getAddPlateMenu().getPanel(), entry.getKey());	
+					IngredientOption opt = new IngredientOption(frame.getEditPlateMenu().getPanel(), entry.getKey());	
 
 
 					
-					if(frame.getMenu().getPlate(name).getPlateIngredients().containsKey(entry.getKey())) {
+					if(frame.getMenu().getPlate(plate).getPlateIngredients().containsKey(entry.getKey())) {
 						opt.getCheck().setSelected(true);
-						opt.getCombo().setSelectedIndex(frame.getMenu().getPlate(name).getPlateIngredients().get(entry.getKey()));
+						opt.getCombo().setSelectedIndex(frame.getMenu().getPlate(plate).getPlateIngredients().get(entry.getKey()));
 					}
 					else {
 						opt.getCheck().setSelected(false); //por siacaso
 					}
 
 
-					frame.getAddPlateMenu().getPanel().add(opt);
+					frame.getEditPlateMenu().getPanel().add(opt);
 
-					frame.getAddPlateMenu().getPanel().repaint();
+					frame.getEditPlateMenu().getPanel().repaint();
 
-					frame.setContentPane(frame.getAddPlateMenu());
+					frame.getEditPlateMenu().setPlate(plate);
+					frame.setContentPane(frame.getEditPlateMenu());
+					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+					frame.revalidate(); 
 				}
-
-
-
-
-
-
-
-
 
 			}
 		}); 
@@ -81,7 +79,7 @@ public class PlateItem extends JPanel {
 		removeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {											
 				System.out.println("Remove was clicked");
-				frame.getMenu().removePlate(frame.getMenu().getPlate(name));
+				frame.getMenu().removePlate(frame.getMenu().getPlate(plate));
 				frame.getPlatesMenu().refresh(frame.getMenu());
 				frame.getMenu().printMenu();
 
@@ -89,11 +87,6 @@ public class PlateItem extends JPanel {
 				frame.getPlatesMenu().getPanel().repaint();
 			}
 		}); 
-
-
-
-
-
 	}
 
 }
