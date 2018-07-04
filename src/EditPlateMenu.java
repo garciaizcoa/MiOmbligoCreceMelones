@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -68,27 +70,27 @@ public class EditPlateMenu extends JPanel {
 		editPanel.add(plateString);
 
 		plateDouble = new JTextField();
-		plateDouble.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(plateString.getText().equals("")){
-					plateString.setText("Name of Plate");
-				}
-				plateDouble.setText("");
-			}
-		});
+//		plateDouble.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				if(plateString.getText().equals("")){
+//					plateString.setText("Name of Plate");
+//				}
+//				plateDouble.setText("");
+//			}
+//		});
 		plateDouble.setText("Price");
 		plateDouble.setHorizontalAlignment(WIDTH/2);
 		plateDouble.setForeground(Color.GRAY);
-		plateString.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(plateDouble.getText().equals("")){
-					plateDouble.setText("Price");
-				}
-				plateString.setText("");
-			}
-		});
+//		plateString.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				if(plateDouble.getText().equals("")){
+//					plateDouble.setText("Price");
+//				}
+//				plateString.setText("");
+//			}
+//		});
 
 		editPanel.add(plateDouble);
 
@@ -117,7 +119,10 @@ public class EditPlateMenu extends JPanel {
 			public void actionPerformed(ActionEvent e) {	
 
 				System.out.println("Done was clicked");
+				
+				validateDouble(plateDouble.getText());
 
+				if(	validateString(plateString.getText())) { //start if
 				plate.setName(plateString.getText());
 				plate.setPrice(Double.parseDouble(plateDouble.getText()));
 				plate.getPlateIngredients().clear();
@@ -141,6 +146,7 @@ public class EditPlateMenu extends JPanel {
 				plateDouble.setText("Price");
 				frame.getPlatesMenu().refresh(frame.getMenu());
 				frame.setContentPane(frame.getPlatesMenu());
+				}
 			}
 		});
 	}
@@ -155,6 +161,31 @@ public class EditPlateMenu extends JPanel {
 			opt.getCheck().setSelected(false);
 			panel.add(opt);
 
+		}
+	}
+	public boolean validateString(String word) {
+		if(word.trim().length()==0) {
+			this.getPlateString().setText("");
+			this.getPlateString().setUI(new JTextFieldHintUI("Plate must have a name.", Color.RED));
+			return false;
+		}
+		Pattern p = Pattern.compile("^[ A-Za-z]+$"); //verifica que sean espacios y letras solamente
+		Matcher m = p.matcher(word);
+		if(! m.matches()) {
+			this.getPlateString().setText("");
+			this.getPlateString().setUI(new JTextFieldHintUI("The ingredient can only contain letters and spaces.", Color.RED));
+			return false;
+		}
+		return true;
+	}
+
+	public void validateDouble(String number) {
+		try {
+			Double.parseDouble(number);
+		}
+		catch(NumberFormatException nfe) {
+			this.getPlateDouble().setText("");
+			this.getPlateDouble().setUI(new JTextFieldHintUI("The amount must be a number.", Color.RED));
 		}
 	}
 
