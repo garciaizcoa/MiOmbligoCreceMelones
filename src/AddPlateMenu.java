@@ -137,7 +137,7 @@ public class AddPlateMenu extends JPanel {
 				//validate texts
 				validateDouble(plateDouble.getText());
 
-				if(	validateString(plateString.getText())) { //start if
+				if(	validateString(plateString.getText()) && validateCheckBoxes()) { //start if
 					Plate plate = new Plate(plateString.getText(), Double.parseDouble(plateDouble.getText()), frame.getInventory());
 					frame.getMenu().addPlate(plate);
 
@@ -211,6 +211,20 @@ public class AddPlateMenu extends JPanel {
 			this.getPlateDouble().setText("");
 			this.getPlateDouble().setUI(new JTextFieldHintUI("The amount must be a number.", Color.RED));
 		}
+	}
+	
+	public boolean validateCheckBoxes() {
+		for (Component opt : panel.getComponents()) {
+			if(((IngredientOption) opt).getCheck().isSelected() && ((IngredientOption) opt).getSelectedInt()!=0) {
+				return true;
+		}
+	}
+		this.getPlateDouble().setText("");
+		this.getPlateString().setText("");
+		this.getPlateDouble().setUI(new JTextFieldHintUI("The plate must contain one ingredient",Color.RED));
+		this.getPlateString().setUI(new JTextFieldHintUI("The plate must contain one ingredient",Color.RED));
+
+		return false;
 	}
 
 	public Frame getFrame() {
