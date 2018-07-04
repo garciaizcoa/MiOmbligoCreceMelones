@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
@@ -121,9 +123,10 @@ public class AddPlateMenu extends JPanel {
 			public void actionPerformed(ActionEvent e) {											
 				System.out.println("Done was clicked");
 				
+				//validate texts
 				
-			
-				
+				validateString(plateString.getText());
+				validateDouble(plateDouble.getText());
 				
 				
 				Plate plate = new Plate(plateString.getText(), Double.parseDouble(plateDouble.getText()), frame.getInventory());
@@ -153,12 +156,6 @@ public class AddPlateMenu extends JPanel {
 		
 
 	}
-	
-	
-		
-
-	
-
 
 	public void refresh(Inventory inv) {
 		panel.removeAll();
@@ -173,7 +170,24 @@ public class AddPlateMenu extends JPanel {
 			
 		}
 	}
-	
+	public void validateString(String word) {
+		if(word.trim().length()==0)
+			this.getPlateString().setText("Plate name must be a word.");
+		Pattern p = Pattern.compile("^[ A-Za-z]+$"); //verifica que sean espacios y letras solamente
+		Matcher m = p.matcher(word);
+		if(! m.matches()) {
+		this.getPlateString().setText("The ingredient can only contain letters and spaces");
+		}
+	}
+
+	public void validateDouble(String number) {
+		try {
+			Double.parseDouble(number);
+		}
+		catch(NumberFormatException nfe) {
+			this.getPlateDouble().setText("The amount must be a number.");
+		}
+	}
 
 	public Frame getFrame() {
 		return frame;
