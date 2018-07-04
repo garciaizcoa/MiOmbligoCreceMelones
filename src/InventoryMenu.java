@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.TextUI;
+
 import java.awt.event.MouseAdapter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.BoxLayout;
@@ -32,6 +34,9 @@ public class InventoryMenu extends JPanel {
 
 	private JTextField inventoryString;
 	private JTextField inventoryInteger;
+
+	private JTextFieldHintUI stringHint;
+	private JTextFieldHintUI integerHint;
 
 	/**
 	 * Create the panel.
@@ -53,7 +58,7 @@ public class InventoryMenu extends JPanel {
 
 		btnAdminMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				refreshText();
 				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
@@ -68,36 +73,47 @@ public class InventoryMenu extends JPanel {
 		JButton btnAdd = new JButton("Add");
 		editPanel.add(btnAdd);
 
-		inventoryString = new JTextField("Insert Item");
-		inventoryString.setForeground(Color.GRAY);
+
+
+
+		inventoryString = new JTextField();
+		//inventoryString.setForeground(Color.GRAY);
 		inventoryString.setHorizontalAlignment(WIDTH/2);
+
+		stringHint = new JTextFieldHintUI(" Insert Item",Color.RED);
+		inventoryString.setUI(stringHint);
 
 		editPanel.add(inventoryString);
 
 		inventoryInteger = new JTextField();
-		inventoryInteger.setForeground(Color.GRAY);
-		inventoryInteger.setHorizontalAlignment(WIDTH/2);
-		inventoryInteger.setText("Insert Amount");
+		//		inventoryInteger.setForeground(Color.GRAY);
+		//		inventoryInteger.setHorizontalAlignment(WIDTH/2);
+		//inventoryInteger.setText("Insert Amount");
 
-		inventoryInteger.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(inventoryString.getText().equals("")){
-					inventoryString.setText("Insert Item");
-				}
-				inventoryInteger.setText("");
-			}
-		});
+		integerHint = new JTextFieldHintUI(" Insert Amount",Color.RED);
+		inventoryInteger.setUI(integerHint);
 
-		inventoryString.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(inventoryInteger.getText().equals("")){
-					inventoryInteger.setText("Insert Amount");
-				}
-				inventoryString.setText("");
-			}
-		});
+
+
+		//		inventoryInteger.addMouseListener(new MouseAdapter() {
+		//			@Override
+		//			public void mouseClicked(MouseEvent e) {
+		//				if(inventoryString.getText().equals("")){
+		//					inventoryString.setText("Insert Item");
+		//				}
+		//				inventoryInteger.setText("");
+		//			}
+		//		});
+		//
+		//		inventoryString.addMouseListener(new MouseAdapter() {
+		//			@Override
+		//			public void mouseClicked(MouseEvent e) {
+		//				if(inventoryInteger.getText().equals("")){
+		//					inventoryInteger.setText("Insert Amount");
+		//				}
+		//				inventoryString.setText("");
+		//			}
+		//		});
 		editPanel.add(inventoryInteger);
 
 		//		DefaultListModel<String> model = new DefaultListModel<>();
@@ -129,32 +145,32 @@ public class InventoryMenu extends JPanel {
 				System.out.println(frame.getInventory());
 
 				// validar textos
-				validateString(inventoryString.getText());
+
 				validateInteger(inventoryInteger.getText());
+				if(validateString(inventoryString.getText())) {//comienza if
+					frame.getInventory().addItemToInventory(inventoryString.getText().trim().replaceAll(" +", " "), Integer.parseInt(inventoryInteger.getText().trim()));
+					frame.getInventory().printInventory();
+					//model.clear();
+					panel.removeAll();
+					for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
+					{
+						//	model.addElement(entry.getKey() + "/" + entry.getValue());
+						InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
+						panel.add(item);
 
-				frame.getInventory().addItemToInventory(inventoryString.getText().trim().replaceAll(" +", " "), Integer.parseInt(inventoryInteger.getText().trim()));
-				frame.getInventory().printInventory();
-				//model.clear();
-				panel.removeAll();
-				for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
-				{
-					//	model.addElement(entry.getKey() + "/" + entry.getValue());
-					InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
-					panel.add(item);
+					}
 
-				}
+					try {
+						Save.saveToInventory(frame.getInventory());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
-				try {
-					Save.saveToInventory(frame.getInventory());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					scrollPane.setViewportView(panel);
 
-				scrollPane.setViewportView(panel);
-
-				getFrame().getAddPlateMenu().refresh(frame.getInventory());
-
+					getFrame().getAddPlateMenu().refresh(frame.getInventory());
+				} //termina if
 			}
 		});
 	}
@@ -168,14 +184,29 @@ public class InventoryMenu extends JPanel {
 		frame.revalidate();
 	}
 
-	public void validateString(String word) {
-		if(word.trim().length()==0)
-			this.getInventoryString().setText("Inventory name must be a word.");
+	public void refreshText() {
+		this.getInventoryInteger().setText("");
+		this.getInventoryString().setText("");
+		this.getInventoryInteger().setUI(this.integerHint);
+		this.getInventoryString().setUI(this.stringHint);
+	}
+
+	public boolean validateString(String word) {
+		if(word.trim().length()==0) {
+			this.getInventoryString().setText("");
+			this.getInventoryString().setUI(new JTextFieldHintUI("Inventory name must be a word.", Color.RED));
+			//this.getInventoryString().setText("Inventory name must be a word.");
+			return false;
+		}
 		Pattern p = Pattern.compile("^[ A-Za-z]+$"); //verifica que sean espacios y letras solamente
 		Matcher m = p.matcher(word);
 		if(! m.matches()) {
-		this.getInventoryString().setText("The ingredient can only contain letters and spaces");
+			this.getInventoryString().setText("");
+			//this.getInventoryString().setText("The ingredient can only contain letters and spaces");
+			this.getInventoryString().setUI(new JTextFieldHintUI("The ingredient can only contain letters and spaces.", Color.RED));
+			return false;
 		}
+		return true;
 	}
 
 	public void validateInteger(String number) {
@@ -183,7 +214,8 @@ public class InventoryMenu extends JPanel {
 			Integer.parseInt(number);
 		}
 		catch(NumberFormatException nfe) {
-			this.getInventoryInteger().setText("The amount must be a number.");
+			this.getInventoryInteger().setText("");
+			this.getInventoryInteger().setUI(new JTextFieldHintUI("The amount must be a number.", Color.RED));
 		}
 	}
 
