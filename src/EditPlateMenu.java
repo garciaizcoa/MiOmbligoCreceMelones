@@ -144,7 +144,7 @@ public class EditPlateMenu extends JPanel {
 				}
 				plateString.setText("Name of Plate");
 				plateDouble.setText("Price");
-				frame.getPlatesMenu().refresh(frame.getMenu());
+				frame.getPlatesMenu().refresh();
 				frame.setContentPane(frame.getPlatesMenu());
 				}
 			}

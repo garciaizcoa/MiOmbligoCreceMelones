@@ -3,7 +3,10 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 
 
@@ -35,6 +39,8 @@ public class AddPlateMenu extends JPanel {
 
 	private JTextFieldHintUI stringHint;
 	private JTextFieldHintUI doubleHint;
+	
+	private HashSet<Plate> allPlates = new HashSet<>();
 
 
 	/**
@@ -140,6 +146,7 @@ public class AddPlateMenu extends JPanel {
 				if(	validateString(plateString.getText()) && validateCheckBoxes()) { //start if
 					Plate plate = new Plate(plateString.getText(), Double.parseDouble(plateDouble.getText()), frame.getInventory());
 					frame.getMenu().addPlate(plate);
+					allPlates.add(plate);
 
 					for (Component opt : panel.getComponents()) {
 						if(((IngredientOption) opt).getCheck().isSelected())
@@ -157,13 +164,24 @@ public class AddPlateMenu extends JPanel {
 
 					}
 					refreshText();
-					frame.getPlatesMenu().refresh(frame.getMenu());
+					frame.getPlatesMenu().refresh();
 					frame.setContentPane(frame.getPlatesMenu());
+					
+					try {
+						Save.savePlate(allPlates);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} //end if
 			}
 		});
 
 
+	}
+	
+	public void setFrame(Frame frame){
+		this.frame = frame;
 	}
 
 	public void refresh(Inventory inv) {
@@ -177,6 +195,13 @@ public class AddPlateMenu extends JPanel {
 			opt.getCheck().setSelected(false);
 			panel.add(opt);
 
+		}
+	}
+	
+	public void setInitialPlates(){
+	
+		for(Plate plate: allPlates){
+			frame.getMenu().addPlate(plate);
 		}
 	}
 
@@ -225,6 +250,14 @@ public class AddPlateMenu extends JPanel {
 		this.getPlateString().setUI(new JTextFieldHintUI("The plate must contain one ingredient",Color.RED));
 
 		return false;
+	}
+	
+	public void addToAllPlates(Plate plate){
+		allPlates.add(plate);
+	}
+	
+	public HashSet<Plate> getAllPlates(){
+		return allPlates;
 	}
 
 	public Frame getFrame() {

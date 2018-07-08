@@ -51,6 +51,7 @@ public class PlatesMenu extends JPanel {
 				frame.setContentPane(frame.getAddPlateMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
+				
 
 			}
 		});
@@ -68,10 +69,14 @@ public class PlatesMenu extends JPanel {
 
 		//		JList list = new JList(model);
 		//		scrollPane.setViewportView(list);
+		
+		
 
-		for (Plate plate : frame.getMenu().getAvailablePlates())
+//		for (Plate plate : frame.getMenu().getAvailablePlates())
+//		{
+
+		for (Plate plate : frame.getAddPlateMenu().getAllPlates())
 		{
-
 			PlateItem item = new PlateItem(frame, plate, plate.getName(),String.valueOf(plate.getPrice()));
 			panel.add(item);
 			panel.repaint();
@@ -90,12 +95,10 @@ public class PlatesMenu extends JPanel {
 		return panel;
 
 	}
-
-
-
-	public void refresh(Menu men) {
+	
+	public void refresh() {
 		panel.removeAll();
-		for (Plate plate : men.getAvailablePlates()){	
+		for (Plate plate : frame.getAddPlateMenu().getAllPlates()){	
 			PlateItem item = new PlateItem(frame, plate, plate.getName(),String.valueOf(plate.getPrice()));
 			panel.add(item);
 			panel.repaint();

@@ -7,16 +7,13 @@ public class Menu {
 	private ArrayList<Plate> availablePlates; 
 
 	public Menu(){
-		
-		availablePlates = new ArrayList<>();
-		
+		availablePlates = new ArrayList<>();		
 	}
 
 	public void addPlate(Plate newPlate){
 		if(!isOnMenu(newPlate)) { 
 			availablePlates.add(newPlate); 
-		}
-		
+		}	
 	}
 
 	//Si el dueño quiere remover un plato
@@ -34,10 +31,6 @@ public class Menu {
 
 
 	public boolean isOnMenu(Plate food){ 
-//		if (availablePlates.contains(food)){      ///////no sirve
-//			return true;
-//		}
-//		return false;
 		for(int i=0;i<availablePlates.size();i++) {
 			if(food.getName().equals(availablePlates.get(i).getName())) {
 				return true;

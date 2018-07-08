@@ -3,7 +3,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class Save {
 
@@ -26,13 +28,17 @@ public class Save {
 
 	}
 
-	public static void savePlate(Plate plate) throws IOException{
+	public static void savePlate(HashSet<Plate> plateSet) throws IOException{
 
 		Path path = Paths.get("memory/PLATES.txt");
-		Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
-		Files.write(path, plate.getName().getBytes(), StandardOpenOption.APPEND);
-		for(Entry<String, Integer> e : plate.getPlateIngredients().entrySet()){
-			Files.write(path, (e.getKey()+" "+Integer.toString(e.getValue())).getBytes(), StandardOpenOption.APPEND);
+		Files.delete(path);
+		for(Plate plate: plateSet ){
+			Files.write(path, (plate.getName()+"  "+plate.getPrice()).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+			for(Entry<String, Integer> e : plate.getPlateIngredients().entrySet()){
+				Files.write(path, ("  "+e.getKey()+"  "+Integer.toString(e.getValue())).getBytes(), StandardOpenOption.APPEND);
+				
+			}
+			Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
 		}
 
 	}
@@ -42,5 +48,18 @@ public class Save {
 			String[] arr = line.split(" ");
 			inv.addItemToInventory(arr[0], Integer.parseInt(arr[1]));		
 		}
+	}
+	
+	public static void readInitialAddPlatesMenu(AddPlateMenu apm, Inventory inv) throws IOException{
+		for(String line: Files.readAllLines(Paths.get("memory/PLATES.txt"))){
+			String[] arr = line.split("  ");
+			Plate plt = new Plate(arr[0], Double.parseDouble(arr[1]), inv);
+			for(int i=2; i< arr.length; i+=2){
+				plt.addIngredient(arr[i], Integer.parseInt(arr[i+1]));
+			}
+			apm.addToAllPlates(plt);
+			
+		}
+		
 	}
 }
