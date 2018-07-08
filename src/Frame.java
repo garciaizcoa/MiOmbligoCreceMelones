@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -60,15 +61,18 @@ public class Frame extends JFrame  {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
 	 */
-	public Frame(Inventory inv, Menu men) {
+	public Frame(Inventory inv, Menu men) throws IOException {
 
 		this.inv = inv;
 		this.men = men;
 
 		this.adminMenu = new AdminMenu(this);
-		this.platesMenu = new PlatesMenu(this);
 		this.addPlateMenu = new AddPlateMenu(this);
+		Save.readInitialAddPlatesMenu(addPlateMenu, inv);
+		//addPlateMenu.setInitialPlates();
+		this.platesMenu = new PlatesMenu(this);
 		this.inventoryMenu = new InventoryMenu(this);
 		this.customerMenu = new CustomerMenu(this);
 		this.editPlateMenu= new EditPlateMenu(this);

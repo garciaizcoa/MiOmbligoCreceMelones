@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
@@ -80,8 +81,16 @@ public class PlateItem extends JPanel {
 			public void actionPerformed(ActionEvent e) {											
 				System.out.println("Remove was clicked");
 				frame.getMenu().removePlate(frame.getMenu().getPlate(plate));
-				frame.getPlatesMenu().refresh(frame.getMenu());
+				frame.getAddPlateMenu().getAllPlates().remove(plate);
+				frame.getPlatesMenu().refresh();
 				frame.getMenu().printMenu();
+				
+				try {
+					Save.savePlate(frame.getAddPlateMenu().getAllPlates());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 
 				frame.getPlatesMenu().getPanel().repaint();
