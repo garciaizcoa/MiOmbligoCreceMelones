@@ -45,7 +45,6 @@ public class PlateItem extends JPanel {
 				frame.getEditPlateMenu().getPlateDouble().setText(amount);
 
 				frame.getEditPlateMenu().getPanel().removeAll();
-				frame.getAddPlateMenu().getAllPlates().remove(plate);
 
 				for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet()){
 
@@ -67,19 +66,11 @@ public class PlateItem extends JPanel {
 					frame.getEditPlateMenu().getPanel().repaint();
 
 					frame.getEditPlateMenu().setPlate(plate);
-					frame.getAddPlateMenu().getAllPlates().add(plate);
 					frame.setContentPane(frame.getEditPlateMenu());
 					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 					frame.revalidate(); 
-					
-					try {
-						Save.savePlate(frame.getAddPlateMenu().getAllPlates());
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
 				}
+				
 
 			}
 		}); 
