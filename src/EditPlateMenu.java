@@ -120,7 +120,7 @@ public class EditPlateMenu extends JPanel {
 			public void actionPerformed(ActionEvent e) {	
 
 				System.out.println("Done was clicked");
-
+//
 				validateDouble(plateDouble.getText());
 
 				if(	validateString(plateString.getText()) && validateCheckBoxes()) { //start if
