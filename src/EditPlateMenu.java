@@ -136,7 +136,7 @@ public class EditPlateMenu extends JPanel {
 
 					frame.getMenu().printMenu();
 
-
+ 
 					for (Plate plato : frame.getMenu().getAvailablePlates()){
 
 						PlateItem item = new PlateItem(frame,plato, plato.getName(),String.valueOf(plato.getPrice()));
