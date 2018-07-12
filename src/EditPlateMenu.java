@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,13 +24,13 @@ public class EditPlateMenu extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Frame frame;
 	private JPanel panel;
 
 	private JTextField plateString;
 	private JTextField plateDouble;
-	
+
 	private Plate plate;
 
 
@@ -38,7 +39,7 @@ public class EditPlateMenu extends JPanel {
 		System.out.println("Edit mode, activate!!!");
 
 		plate= null;
-		
+
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
@@ -70,27 +71,27 @@ public class EditPlateMenu extends JPanel {
 		editPanel.add(plateString);
 
 		plateDouble = new JTextField();
-//		plateDouble.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				if(plateString.getText().equals("")){
-//					plateString.setText("Name of Plate");
-//				}
-//				plateDouble.setText("");
-//			}
-//		});
+		//		plateDouble.addMouseListener(new MouseAdapter() {
+		//			@Override
+		//			public void mouseClicked(MouseEvent e) {
+		//				if(plateString.getText().equals("")){
+		//					plateString.setText("Name of Plate");
+		//				}
+		//				plateDouble.setText("");
+		//			}
+		//		});
 		plateDouble.setText("Price");
 		plateDouble.setHorizontalAlignment(WIDTH/2);
 		plateDouble.setForeground(Color.GRAY);
-//		plateString.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				if(plateDouble.getText().equals("")){
-//					plateDouble.setText("Price");
-//				}
-//				plateString.setText("");
-//			}
-//		});
+		//		plateString.addMouseListener(new MouseAdapter() {
+		//			@Override
+		//			public void mouseClicked(MouseEvent e) {
+		//				if(plateDouble.getText().equals("")){
+		//					plateDouble.setText("Price");
+		//				}
+		//				plateString.setText("");
+		//			}
+		//		});
 
 		editPanel.add(plateDouble);
 
@@ -119,33 +120,42 @@ public class EditPlateMenu extends JPanel {
 			public void actionPerformed(ActionEvent e) {	
 
 				System.out.println("Done was clicked");
-				
+
 				validateDouble(plateDouble.getText());
 
 				if(	validateString(plateString.getText()) && validateCheckBoxes()) { //start if
-				plate.setName(plateString.getText());
-				plate.setPrice(Double.parseDouble(plateDouble.getText()));
-				plate.getPlateIngredients().clear();
+					plate.setName(plateString.getText());
+					plate.setPrice(Double.parseDouble(plateDouble.getText()));
+					plate.getPlateIngredients().clear();
 
-				for (Component opt : panel.getComponents()) {
-					if(((IngredientOption) opt).getCheck().isSelected())
-						plate.addIngredient(((IngredientOption) opt).getCheck().getText(), ((IngredientOption) opt).getSelectedInt()); // no existe opcion todavia
+					for (Component opt : panel.getComponents()) {
+						if(((IngredientOption) opt).getCheck().isSelected())
+							plate.addIngredient(((IngredientOption) opt).getCheck().getText(), ((IngredientOption) opt).getSelectedInt()); // no existe opcion todavia
+					}
+					plate.printIngredients();
+
+					frame.getMenu().printMenu();
+
+
+					for (Plate plato : frame.getMenu().getAvailablePlates()){
+
+						PlateItem item = new PlateItem(frame,plato, plato.getName(),String.valueOf(plato.getPrice()));
+						frame.getPlatesMenu().getPanel().add(item);
+
+					}
+					plateString.setText("Name of Plate");
+					plateDouble.setText("Price");
+					frame.getPlatesMenu().refresh();
+					frame.setContentPane(frame.getPlatesMenu());
 				}
-				plate.printIngredients();
 
-				frame.getMenu().printMenu();
+				frame.getAddPlateMenu().getAllPlates().add(plate);
 
-
-				for (Plate plato : frame.getMenu().getAvailablePlates()){
-
-					PlateItem item = new PlateItem(frame,plato, plato.getName(),String.valueOf(plato.getPrice()));
-					frame.getPlatesMenu().getPanel().add(item);
-
-				}
-				plateString.setText("Name of Plate");
-				plateDouble.setText("Price");
-				frame.getPlatesMenu().refresh();
-				frame.setContentPane(frame.getPlatesMenu());
+				try {
+					Save.savePlate(frame.getAddPlateMenu().getAllPlates());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -188,13 +198,13 @@ public class EditPlateMenu extends JPanel {
 			this.getPlateDouble().setUI(new JTextFieldHintUI("The amount must be a number.", Color.RED));
 		}
 	}
-	
+
 	public boolean validateCheckBoxes() {
 		for (Component opt : panel.getComponents()) {
 			if(((IngredientOption) opt).getCheck().isSelected() && ((IngredientOption) opt).getSelectedInt()!=0) {
 				return true;
+			}
 		}
-	}
 		this.getPlateDouble().setText("");
 		this.getPlateString().setText("");
 		this.getPlateDouble().setUI(new JTextFieldHintUI("The plate must contain one ingredient",Color.RED));
@@ -221,7 +231,7 @@ public class EditPlateMenu extends JPanel {
 	public Plate getPlate() {
 		return plate;
 	}
-	
+
 	public void setPlate(Plate plate) {
 		this.plate=plate;
 	}
