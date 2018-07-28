@@ -32,34 +32,40 @@ public class Save {
 
 		Path path = Paths.get("memory/PLATES.txt");
 		Files.delete(path);
-		for(Plate plate: plateSet ){
-			Files.write(path, (plate.getName()+"  "+plate.getPrice()).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-			for(Entry<String, Integer> e : plate.getPlateIngredients().entrySet()){
-				Files.write(path, ("  "+e.getKey()+"  "+Integer.toString(e.getValue())).getBytes(), StandardOpenOption.APPEND);
-				
+		if(!plateSet.isEmpty()){
+			for(Plate plate: plateSet ){
+				Files.write(path, (plate.getName()+"  "+plate.getPrice()).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+				for(Entry<String, Integer> e : plate.getPlateIngredients().entrySet()){
+					Files.write(path, ("  "+e.getKey()+"  "+Integer.toString(e.getValue())).getBytes(), StandardOpenOption.APPEND);
+
+				}
+				Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
 			}
-			Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
+		}
+		else{
+			Files.write(path, "Empty".getBytes(), StandardOpenOption.CREATE);
 		}
 
 	}
-	
+
 	public static void readInitialInventory(Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/INVENTORY.txt"))){
 			String[] arr = line.split(" ");
 			inv.addItemToInventory(arr[0], Integer.parseInt(arr[1]));		
 		}
 	}
-	
+
 	public static void readInitialAddPlatesMenu(AddPlateMenu apm, Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/PLATES.txt"))){
+			if(!line.equals("Empty")){
 			String[] arr = line.split("  ");
 			Plate plt = new Plate(arr[0], Double.parseDouble(arr[1]), inv);
 			for(int i=2; i< arr.length; i+=2){
 				plt.addIngredient(arr[i], Integer.parseInt(arr[i+1]));
 			}
 			apm.addToAllPlates(plt);
-			
+			}
 		}
-		
+
 	}
 }
