@@ -165,6 +165,7 @@ public class AddPlateMenu extends JPanel {
 					}
 					refreshText();
 					frame.getPlatesMenu().refresh();
+					frame.getCustomerMenu().refresh();
 					frame.setContentPane(frame.getPlatesMenu());
 					
 					try {

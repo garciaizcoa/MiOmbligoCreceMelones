@@ -71,27 +71,11 @@ public class EditPlateMenu extends JPanel {
 		editPanel.add(plateString);
 
 		plateDouble = new JTextField();
-		//		plateDouble.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(plateString.getText().equals("")){
-		//					plateString.setText("Name of Plate");
-		//				}
-		//				plateDouble.setText("");
-		//			}
-		//		});
+		
 		plateDouble.setText("Price");
 		plateDouble.setHorizontalAlignment(WIDTH/2);
 		plateDouble.setForeground(Color.GRAY);
-		//		plateString.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(plateDouble.getText().equals("")){
-		//					plateDouble.setText("Price");
-		//				}
-		//				plateString.setText("");
-		//			}
-		//		});
+		
 
 		editPanel.add(plateDouble);
 
@@ -146,6 +130,7 @@ public class EditPlateMenu extends JPanel {
 					plateString.setText("Name of Plate");
 					plateDouble.setText("Price");
 					frame.getPlatesMenu().refresh();
+					frame.getCustomerMenu().refresh();
 					frame.setContentPane(frame.getPlatesMenu());
 				}
 
