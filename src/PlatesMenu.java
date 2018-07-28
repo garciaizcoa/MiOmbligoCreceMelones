@@ -27,6 +27,9 @@ public class PlatesMenu extends JPanel {
 	public PlatesMenu(Frame frame) {
 
 		this.frame = frame;
+		System.out.println("platesmenu "+ frame.getMenu());
+		System.out.println(frame.getMenu().toString());
+		frame.getMenu().printMenu();
 
 
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));

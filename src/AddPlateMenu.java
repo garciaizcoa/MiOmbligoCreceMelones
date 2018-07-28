@@ -39,7 +39,7 @@ public class AddPlateMenu extends JPanel {
 
 	private JTextFieldHintUI stringHint;
 	private JTextFieldHintUI doubleHint;
-	
+
 	private HashSet<Plate> allPlates = new HashSet<>();
 
 
@@ -60,7 +60,7 @@ public class AddPlateMenu extends JPanel {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				refreshText();
-				
+
 				frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
@@ -165,8 +165,9 @@ public class AddPlateMenu extends JPanel {
 					}
 					refreshText();
 					frame.getPlatesMenu().refresh();
+					frame.getCustomerMenu().refresh(frame.getMenu());///////////////////////
 					frame.setContentPane(frame.getPlatesMenu());
-					
+
 					try {
 						Save.savePlate(allPlates);
 					} catch (IOException e1) {
@@ -179,7 +180,7 @@ public class AddPlateMenu extends JPanel {
 
 
 	}
-	
+
 	public void setFrame(Frame frame){
 		this.frame = frame;
 	}
@@ -197,9 +198,9 @@ public class AddPlateMenu extends JPanel {
 
 		}
 	}
-	
+
 	public void setInitialPlates(){
-	
+
 		for(Plate plate: allPlates){
 			frame.getMenu().addPlate(plate);
 		}
@@ -237,13 +238,13 @@ public class AddPlateMenu extends JPanel {
 			this.getPlateDouble().setUI(new JTextFieldHintUI("The amount must be a number.", Color.RED));
 		}
 	}
-	
+
 	public boolean validateCheckBoxes() {
 		for (Component opt : panel.getComponents()) {
 			if(((IngredientOption) opt).getCheck().isSelected() && ((IngredientOption) opt).getSelectedInt()!=0) {
 				return true;
+			}
 		}
-	}
 		this.getPlateDouble().setText("");
 		this.getPlateString().setText("");
 		this.getPlateDouble().setUI(new JTextFieldHintUI("The plate must contain one ingredient",Color.RED));
@@ -251,11 +252,11 @@ public class AddPlateMenu extends JPanel {
 
 		return false;
 	}
-	
+
 	public void addToAllPlates(Plate plate){
 		allPlates.add(plate);
 	}
-	
+
 	public HashSet<Plate> getAllPlates(){
 		return allPlates;
 	}

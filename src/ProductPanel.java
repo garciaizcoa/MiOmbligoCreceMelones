@@ -26,9 +26,11 @@ public class ProductPanel extends JPanel {
 	public ProductPanel(Frame frame, Plate plate) {
 
 		
-				JButton productBtn = new JButton("");
-				productBtn.setIcon(null);
-				
+				JButton productBtn = new JButton(plate.getName()); //temporero, aqui va la foto
+				add(productBtn);
+				//productBtn.setIcon(null);
+//				
+//				//menos
 				JButton menos = new JButton("-");
 				menos.setFont(new Font("Tahoma", Font.PLAIN, 6));
 				menos.setForeground(Color.BLACK);
@@ -43,11 +45,13 @@ public class ProductPanel extends JPanel {
 						number.setText(answer);
 					}
 				});
-				
+//				
+//				//cantidad
 				number = new JLabel("0");
 				number.setHorizontalAlignment(SwingConstants.CENTER);
 				number.setFont(new Font("Tahoma", Font.BOLD, 12));
 				
+				//mas
 				JButton mas = new JButton("+");
 				mas.setFont(new Font("Tahoma", Font.PLAIN, 6));
 				mas.setForeground(Color.BLACK);
