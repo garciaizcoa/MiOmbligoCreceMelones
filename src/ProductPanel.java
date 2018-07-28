@@ -27,7 +27,8 @@ public class ProductPanel extends JPanel {
 
 		
 				JButton productBtn = new JButton("");
-				productBtn.setIcon(null);
+				productBtn.setText(plate.getName());
+				//productBtn.setIcon(null);
 				
 				JButton menos = new JButton("-");
 				menos.setFont(new Font("Tahoma", Font.PLAIN, 6));
@@ -94,7 +95,4 @@ public class ProductPanel extends JPanel {
 		
 		
 	}
-
-
-	
 }

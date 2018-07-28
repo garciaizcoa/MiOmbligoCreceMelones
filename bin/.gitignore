@@ -1,7 +1,5 @@
 /AddPlateMenu$1.class
 /AddPlateMenu$2.class
-/AddPlateMenu$3.class
-/AddPlateMenu$4.class
 /AddPlateMenu.class
 /AdminMenu$1.class
 /AdminMenu$2.class
@@ -9,6 +7,9 @@
 /AdminMenu.class
 /CustomerMenu$1.class
 /CustomerMenu.class
+/EditPlateMenu$1.class
+/EditPlateMenu$2.class
+/EditPlateMenu.class
 /Frame$1.class
 /Frame$2.class
 /Frame$3.class
@@ -19,9 +20,8 @@
 /InventoryItem.class
 /InventoryMenu$1.class
 /InventoryMenu$2.class
-/InventoryMenu$3.class
-/InventoryMenu$4.class
 /InventoryMenu.class
+/JTextFieldHintUI.class
 /Menu.class
 /Plate.class
 /PlateItem$1.class
@@ -31,17 +31,7 @@
 /PlatesMenu$2.class
 /PlatesMenu.class
 /ProductPanel$1.class
+/ProductPanel$2.class
 /ProductPanel.class
 /Save.class
 /Ticket.class
-/AddPlateMenu$5.class
-/AddPlateMenu$6.class
-/AddPlateMenu$7.class
-/AddPlateMenu$8.class
-/EditPlateMenu.class
-/EditPlateMenu$1.class
-/EditPlateMenu$2.class
-/EditPlateMenu$3.class
-/EditPlateMenu$4.class
-/JTextFieldHintUI.class
-/ProductPanel$2.class
