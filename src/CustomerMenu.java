@@ -97,14 +97,15 @@ public class CustomerMenu extends JPanel {
 		 panel = new JPanel();
 		add(panel);
 
-
+		refresh();
 
 
 	}	
 
 	public void refresh() {
 		panel.removeAll();
-		for(Plate plato: frame.getMenu().getAvailablePlates()) {
+		for(Plate plato: frame.getAddPlateMenu().getAllPlates()) {
+			
 			ProductPanel product = new ProductPanel(frame, plato);
 			this.getPanel().add(product);
 			panel.repaint();
