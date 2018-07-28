@@ -1,13 +1,1 @@
-azucar  3.0  azucar  1
-azucar  3.0  azucar  1
-hola  3.0  azucar  1
-ketchup  3.0  ketchup  1
-sopaa  2.99  azucar  1
-salad  3.99  sal  1
-a  1.0  azucar  1  sal  1
-sopa  2.0  azucar  1
-d  2.0  azucar  1
-sal  1.0  azucar  1
-sal  3.0  sal  1
-hola  2.0  azucar  1
-c  3.0  sal  2  ketchup  4
+

@@ -52,9 +52,9 @@ public class PlateItem extends JPanel {
 
 
 					
-					if(frame.getMenu().getPlate(plate).getPlateIngredients().containsKey(entry.getKey())) {
+					if(plate.getPlateIngredients().containsKey(entry.getKey())) {
 						opt.getCheck().setSelected(true);
-						opt.getCombo().setSelectedIndex(frame.getMenu().getPlate(plate).getPlateIngredients().get(entry.getKey()));
+						opt.getCombo().setSelectedIndex(plate.getPlateIngredients().get(entry.getKey()));
 					}
 					else {
 						opt.getCheck().setSelected(false); //por siacaso
@@ -70,6 +70,7 @@ public class PlateItem extends JPanel {
 					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 					frame.revalidate(); 
 				}
+				
 
 			}
 		}); 

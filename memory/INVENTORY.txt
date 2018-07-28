@@ -1,3 +1,6 @@
+queso 6
 azucar 4
+carne 7
+pan 6
 sal 2
 ketchup 2
