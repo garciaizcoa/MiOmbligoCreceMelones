@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -14,14 +15,15 @@ public class TableDiagramMenu extends JPanel {
 	
 	private JPanel panel;
 	private JTextField numTablesTextBox;
+	private JPanel buttonPanel;
 	
 	public TableDiagramMenu(Frame frame) {
 		setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		add(panel);
 		
-		JPanel buttonPanel = new JPanel();
+		buttonPanel = new JPanel();
 		panel.add(buttonPanel);
 		
 		JButton btnBack = new JButton("Back");
@@ -45,8 +47,22 @@ public class TableDiagramMenu extends JPanel {
 		buttonPanel.add(numTablesTextBox);
 		numTablesTextBox.setColumns(10);
 		
+		numTables = 0;
+		try {
+			numTables = Save.readTableNumber();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		System.out.println(numTables);
+		if (numTables==0){
 		JTextFieldHintUI numTablesHint = new JTextFieldHintUI(" Insert Amount",Color.RED);
 		numTablesTextBox.setUI(numTablesHint);
+		}
+		else{
+			numTablesTextBox.setText(numTables+"");
+			refreshTables();
+		}
 		
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -57,13 +73,14 @@ public class TableDiagramMenu extends JPanel {
 				else{
 					if(validateNum(numTablesTextBox.getText())) {
 					numTables=Integer.parseInt(numTablesTextBox.getText());
+					try {
+						Save.saveTableNumber(numTablesTextBox.getText());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
-					panel.removeAll();
-					panel.repaint();
-					panel.revalidate();
-					panel.add(buttonPanel);
-					for(int i=1;i<=numTables;i++)
-						panel.add(new Table(i));
+					refreshTables();
 					numTablesTextBox.setVisible(false);
 					btnEdit.setText("Edit");
 					}
@@ -72,7 +89,15 @@ public class TableDiagramMenu extends JPanel {
 		});
 		
 		
-		
+	}
+	
+	public void refreshTables(){
+		panel.removeAll();
+		panel.repaint();
+		panel.revalidate();
+		panel.add(buttonPanel);
+		for(int i=1;i<=numTables;i++)
+			panel.add(new Table(i));
 	}
 	
 	public class Table extends JPanel{

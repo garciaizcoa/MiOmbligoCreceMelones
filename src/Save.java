@@ -47,6 +47,19 @@ public class Save {
 		}
 
 	}
+	
+	public static void saveTableNumber(String tableNum) throws IOException{
+		Path path = Paths.get("memory/TABLES.txt");
+		Files.delete(path);
+		Files.write(path, tableNum.getBytes(), StandardOpenOption.CREATE);
+	}
+	
+	public static int readTableNumber() throws IOException{
+		for(String line: Files.readAllLines(Paths.get("memory/TABLES.txt"))){
+			return Integer.parseInt(line);
+		}
+		return 0;
+	}
 
 	public static void readInitialInventory(Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/INVENTORY.txt"))){
