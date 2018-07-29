@@ -55,7 +55,7 @@ public class TableDiagramMenu extends JPanel {
 				btnEdit.setText("Done");
 				}
 				else{
-					validateNum(numTablesTextBox.getText());
+					if(validateNum(numTablesTextBox.getText())) {
 					numTables=Integer.parseInt(numTablesTextBox.getText());
 					
 					panel.removeAll();
@@ -66,6 +66,7 @@ public class TableDiagramMenu extends JPanel {
 						panel.add(new Table(i));
 					numTablesTextBox.setVisible(false);
 					btnEdit.setText("Edit");
+					}
 				}
 			}
 		});
@@ -86,18 +87,20 @@ public class TableDiagramMenu extends JPanel {
 		
 	}
 	
-	public void validateNum(String num){
+	public boolean validateNum(String num){
 		try{
 			Integer.parseInt(num);
 		}catch(NumberFormatException nfe){
 			numTablesTextBox.setText("");
 			numTablesTextBox.setUI(new JTextFieldHintUI(" Must be a number. ",Color.RED));
+			return false;
 		}
 		if(Integer.parseInt(num)<=0){
 			numTablesTextBox.setText("");
 			numTablesTextBox.setUI(new JTextFieldHintUI(" Can't be a number less than 1. ",Color.RED));
+			return false;
 		}
+		return true;
 	}
 	
-	//validar numero de mesas
 }
