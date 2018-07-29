@@ -1,12 +1,15 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
 public class Ticket {
 	
 	private Menu menu;
 	private Inventory inventory;
 	private Map<Integer, ArrayList<Plate>> tables;
+	private Queue<ArrayList<Plate>> orders = new ArrayDeque<>();
 	
 	public Ticket(Menu men, Inventory inv){
 		this.menu = men;
@@ -34,6 +37,10 @@ public class Ticket {
 			tables.put(num, nl);
 		}
 		
+	}
+	
+	public void orderQueue(ArrayList<Plate> ap){
+		orders.add(ap);
 	}
 	
 	

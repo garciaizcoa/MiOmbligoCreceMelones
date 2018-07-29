@@ -2,6 +2,7 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,11 +19,16 @@ public class CheckoutMenu extends JPanel {
 		
 		JButton btnBack = new JButton("Back");
 		
+		JButton btnOrder = new JButton("Order!");
+		btnOrder.setBounds(327, 265, 117, 29);
+		add(btnOrder);
+		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getCustomerMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
+				btnOrder.setEnabled(true);
 			}
 		});
 		btnBack.setBounds(166, 5, 117, 29);
@@ -38,9 +44,18 @@ public class CheckoutMenu extends JPanel {
 		 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		scrollPane_1.setViewportView(panel);
 		
-		JButton btnOrder = new JButton("Order!");
-		btnOrder.setBounds(327, 265, 117, 29);
-		add(btnOrder);
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				TableDiagramMenu.Table tab = frame.getTableDiagramMenu().getTableByNumber(frame.getCustomerMenu().getTableNumber());
+				tab.setOrderOfTable(frame.getCustomerMenu().getPlatesList());
+				JLabel thanku = new JLabel("Your order has been placed!");
+				panel.add(thanku);
+				panel.repaint();
+				panel.revalidate();
+				btnOrder.setEnabled(false);
+			}
+		});
 		
 		for(Plate plato :frame.getCustomerMenu().getPlatesList()) {
 			 OrderItem item = new OrderItem(plato, frame); 
