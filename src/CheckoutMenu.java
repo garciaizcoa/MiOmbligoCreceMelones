@@ -1,14 +1,23 @@
 import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ScrollPaneConstants;
 
 public class CheckoutMenu extends JPanel {
+	
+	private JPanel panel;
+	private Frame frame;
+	
 	public CheckoutMenu(Frame frame) {
 		setLayout(null);
+		this.frame=frame;
 		
 		JButton btnBack = new JButton("Back");
+		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getCustomerMenu()); //panel = panel you want to change too.
@@ -19,15 +28,34 @@ public class CheckoutMenu extends JPanel {
 		btnBack.setBounds(166, 5, 117, 29);
 		add(btnBack);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(6, 32, 438, 232);
-		add(panel);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(6, 32, 438, 232);
+		add(scrollPane_1);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		panel.add(scrollPane);
+		 panel = new JPanel();
+		 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		scrollPane_1.setViewportView(panel);
 		
 		JButton btnOrder = new JButton("Order!");
 		btnOrder.setBounds(327, 265, 117, 29);
 		add(btnOrder);
+		
+		for(Plate plato :frame.getCustomerMenu().getPlatesList()) {
+			 OrderItem item = new OrderItem(plato, frame); 
+			 panel.add(item);
+		}
+	}
+	
+	public void refresh() {
+		panel.removeAll();
+		for(Plate plato :frame.getCustomerMenu().getPlatesList()) {
+			 OrderItem item = new OrderItem(plato, frame); 
+			 panel.add(item);
+			 panel.repaint();
+				panel.revalidate();
+		}
+		
 	}
 }

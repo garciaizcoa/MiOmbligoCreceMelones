@@ -128,4 +128,10 @@ public class TableDiagramMenu extends JPanel {
 		return true;
 	}
 	
+	//getters
+	
+	public int getNumTables() {
+		return numTables;
+	}
+	
 }
