@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Plate {
 	
-	private Map<String, Integer> ingredients;
+	private HashMap<String, Integer> ingredients;
 	private Inventory inventory;
 	private String name;
 	private double price;
@@ -33,13 +33,20 @@ public class Plate {
 //		for
 //	}
 	
-	public Map<String, Integer> getPlateIngredients(){
+	//getters
+	
+	public HashMap<String, Integer> getPlateIngredients(){
 		return ingredients;
 	}
 	
 	public String getName(){
 		return name;
 	}
+	public Inventory getInventory(){
+		return inventory;
+	}
+	
+	//setters
 	
 	public void setName(String name) {
 		this.name=name;
@@ -51,6 +58,14 @@ public class Plate {
 
 	public void setPrice(double price) {
 		this.price=price;
+	}
+	
+	protected Plate clone(){
+		Plate np =  new Plate(this.getName(),this.getPrice(),this.getInventory());
+		for(Map.Entry<String, Integer> e: this.getPlateIngredients().entrySet()){
+			np.addIngredient(e.getKey(), e.getValue());
+		}
+		return np;
 	}
 	
 

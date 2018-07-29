@@ -38,7 +38,7 @@ public class CustomerMenu extends JPanel {
 
 	private JPanel panel;
 	private Frame frame;
-	private TableDiagramMenu.Table table;
+	private int tableNumber = 1;
 
 	private ArrayList<Plate> platesList = new ArrayList<>();
 
@@ -101,21 +101,26 @@ public class CustomerMenu extends JPanel {
 		}
 		tableComboBox.setVisible(false);
 
-		JButton btnTable = new JButton("Table #"+ tableComboBox.getSelectedItem() );
+		JButton btnCheckout = new JButton("Checkout");
+		add(btnCheckout);
+
+		JButton btnTable = new JButton("Table #"+ tableComboBox.getSelectedItem());
 		btnTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btnTable.getText().contains("Table #")) {
-				
-				tableComboBox.setVisible(true);
-				btnTable.setText("Done");
+
+					btnCheckout.setEnabled(false);
+					tableComboBox.setVisible(true);
+					btnTable.setText("Done");
 				}else {
 					btnTable.setText("Table #"+ tableComboBox.getSelectedItem());
+					tableNumber= (int) tableComboBox.getSelectedItem();
+					btnCheckout.setEnabled(true);
 					tableComboBox.setVisible(false);
 				}
-				
+
 			}
 		});
-
 
 
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -164,8 +169,7 @@ public class CustomerMenu extends JPanel {
 				);
 		orderPanel.setLayout(gl_orderPanel);
 
-		JButton btnCheckout = new JButton("Checkout");
-		add(btnCheckout);
+
 
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -175,7 +179,8 @@ public class CustomerMenu extends JPanel {
 				for (Component opt : panel.getComponents()) {
 					if(((ProductPanel) opt).getPlateNumber()!=0) {
 						for(int i=0; i<((ProductPanel) opt).getPlateNumber();i++) {
-							platesList.add(((ProductPanel) opt).getSelectedPlate());
+
+							platesList.add((((ProductPanel) opt).getSelectedPlate()).clone());
 							System.out.println("comida " +platesList.get(i).getName());
 						}
 					}
@@ -216,5 +221,9 @@ public class CustomerMenu extends JPanel {
 
 	public ArrayList<Plate> getPlatesList(){
 		return platesList;
+	}
+
+	public int getTableNumber(){
+		return tableNumber;
 	}
 }

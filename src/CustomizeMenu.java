@@ -21,12 +21,14 @@ public class CustomizeMenu extends JPanel {
 	private Plate plate;
 	
 	private JPanel panel;
+	private Frame frame;
+	private JLabel lblExtraMessage;
 
 
 	public CustomizeMenu(Frame frame) {
 		
 		this.plate=null;
-
+		this.frame = frame;
 		JButton btnBack = new JButton("Back");
 		add(btnBack);
 		
@@ -46,6 +48,10 @@ public class CustomizeMenu extends JPanel {
 		 panel = new JPanel();
 		 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		scrollPane.setViewportView(panel);
+		
+		lblExtraMessage = new JLabel("Yo existo!");
+		lblExtraMessage.setVisible(false);
+		add(lblExtraMessage);
 //		panel.setLayout(new FormLayout(new ColumnSpec[] {},
 //				new RowSpec[] {}));
 		
@@ -66,10 +72,28 @@ public class CustomizeMenu extends JPanel {
 			JButton btnExtra = new JButton("Extra");
 			add(btnExtra);
 			
+			//VERIFICAR SI HAY SUFICIENTES INGREDIENTES
+			btnExtra.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					plate.getPlateIngredients().put(name, plate.getPlateIngredients().get(name)+1);
+					System.out.println(plate.getPlateIngredients().entrySet().toString());
+					setExtraLabel("Extra "+name+" was added!");
+					lblExtraMessage.setVisible(true);
+				}
+			});
 			
 			JButton btnRemove = new JButton("Remove Ingredient");
 			add(btnRemove);
 
+			btnRemove.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					plate.getPlateIngredients().remove(name);
+					frame.getCustomizeMenu().refresh();
+					System.out.println(plate.getPlateIngredients().entrySet().toString());
+					setExtraLabel(name+" was removed!");
+					lblExtraMessage.setVisible(true);
+				}
+			});
 		}
 	}
 	
@@ -83,5 +107,9 @@ public class CustomizeMenu extends JPanel {
 	//setters
 	public void setPlate(Plate plate) {
 		this.plate=plate;
+	}
+	
+	public void setExtraLabel(String name){
+		lblExtraMessage.setText(name);
 	}
 }
