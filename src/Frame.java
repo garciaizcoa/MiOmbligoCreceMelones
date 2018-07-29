@@ -36,6 +36,7 @@ public class Frame extends JFrame  {
 	private EditPlateMenu editPlateMenu;
 	private CheckoutMenu checkoutMenu;
 	private TableDiagramMenu tableDiagramMenu;
+	private CustomizeMenu customizeMenu;
 
 
 	/**
@@ -80,6 +81,7 @@ public class Frame extends JFrame  {
 		this.editPlateMenu= new EditPlateMenu(this);
 		this.checkoutMenu = new CheckoutMenu(this);
 		this.tableDiagramMenu= new TableDiagramMenu(this);
+		this.customizeMenu = new CustomizeMenu(this);
 
 
 		System.out.println("frame "+this.getInventory());
@@ -159,6 +161,9 @@ public class Frame extends JFrame  {
 	}
 	public TableDiagramMenu getTableDiagramMenu(){
 		return tableDiagramMenu;
+	}
+	public CustomizeMenu getCustomizeMenu() {
+		return customizeMenu;
 	}
 	
 
