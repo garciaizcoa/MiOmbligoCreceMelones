@@ -36,6 +36,9 @@ public class AdminMenu extends JPanel {
 
 				JButton btnPlates = new JButton("Plates");
 				add(btnPlates, BorderLayout.WEST);
+				
+				JButton btnTableDiagram = new JButton("Table Diagram");
+				add(btnTableDiagram);
 
 				JButton btnInventory = new JButton("Inventory");
 				add(btnInventory, BorderLayout.EAST);
@@ -59,6 +62,15 @@ public class AdminMenu extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println("Plates was clicked");
 						frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
+						frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+						frame.revalidate(); 
+					}
+				});
+				
+				btnTableDiagram.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					
+						frame.setContentPane(frame.getTableDiagramMenu()); //panel = panel you want to change too.
 						frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 						frame.revalidate(); 
 					}

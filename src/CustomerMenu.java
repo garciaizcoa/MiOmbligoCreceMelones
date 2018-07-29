@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -21,6 +25,10 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.SystemColor;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class CustomerMenu extends JPanel {
 
@@ -93,10 +101,28 @@ public class CustomerMenu extends JPanel {
 						.addContainerGap())
 				);
 		orderPanel.setLayout(gl_orderPanel);
+		 
+		 JScrollPane scrollPane_1 = new JScrollPane();
+		 scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		 scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		 add(scrollPane_1);
 
 		 panel = new JPanel();
-		add(panel);
-
+		 scrollPane_1.setViewportView(panel);
+		 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		 
+		 JButton btnCheckout = new JButton("Checkout");
+		 add(btnCheckout);
+		 
+		 btnCheckout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("checkout was clicked");
+					frame.setContentPane(frame.getCheckoutMenu()); //panel = panel you want to change too.
+					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+					frame.revalidate(); 
+				}
+			});
+		 
 		refresh();
 
 
@@ -120,6 +146,4 @@ public class CustomerMenu extends JPanel {
 
 		return panel;
 	}
-
-
 }
