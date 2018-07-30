@@ -187,7 +187,7 @@ public class CustomerMenu extends JPanel {
 
 				}
 
-				frame.getCustomerMenu().refresh();
+				//frame.getCustomerMenu().refresh();
 				frame.setContentPane(frame.getCheckoutMenu()); //panel = panel you want to change too.
 				frame.getCheckoutMenu().refresh();
 				
@@ -196,7 +196,7 @@ public class CustomerMenu extends JPanel {
 			}
 		});
 
-	//	refresh();
+		refresh();
 
 
 	}	
@@ -213,7 +213,6 @@ public class CustomerMenu extends JPanel {
 
 	//getters
 	public JPanel getPanel() {
-
 		return panel;
 	}
 
