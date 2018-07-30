@@ -24,6 +24,7 @@ public class Inventory{
 		int curr = inventoryList.get(item);
 		if(curr - amount >= 0){
 			inventoryList.replace(item, curr-amount);
+			System.out.println(item + "current amount is now "+inventoryList.get(item));
 		}
 		else{
 			System.out.println(item+" "+"not available.");
@@ -38,7 +39,13 @@ public class Inventory{
 	}
 
 	public boolean isAvailable(String item, Integer num){
-		int curr = inventoryList.get(item);
+		int curr = 0;
+		try {
+		curr = inventoryList.get(item);
+		}
+		catch(Exception e){
+			return false;
+		}
 		return curr >= num;
 	}
 	
@@ -57,7 +64,4 @@ public class Inventory{
 		    System.out.println(entry.getKey() + "/" + entry.getValue());
 		}
 	}
-	
-	
-	
 }

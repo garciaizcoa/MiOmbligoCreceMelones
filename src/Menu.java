@@ -5,6 +5,7 @@ import java.util.Set;
 public class Menu {
 
 	private ArrayList<Plate> availablePlates; 
+	public Frame frame;
 
 	public Menu(){
 		availablePlates = new ArrayList<>();		
@@ -40,6 +41,11 @@ public class Menu {
 	}
 
 	public ArrayList<Plate> getAvailablePlates() {
+		for(Plate plt: frame.getAddPlateMenu().getAllPlates()) {
+			if(plt.checkAvailability()) {
+				availablePlates.add(plt);
+			}
+		}
 		return availablePlates;
 	}
 	
@@ -58,6 +64,10 @@ public class Menu {
 		for(Plate e: availablePlates){
 			System.out.println(e.getName());
 		}
+	}
+	
+	public void setFrame(Frame frame) {
+		this.frame = frame;
 	}
 
 }
