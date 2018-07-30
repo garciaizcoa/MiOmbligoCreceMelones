@@ -58,6 +58,7 @@ public class InventoryMenu extends JPanel {
 
 		btnAdminMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			frame.getCustomerMenu().refresh();
 				refreshText();
 				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.

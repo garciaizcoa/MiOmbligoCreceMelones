@@ -1,8 +1,8 @@
 ensalada  2.0  carne  3
-spaghetti  7.0  queso  1
-sandwich  5.0  queso  1  azucar  4  carne  2  pan  1
-brioche  2.0  pan  3
-sopa  6.0  azucar  2  ketchup  3
-hot dog  3.0  carne  1
 cheesecake  3.0  queso  1
+sopa  6.0  azucar  2  ketchup  3
 arroz mamposteao  10.0  queso  1  azucar  2
+sandwich  5.0  queso  1  azucar  4  carne  2  pan  1
+spaghetti  7.0  queso  1
+brioche  2.0  pan  2
+hot dog  3.0  carne  1

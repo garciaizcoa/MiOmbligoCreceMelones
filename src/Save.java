@@ -13,11 +13,15 @@ public class Save {
 
 		Path path = Paths.get("memory/INVENTORY.txt");
 		Files.delete(path);
+		if(!inv.getInventoryList().isEmpty()) {
 		for(Entry<String, Integer> e : inv.getInventoryList().entrySet()){
 			Files.write(path, (e.getKey()+" "+Integer.toString(e.getValue())).getBytes(),StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 			Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
 		}
-
+		}
+		else {
+			Files.write(path, "Empty".getBytes(), StandardOpenOption.CREATE);
+		}
 		//
 	}
 
@@ -63,8 +67,10 @@ public class Save {
 
 	public static void readInitialInventory(Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/INVENTORY.txt"))){
+			if(!line.equals("Empty")) {
 			String[] arr = line.split(" ");
 			inv.addItemToInventory(arr[0], Integer.parseInt(arr[1]));		
+			}
 		}
 	}
 

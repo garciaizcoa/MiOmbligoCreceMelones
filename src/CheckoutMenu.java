@@ -50,6 +50,14 @@ public class CheckoutMenu extends JPanel {
 				TableDiagramMenu.Table tab = frame.getTableDiagramMenu().getTableByNumber(frame.getCustomerMenu().getTableNumber());
 				tab.setOrderOfTable(frame.getCustomerMenu().getPlatesList());
 				JLabel thanku = new JLabel("Your order has been placed!");
+				thanku.setAlignmentX(CENTER_ALIGNMENT);
+				Ticket tk = new Ticket(frame.getMenu(), frame.getInventory());
+				tk.orderQueue(frame.getCustomerMenu().getPlatesList());
+				for(Plate plt: frame.getCustomerMenu().getPlatesList()) {
+					tk.placeOrder(tab.getTableNumber(), plt);
+				}
+				frame.getCustomerMenu().refresh();
+				frame.getInventoryMenu().refresh(frame.getInventory());
 				panel.add(thanku);
 				panel.repaint();
 				panel.revalidate();

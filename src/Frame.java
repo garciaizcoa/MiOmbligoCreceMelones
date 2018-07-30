@@ -70,7 +70,7 @@ public class Frame extends JFrame  {
 
 		this.inv = inv;
 		this.men = men;
-
+		men.setFrame(this);
 		this.adminMenu = new AdminMenu(this);
 		this.addPlateMenu = new AddPlateMenu(this);
 		Save.readInitialAddPlatesMenu(addPlateMenu, inv);
@@ -84,7 +84,8 @@ public class Frame extends JFrame  {
 		this.customizeMenu = new CustomizeMenu(this);
 
 
-		System.out.println("frame "+this.getInventory());
+		System.out.println("frame ");
+		this.getInventory().printInventory();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -133,6 +134,7 @@ public class Frame extends JFrame  {
 	public Menu getMenu() {
 		return men;
 	}
+	
 
 	// menu getters
 	public AdminMenu getAdminMenu(){
