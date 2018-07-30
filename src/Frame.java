@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +38,9 @@ public class Frame extends JFrame  {
 	private CheckoutMenu checkoutMenu;
 	private TableDiagramMenu tableDiagramMenu;
 	private CustomizeMenu customizeMenu;
+	private KitchenMenu kitchenMenu;
+	private CustomerTicketMenu customerTicketMenu;
+	private TableMenu tableMenu;
 
 
 	/**
@@ -82,6 +86,9 @@ public class Frame extends JFrame  {
 		this.checkoutMenu = new CheckoutMenu(this);
 		this.tableDiagramMenu= new TableDiagramMenu(this);
 		this.customizeMenu = new CustomizeMenu(this);
+		this.kitchenMenu = new KitchenMenu(this);
+		this.customerTicketMenu = new CustomerTicketMenu(this);
+		this.tableMenu = new TableMenu(this);
 
 
 		System.out.println("frame ");
@@ -167,8 +174,15 @@ public class Frame extends JFrame  {
 	public CustomizeMenu getCustomizeMenu() {
 		return customizeMenu;
 	}
-	
-
-	
-	
+	public KitchenMenu getKitchenMenu() {
+			return kitchenMenu;
+	}
+	public CustomerTicketMenu getCustomerTicketMenu() {
+		
+		return customerTicketMenu;
+	}
+	public TableMenu getTableMenu() {
+		
+		return tableMenu;
+	}
 }

@@ -187,15 +187,16 @@ public class CustomerMenu extends JPanel {
 
 				}
 
-
+				frame.getCustomerMenu().refresh();
 				frame.setContentPane(frame.getCheckoutMenu()); //panel = panel you want to change too.
 				frame.getCheckoutMenu().refresh();
+				
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 
-		refresh();
+	//	refresh();
 
 
 	}	
@@ -203,11 +204,8 @@ public class CustomerMenu extends JPanel {
 	public void refresh() {
 		panel.removeAll();
 		for(Plate plato: frame.getMenu().getAvailablePlates()) {
-
 			ProductPanel product = new ProductPanel(frame, plato);
-			this.getPanel().add(product);
-			panel.repaint();
-			panel.revalidate();
+			panel.add(product);
 		}
 
 	}

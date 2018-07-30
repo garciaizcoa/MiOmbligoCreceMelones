@@ -17,12 +17,16 @@ public class TableDiagramMenu extends JPanel {
 
 	private int numTables;
 
+	private Frame frame;
 	private JPanel panel;
 	private JTextField numTablesTextBox;
 	private JPanel buttonPanel;
 	private ArrayList<TableDiagramMenu.Table> tables = new ArrayList<>();
 
 	public TableDiagramMenu(Frame frame) {
+		
+		this.frame=frame;
+		
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		panel = new JPanel();
@@ -116,6 +120,7 @@ public class TableDiagramMenu extends JPanel {
 
 	public class Table extends JPanel{
 
+		
 		private int tableNumber;
 		private ArrayList<Plate> orderOfTable = new ArrayList<>();
 
@@ -127,32 +132,68 @@ public class TableDiagramMenu extends JPanel {
 			
 			btnTable.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
-					panel.removeAll();
-				
-					JButton btnBack = new JButton("Back");
-					panel.add(btnBack);
 					
-					btnBack.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
+					frame.getTableMenu().setTable(getTableByNumber(tableNumber));
+					frame.setContentPane(frame.getTableMenu());
+					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+					frame.revalidate();
 
-							panel.removeAll();
-							panel.add(buttonPanel);
-							for(int i=1; i<=numTables; i++){
-								panel.add(getTableByNumber(i));
-							}
-							panel.repaint();
-							panel.revalidate();
-							
-						}
-					});
-					
-					JLabel orderDetails = new JLabel("Order of Table #"+tableNumber);
-					panel.add(orderDetails);
-					JList lista = new JList(orderToStrings().toArray());
-					panel.add(lista);
-					panel.repaint();
-					panel.revalidate();
+//					panel.removeAll();
+//					setLayout(new GridLayout(0, 3, 0, 0));
+//					
+//				
+//					JButton btnBack = new JButton("Back");
+//					panel.add(btnBack);
+//					
+//					btnBack.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent e) {
+//
+//							panel.removeAll();
+//							setLayout(new GridLayout(1, 0, 0, 0));
+//							panel.add(buttonPanel);
+//							for(int i=1; i<=numTables; i++){
+//								panel.add(getTableByNumber(i));
+//							}
+//							panel.repaint();
+//							panel.revalidate();
+//							
+//						}
+//					});
+//					
+//					JLabel orderDetails = new JLabel("Order of Table #"+tableNumber);
+//					panel.add(orderDetails);
+//					
+//					JButton btnKitcken = new JButton("Kitchen Ticket");
+//					panel.add(btnKitcken);
+//					
+//					btnKitcken.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent e) {
+//
+//							frame.setContentPane(frame.getKitchenMenu()); //panel = panel you want to change too.
+//							frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+//							frame.revalidate(); 
+//							
+//						}
+//					});
+//					
+//					JButton btnCustomer = new JButton("Customer Ticket");
+//					panel.add(btnCustomer);
+//					
+//					btnCustomer.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent e) {
+//							
+//							frame.setContentPane(frame.getCustomerTicketMenu()); //panel = panel you want to change too.
+//							frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+//							frame.revalidate(); 
+//							
+//							
+//						}
+//					});
+//					
+//					JList lista = new JList(orderToStrings().toArray());
+//					panel.add(lista);
+//					panel.repaint();
+//					panel.revalidate();
 				}
 			});
 			
@@ -177,7 +218,7 @@ public class TableDiagramMenu extends JPanel {
 			}
 			return atr;
 		}
-	}
+			}
 
 	public boolean validateNum(String num){
 		try{
