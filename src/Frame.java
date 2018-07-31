@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +18,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import javax.swing.JToolBar;
+import javax.swing.WindowConstants;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JScrollBar;
 
 public class Frame extends JFrame  {
@@ -91,25 +97,30 @@ public class Frame extends JFrame  {
 		setBounds(100, 100, 450, 300);
 
 		mainMenu = new JPanel();
-		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainMenu = new JPanel();
 		mainMenu.setLayout(new BorderLayout(0, 0));
 
-		JButton btnCustomer = new JButton("Customer");
-		mainMenu.add(btnCustomer, BorderLayout.WEST);
+//		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		JButton btnAdmin = new JButton("Admin");
-		mainMenu.add(btnAdmin, BorderLayout.EAST);
+		JButton adminBTN = new JButton();
+		JButton clientBTN = new JButton();
+		JLabel jLabel2 = new JLabel();
 
-		btnAdmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Admin clicked");
-				setContentPane(adminMenu); //panel = panel you want to change too.
-				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				revalidate(); 
-			}
-		});
 		
-		btnCustomer.addActionListener(new ActionListener() {
+		Image imgAdmin = new ImageIcon(this.getClass().getResource("/admin2.png")).getImage();
+		adminBTN.setIcon(new ImageIcon(imgAdmin)); // ADMIN BUTTON
+		mainMenu.add(adminBTN);
+		
+		adminBTN.setBounds(360, 370, 146, 30);
+		
+		Image imgClient = new ImageIcon(this.getClass().getResource("/CLIENT.png")).getImage();
+		clientBTN.setIcon(new ImageIcon(imgClient)); // CLIENT BUTTON
+		mainMenu.add(clientBTN);
+		
+		clientBTN.setBounds(40, 370, 146, 30);
+
+
+		clientBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Customer clicked");
 				setContentPane(customerMenu); //panel = panel you want to change too.
@@ -117,7 +128,31 @@ public class Frame extends JFrame  {
 				revalidate(); 
 			}
 		});
+		adminBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Admin clicked");
+				setContentPane(adminMenu); //panel = panel you want to change too.
+				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				revalidate(); 
+			}
+		});
 
+		
+		Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
+		jLabel2.setIcon(new ImageIcon(backgroundIMG)); // NOI18N
+		mainMenu.add(jLabel2);
+		jLabel2.setBounds(0, 0, 550, 430);
+
+		GroupLayout layout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(mainMenu, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(mainMenu, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				);
 
 		//starting pane
 		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
