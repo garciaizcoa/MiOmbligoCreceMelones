@@ -47,6 +47,11 @@ public class CheckoutMenu extends JPanel {
 		
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Place order pressed");
+				for(Plate plato : frame.getCustomerMenu().getPlatesList()) {
+					System.out.println(plato.getName());
+					System.out.println(frame.getMenu().isOnMenu(plato));
+				}
 				panel.removeAll();
 				TableDiagramMenu.Table tab = frame.getTableDiagramMenu().getTableByNumber(frame.getCustomerMenu().getTableNumber());
 				tab.setOrderOfTable(frame.getCustomerMenu().getPlatesList());
@@ -55,7 +60,7 @@ public class CheckoutMenu extends JPanel {
 				Ticket tk = new Ticket(frame.getMenu(), frame.getInventory());
 				tk.orderQueue(frame.getCustomerMenu().getPlatesList());
 				for(Plate plt: frame.getCustomerMenu().getPlatesList()) {
-					tk.placeOrder(tab.getTableNumber(), plt);
+					tk.placeOrder(tab.getTableNumber(), frame.getMenu().getPlate(plt.getName()));
 				}
 				frame.getCustomerMenu().refresh();
 				frame.getInventoryMenu().refresh(frame.getInventory());
