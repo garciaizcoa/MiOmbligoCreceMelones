@@ -4,11 +4,11 @@ import java.util.Set;
 
 public class Menu {
 
-	private ArrayList<Plate> availablePlates; 
+	private HashSet<Plate> availablePlates; 
 	public Frame frame;
 
 	public Menu(){
-		availablePlates = new ArrayList<>();		
+		availablePlates = new HashSet<>();		
 	}
 
 	public void addPlate(Plate newPlate){
@@ -23,24 +23,30 @@ public class Menu {
 	}
 
 	public void updateMenu(){
-		for(int i=0; i< availablePlates.size(); i++){
-			if(!availablePlates.get(i).checkAvailability()){
-				availablePlates.remove(i);
+//		for(int i=0; i< availablePlates.size(); i++){
+//			if(!availablePlates.get(i).checkAvailability()){
+//				availablePlates.remove(i);
+//			}
+//		}
+		for(Plate pt: availablePlates){
+			if(!pt.checkAvailability()){
+				availablePlates.remove(pt);
 			}
 		}
 	}
 
 
 	public boolean isOnMenu(Plate food){ 
-		for(int i=0;i<availablePlates.size();i++) {
-			if(food.getName().equals(availablePlates.get(i).getName())) {
-				return true;
-			}
-		}
+//		for(int i=0;i<availablePlates.size();i++) {
+//			if(food.getName().equals(availablePlates.get(i).getName())) {
+//				return true;
+//			}
+//		}
+		if(availablePlates.contains(food)) return true;
 		return false;
 	}
 
-	public ArrayList<Plate> getAvailablePlates() {
+	public HashSet<Plate> getAvailablePlates() {
 		for(Plate plt: frame.getAddPlateMenu().getAllPlates()) {
 			if(plt.checkAvailability()) {
 				availablePlates.add(plt);
