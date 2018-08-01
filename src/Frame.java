@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JScrollBar;
 
@@ -43,6 +45,7 @@ public class Frame extends JFrame  {
 	private CheckoutMenu checkoutMenu;
 	private TableDiagramMenu tableDiagramMenu;
 	private CustomizeMenu customizeMenu;
+	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 
 	/**
@@ -94,7 +97,10 @@ public class Frame extends JFrame  {
 		this.getInventory().printInventory();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 480);
+		
+		//Full Screen just in case
+		//setBounds(0, 0 ,(int)screenSize.getWidth(), (int)screenSize.getHeight());
 
 		mainMenu = new JPanel();
 		mainMenu = new JPanel();

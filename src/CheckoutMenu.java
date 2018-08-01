@@ -26,6 +26,7 @@ public class CheckoutMenu extends JPanel {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getCustomerMenu()); //panel = panel you want to change too.
+				frame.getCustomerMenu().refresh();
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 				btnOrder.setEnabled(true);
