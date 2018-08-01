@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,12 +18,16 @@ public class TableDiagramMenu extends JPanel {
 
 	private int numTables;
 
+	private Frame frame;
 	private JPanel panel;
 	private JTextField numTablesTextBox;
 	private JPanel buttonPanel;
 	private ArrayList<TableDiagramMenu.Table> tables = new ArrayList<>();
 
 	public TableDiagramMenu(Frame frame) {
+
+		this.frame=frame;
+
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		panel = new JPanel();
@@ -105,16 +110,17 @@ public class TableDiagramMenu extends JPanel {
 			TableDiagramMenu.Table tab = new Table(i);
 			panel.add(tab);
 			tables.add(tab);
-			
+
 		}
 	}
-	
+
 	public Table getTableByNumber(int numTable){
 		System.out.println("NUMTABLE"+numTable);
 		return tables.get(numTable-1);
 	}
 
 	public class Table extends JPanel{
+
 
 		private int tableNumber;
 		private ArrayList<Plate> orderOfTable = new ArrayList<>();
@@ -124,41 +130,77 @@ public class TableDiagramMenu extends JPanel {
 			this.tableNumber = tableNumber;
 			JButton btnTable = new JButton(tableNumber+"");
 			add(btnTable);
-			
+
 			btnTable.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
-					panel.removeAll();
-				
-					JButton btnBack = new JButton("Back");
-					panel.add(btnBack);
-					
-					btnBack.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
+					frame.getTableMenu().setTable(getTableByNumber(tableNumber));
+					frame.setContentPane(frame.getTableMenu());
+					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+					frame.revalidate();
 
-							panel.removeAll();
-							panel.add(buttonPanel);
-							for(int i=1; i<=numTables; i++){
-								panel.add(getTableByNumber(i));
-							}
-							panel.repaint();
-							panel.revalidate();
-							
-						}
-					});
-					
-					JLabel orderDetails = new JLabel("Order of Table #"+tableNumber);
-					panel.add(orderDetails);
-					JList lista = new JList(orderToStrings().toArray());
-					panel.add(lista);
-					panel.repaint();
-					panel.revalidate();
+					//					panel.removeAll();
+					//					setLayout(new GridLayout(0, 3, 0, 0));
+					//					
+					//				
+					//					JButton btnBack = new JButton("Back");
+					//					panel.add(btnBack);
+					//					
+					//					btnBack.addActionListener(new ActionListener() {
+					//						public void actionPerformed(ActionEvent e) {
+					//
+					//							panel.removeAll();
+					//							setLayout(new GridLayout(1, 0, 0, 0));
+					//							panel.add(buttonPanel);
+					//							for(int i=1; i<=numTables; i++){
+					//								panel.add(getTableByNumber(i));
+					//							}
+					//							panel.repaint();
+					//							panel.revalidate();
+					//							
+					//						}
+					//					});
+					//					
+					//					JLabel orderDetails = new JLabel("Order of Table #"+tableNumber);
+					//					panel.add(orderDetails);
+					//					
+					//					JButton btnKitcken = new JButton("Kitchen Ticket");
+					//					panel.add(btnKitcken);
+					//					
+					//					btnKitcken.addActionListener(new ActionListener() {
+					//						public void actionPerformed(ActionEvent e) {
+					//
+					//							frame.setContentPane(frame.getKitchenMenu()); //panel = panel you want to change too.
+					//							frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+					//							frame.revalidate(); 
+					//							
+					//						}
+					//					});
+					//					
+					//					JButton btnCustomer = new JButton("Customer Ticket");
+					//					panel.add(btnCustomer);
+					//					
+					//					btnCustomer.addActionListener(new ActionListener() {
+					//						public void actionPerformed(ActionEvent e) {
+					//							
+					//							frame.setContentPane(frame.getCustomerTicketMenu()); //panel = panel you want to change too.
+					//							frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+					//							frame.revalidate(); 
+					//							
+					//							
+					//						}
+					//					});
+					//					
+					//					JList lista = new JList(orderToStrings().toArray());
+					//					panel.add(lista);
+					//					panel.repaint();
+					//					panel.revalidate();
 				}
 			});
-			
+
 		}
-		
-		
+
+
 
 		public int getTableNumber(){
 			return tableNumber;
@@ -170,6 +212,7 @@ public class TableDiagramMenu extends JPanel {
 		public ArrayList<Plate> getOrderOfTable(){
 			return orderOfTable;
 		}
+
 		public ArrayList<String> orderToStrings(){
 			ArrayList<String> atr = new ArrayList<>();
 			for(Plate plt: getOrderOfTable()){
@@ -177,7 +220,31 @@ public class TableDiagramMenu extends JPanel {
 			}
 			return atr;
 		}
+
+		public ArrayList<String> kitchenOrderToString(){
+			ArrayList<String> atr = new ArrayList<>();
+
+			for(Plate plt: getOrderOfTable()){
+				atr.add(plt.getName());
+
+				for (Map.Entry<String, Integer> entry : frame.getMenu().getPlate(plt.getName()).getPlateIngredients().entrySet()){
+
+					if(plt.hasExtra(frame.getMenu().getPlate(plt.getName()),entry.getKey()) )
+						atr.add("		Extra "+ entry.getKey());
+
+					else if(plt.hasNone( entry.getKey()))
+						atr.add("		No "+ entry.getKey());
+					else
+						atr.add("		"+entry.getKey());
+				}
+
+
+			}
+			return atr;
+		}
 	}
+
+
 
 	public boolean validateNum(String num){
 		try{
