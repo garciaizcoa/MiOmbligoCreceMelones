@@ -65,6 +65,15 @@ public class Menu {
 		return null; ////////no me  gusta
 	}
 	
+	public Plate getPlate (String name) {
+		for(Plate plato: availablePlates) {
+			if(name==plato.getName())
+				return plato;
+		}
+		System.out.println("plate doesnt exist");
+		return null;
+	}
+	
 	
 	public void printMenu(){
 		for(Plate e: availablePlates){
