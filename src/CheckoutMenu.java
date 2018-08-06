@@ -47,11 +47,15 @@ public class CheckoutMenu extends JPanel {
 		
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				System.out.println("Place order pressed");
 				for(Plate plato : frame.getCustomerMenu().getPlatesList()) {
 					System.out.println(plato.getName());
-					System.out.println(frame.getMenu().isOnMenu(plato));
+					System.out.println(frame.getMenu().isOnMenu(frame.getMenu().getPlate(plato.getName())));
 				}
+				System.out.println("printing menu");
+				frame.getMenu().printMenu();
+				
 				panel.removeAll();
 				TableDiagramMenu.Table tab = frame.getTableDiagramMenu().getTableByNumber(frame.getCustomerMenu().getTableNumber());
 				tab.setOrderOfTable(frame.getCustomerMenu().getPlatesList());

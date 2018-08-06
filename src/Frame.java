@@ -45,6 +45,10 @@ public class Frame extends JFrame  {
 	private CheckoutMenu checkoutMenu;
 	private TableDiagramMenu tableDiagramMenu;
 	private CustomizeMenu customizeMenu;
+	private TableMenu tableMenu;
+	private KitchenMenu kitchenMenu;
+	private CustomerTicketMenu customerTicketMenu;
+	
 	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 
@@ -91,7 +95,9 @@ public class Frame extends JFrame  {
 		this.checkoutMenu = new CheckoutMenu(this);
 		this.tableDiagramMenu= new TableDiagramMenu(this);
 		this.customizeMenu = new CustomizeMenu(this);
-
+		this.tableMenu = new TableMenu(this);
+		this.kitchenMenu = new KitchenMenu(this);
+		this.customerTicketMenu = new CustomerTicketMenu(this);
 
 		System.out.println("frame ");
 		this.getInventory().printInventory();
@@ -207,6 +213,15 @@ public class Frame extends JFrame  {
 	}
 	public CustomizeMenu getCustomizeMenu() {
 		return customizeMenu;
+	}
+	public TableMenu getTableMenu() {
+		return tableMenu;
+	}
+	public KitchenMenu getKitchenMenu() {
+		return kitchenMenu;
+	}
+	public CustomerTicketMenu getCustomerTicketMenu() {
+		return customerTicketMenu;
 	}
 	
 

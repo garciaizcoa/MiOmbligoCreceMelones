@@ -70,7 +70,7 @@ public class Menu {
 			if(name==plato.getName())
 				return plato;
 		}
-		System.out.println("plate doesnt exist");
+		System.out.println("plate ("+name+") doesnt exist");
 		return null;
 	}
 	
