@@ -74,7 +74,6 @@ public class CustomerMenu extends JPanel {
 		backBTN.setIcon(new ImageIcon("C:\\Users\\chris\\Desktop\\backEVER.png"));
 
 
-
 		backBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("mainMenu was clicked");

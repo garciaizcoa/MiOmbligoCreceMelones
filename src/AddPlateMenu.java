@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,13 +50,13 @@ public class AddPlateMenu extends JPanel {
 	public AddPlateMenu(Frame frame){
 
 		System.out.println("AddPlateMenu "+frame.getInventory());
-		System.out.println("hola "+frame.getAddPlateMenu());
 
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
 		JButton btnCancel = new JButton("Cancel");
 		add(btnCancel);
+		btnCancel.setFont(new Font("Juicebox", Font.BOLD, 20));
 
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,6 +74,7 @@ public class AddPlateMenu extends JPanel {
 
 		JButton btnDone = new JButton("Done");
 		editPanel.add(btnDone);
+		btnDone.setFont(frame.getFont());
 
 		plateString = new JTextField();
 		//		plateString.setText("Name of Plate");
@@ -89,6 +91,7 @@ public class AddPlateMenu extends JPanel {
 
 		doubleHint = new JTextFieldHintUI(" Price",Color.RED);
 		plateDouble.setUI(doubleHint);
+		
 
 
 		//		plateDouble.addMouseListener(new MouseAdapter() {
@@ -130,6 +133,7 @@ public class AddPlateMenu extends JPanel {
 
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
 			opt.getCheck().setSelected(false);
+			opt.setFont(new Font("Juicebox", Font.BOLD, 20));
 			panel.add(opt);
 			//
 

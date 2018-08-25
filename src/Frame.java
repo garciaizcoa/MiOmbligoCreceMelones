@@ -1,40 +1,32 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.html.HTMLDocument.Iterator;
-import javax.swing.JToolBar;
-import javax.swing.WindowConstants;
-import javax.swing.DefaultListModel;
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.JScrollBar;
-
 public class Frame extends JFrame  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Inventory inv;
 	private Menu men;
-
 	private JPanel mainMenu;
 	private AdminMenu adminMenu;
 	private PlatesMenu platesMenu; 
@@ -48,8 +40,9 @@ public class Frame extends JFrame  {
 	private TableMenu tableMenu;
 	private KitchenMenu kitchenMenu;
 	private CustomerTicketMenu customerTicketMenu;
-	
-	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+	private Dimension screenSize;
+	private Font JuiceboxFont;
 
 
 	/**
@@ -63,6 +56,14 @@ public class Frame extends JFrame  {
 					Inventory initialInventory = new Inventory();
 					Save.readInitialInventory(initialInventory);
 					Frame frame = new Frame(initialInventory, new Menu());
+
+					//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+					//					frame.setUndecorated(true);
+
+					frame.setBounds(0,0,frame.getScreenSize().width, frame.getScreenSize().height);
+
+
+					frame.setResizable(false);
 					frame.setVisible(true);	
 
 				}
@@ -81,6 +82,8 @@ public class Frame extends JFrame  {
 	 */
 	public Frame(Inventory inv, Menu men) throws IOException {
 
+		setAllFonts();
+		this.screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.inv = inv;
 		this.men = men;
 		men.setFrame(this);
@@ -104,7 +107,7 @@ public class Frame extends JFrame  {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 480);
-		
+
 		//Full Screen just in case
 		//setBounds(0, 0 ,(int)screenSize.getWidth(), (int)screenSize.getHeight());
 
@@ -112,24 +115,26 @@ public class Frame extends JFrame  {
 		mainMenu = new JPanel();
 		mainMenu.setLayout(new BorderLayout(0, 0));
 
-//		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		JButton adminBTN = new JButton();
 		JButton clientBTN = new JButton();
 		JLabel jLabel2 = new JLabel();
 
-		
+
 		Image imgAdmin = new ImageIcon(this.getClass().getResource("/admin2.png")).getImage();
 		adminBTN.setIcon(new ImageIcon(imgAdmin)); // ADMIN BUTTON
 		mainMenu.add(adminBTN);
-		
-		adminBTN.setBounds(360, 370, 146, 30);
-		
+
+		//adminBTN.setBounds(360, 370, 146, 30);
+		adminBTN.setBounds((int) (this.getScreenSize().width*.75), (int) (this.getScreenSize().height*.75), 146, 30);
+
 		Image imgClient = new ImageIcon(this.getClass().getResource("/CLIENT.png")).getImage();
 		clientBTN.setIcon(new ImageIcon(imgClient)); // CLIENT BUTTON
 		mainMenu.add(clientBTN);
-		
-		clientBTN.setBounds(40, 370, 146, 30);
+
+		//clientBTN.setBounds(40, 370, 146, 30);
+		clientBTN.setBounds((int) (this.getScreenSize().width*.25)-146, (int) (this.getScreenSize().height*.75), 146, 30);
 
 
 		clientBTN.addActionListener(new ActionListener() {
@@ -149,9 +154,28 @@ public class Frame extends JFrame  {
 			}
 		});
 
-		
-		Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
-		jLabel2.setIcon(new ImageIcon(backgroundIMG)); // NOI18N
+		jLabel2.setSize(screenSize.width,screenSize.height);
+
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(new File("Images/mt.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+		Image dimg = img.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(),
+				Image.SCALE_SMOOTH);
+
+		//	Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
+
+		ImageIcon imageIcon = new ImageIcon(dimg);
+
+
+
+		jLabel2.setIcon(imageIcon); // NOI18N
+
+
 		mainMenu.add(jLabel2);
 		jLabel2.setBounds(0, 0, 550, 430);
 
@@ -170,6 +194,25 @@ public class Frame extends JFrame  {
 		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
+	public void setAllFonts(){
+		try {
+			//create the font to use. Specify the size!
+			JuiceboxFont = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/Juicebox.otf")).deriveFont(12f);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			//register the font
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/Juicebox.otf")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch(FontFormatException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public Font getFont(){
+		return JuiceboxFont;
+	}
+
 	public Inventory getInventory() {
 		return inv;
 	}
@@ -181,7 +224,10 @@ public class Frame extends JFrame  {
 	public Menu getMenu() {
 		return men;
 	}
-	
+
+	public Dimension getScreenSize() {
+		return screenSize;
+	}
 
 	// menu getters
 	public AdminMenu getAdminMenu(){
@@ -223,8 +269,9 @@ public class Frame extends JFrame  {
 	public CustomerTicketMenu getCustomerTicketMenu() {
 		return customerTicketMenu;
 	}
-	
 
-	
-	
+
+
+
+
 }

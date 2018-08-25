@@ -6,8 +6,13 @@ import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.JList;
+
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 
@@ -33,7 +38,8 @@ public class PlatesMenu extends JPanel {
 
 		JButton btnAdminMenu = new JButton("Admin Menu");
 		add(btnAdminMenu);
-
+		btnAdminMenu.setFont(new Font("Juicebox", Font.BOLD, 20));
+	
 		btnAdminMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
@@ -44,7 +50,8 @@ public class PlatesMenu extends JPanel {
 
 		JButton btnAdd = new JButton("Add");
 		add(btnAdd);
-
+		btnAdd.setFont(new Font("Juicebox", Font.BOLD, 20));
+		
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.getAddPlateMenu().refresh(frame.getInventory());

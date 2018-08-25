@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,21 +33,29 @@ public class AdminMenu extends JPanel {
 				
 				setBorder(new EmptyBorder(5, 5, 5, 5));
 				setLayout(new BorderLayout(0, 0));
-
-
+				setBackground(Color.BLACK);
+				
 
 				JButton btnPlates = new JButton("Plates");
 				add(btnPlates, BorderLayout.WEST);
+				btnPlates.setFont(frame.getFont().deriveFont(40f));
+				btnPlates.setForeground(Color.ORANGE);
 				
 				JButton btnTableDiagram = new JButton("Table Diagram");
 				add(btnTableDiagram);
+				btnTableDiagram.setFont(frame.getFont().deriveFont(40f));
+				btnTableDiagram.setForeground(Color.ORANGE);
 
 				JButton btnInventory = new JButton("Inventory");
 				add(btnInventory, BorderLayout.EAST);
+				btnInventory.setFont(frame.getFont().deriveFont(40f));
+				btnInventory.setForeground(Color.ORANGE);
 
 				JButton btnMainMenu = new JButton("Main Menu");
 				add(btnMainMenu, BorderLayout.NORTH);
-
+				btnMainMenu.setFont(frame.getFont().deriveFont(40f));
+				btnMainMenu.setForeground(Color.ORANGE);
+				
 				btnInventory.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println("Inventory was clicked");
