@@ -1,3 +1,5 @@
-pan  1.0  pan  1
 toast  1.0  butter  1  pan  1
+pan  1.0  pan  1
+ensalada  3.99  huevo  1  ketchup  1
 cake  3.0  huevo  1  butter  1  milk  1  azucar  1
+salad  2.99  ketchup  1  lechuga  1

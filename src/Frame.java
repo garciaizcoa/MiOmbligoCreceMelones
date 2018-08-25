@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -20,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -49,7 +52,7 @@ public class Frame extends JFrame  {
 	private KitchenMenu kitchenMenu;
 	private CustomerTicketMenu customerTicketMenu;
 	
-	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private Dimension screenSize;
 
 
 	/**
@@ -63,6 +66,14 @@ public class Frame extends JFrame  {
 					Inventory initialInventory = new Inventory();
 					Save.readInitialInventory(initialInventory);
 					Frame frame = new Frame(initialInventory, new Menu());
+					
+//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//					frame.setUndecorated(true);
+					
+					 frame.setBounds(0,0,frame.getScreenSize().width, frame.getScreenSize().height);
+				    
+					
+					frame.setResizable(false);
 					frame.setVisible(true);	
 
 				}
@@ -81,6 +92,7 @@ public class Frame extends JFrame  {
 	 */
 	public Frame(Inventory inv, Menu men) throws IOException {
 
+		this.screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.inv = inv;
 		this.men = men;
 		men.setFrame(this);
@@ -123,13 +135,15 @@ public class Frame extends JFrame  {
 		adminBTN.setIcon(new ImageIcon(imgAdmin)); // ADMIN BUTTON
 		mainMenu.add(adminBTN);
 		
-		adminBTN.setBounds(360, 370, 146, 30);
+		//adminBTN.setBounds(360, 370, 146, 30);
+		adminBTN.setBounds((int) (this.getScreenSize().width*.75), (int) (this.getScreenSize().height*.75), 146, 30);
 		
 		Image imgClient = new ImageIcon(this.getClass().getResource("/CLIENT.png")).getImage();
 		clientBTN.setIcon(new ImageIcon(imgClient)); // CLIENT BUTTON
 		mainMenu.add(clientBTN);
 		
-		clientBTN.setBounds(40, 370, 146, 30);
+		//clientBTN.setBounds(40, 370, 146, 30);
+		clientBTN.setBounds((int) (this.getScreenSize().width*.25)-146, (int) (this.getScreenSize().height*.75), 146, 30);
 
 
 		clientBTN.addActionListener(new ActionListener() {
@@ -148,10 +162,29 @@ public class Frame extends JFrame  {
 				revalidate(); 
 			}
 		});
-
 		
-		Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
-		jLabel2.setIcon(new ImageIcon(backgroundIMG)); // NOI18N
+		jLabel2.setSize(screenSize.width,screenSize.height);
+
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File("Images/mt.png"));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		
+		Image dimg = img.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(),
+		        Image.SCALE_SMOOTH);
+		
+	//	Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
+		
+		ImageIcon imageIcon = new ImageIcon(dimg);
+		
+		
+		
+		jLabel2.setIcon(imageIcon); // NOI18N
+	
+		
 		mainMenu.add(jLabel2);
 		jLabel2.setBounds(0, 0, 550, 430);
 
@@ -182,6 +215,9 @@ public class Frame extends JFrame  {
 		return men;
 	}
 	
+	public Dimension getScreenSize() {
+		return screenSize;
+	}
 
 	// menu getters
 	public AdminMenu getAdminMenu(){
@@ -223,6 +259,7 @@ public class Frame extends JFrame  {
 	public CustomerTicketMenu getCustomerTicketMenu() {
 		return customerTicketMenu;
 	}
+	
 	
 
 	

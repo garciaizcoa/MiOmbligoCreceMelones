@@ -5,3 +5,4 @@ azucar 5
 sauce 6
 pan 10
 ketchup 5
+lechuga 3
