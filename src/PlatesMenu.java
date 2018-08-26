@@ -45,14 +45,14 @@ public class PlatesMenu extends JPanel {
 		panel = new javax.swing.JPanel();
 		btnAdminMenu = new javax.swing.JButton("Admin Menu");
 		btnAdd = new javax.swing.JButton("Add");
-		
+
 
 		btnAdminMenu.setFont(new Font("Juicebox", Font.BOLD, 40));
 		btnAdd.setFont(new Font("Juicebox", Font.BOLD, 40));
-		
+
 		btnAdminMenu.setForeground(Color.ORANGE);
 		btnAdd.setForeground(Color.ORANGE);
-		
+
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(Color.WHITE);
 
@@ -64,21 +64,23 @@ public class PlatesMenu extends JPanel {
 						.addGap(GAP, GAP, GAP)
 						.addComponent(btnAdminMenu, GroupLayout.PREFERRED_SIZE, 50,Short.MAX_VALUE)
 						.addGap(GAP, GAP, GAP)
-						.addPreferredGap(ComponentPlacement.RELATED)
+						//.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
 						.addGap(GAP, GAP, GAP)
-						.addContainerGap())
+						.addContainerGap()
+						)
 				);
 		layout.setVerticalGroup(
 				layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGap(GAP/2, GAP/2, GAP/2)
 						.addGroup(layout.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnAdminMenu, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addGap(GAP/2, GAP/2, GAP/2)
+
 						)
 				);
 		this.setLayout(layout);
@@ -102,11 +104,12 @@ public class PlatesMenu extends JPanel {
 
 			}
 		});
-		
+	
+
 		add(btnAdd);
 		add(btnAdminMenu);
 		add(scrollPane);	
-		
+
 		scrollPane.setViewportView(panel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -120,8 +123,8 @@ public class PlatesMenu extends JPanel {
 			panel.add(item);
 			panel.repaint();
 		}
-		
-//
+
+		//
 	}
 
 	public DefaultListModel<String> getModel() {

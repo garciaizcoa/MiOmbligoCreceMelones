@@ -2,23 +2,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Map;
-
 import javax.swing.BoxLayout;
-import javax.swing.DefaultCellEditor;
 
 public class PlateItem extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Create the panel.
 	 */
@@ -136,10 +134,8 @@ public class PlateItem extends JPanel {
 					frame.revalidate(); 
 				}
 
-
 			}
 		});
-
 
 	}
 
