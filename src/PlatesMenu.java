@@ -54,6 +54,7 @@ public class PlatesMenu extends JPanel {
 		btnAdd.setForeground(Color.ORANGE);
 		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBackground(Color.WHITE);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		layout.setHorizontalGroup(
@@ -78,7 +79,7 @@ public class PlatesMenu extends JPanel {
 								.addComponent(btnAdminMenu, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addGap(GAP/2, GAP/2, GAP/2)
-						.addContainerGap())
+						)
 				);
 		this.setLayout(layout);
 		this.setBackground(Color.BLACK);
@@ -110,8 +111,15 @@ public class PlatesMenu extends JPanel {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-		
-		refresh();
+		JLabel title = new JLabel("PLATES");
+		title.setFont(new Font("Juicebox", Font.BOLD, 50));
+		title.setLocation(scrollPane.getWidth()/2 - 200, 15);
+		panel.add(title);
+		for (Plate plate : frame.getAddPlateMenu().getAllPlates()){	
+			PlateItem item = new PlateItem(frame, plate, plate.getName(),String.valueOf(plate.getPrice()));
+			panel.add(item);
+			panel.repaint();
+		}
 		
 //
 	}
