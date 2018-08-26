@@ -113,7 +113,7 @@ public class PlatesMenu extends JPanel {
 		
 		refresh();
 		
-
+//
 	}
 
 	public DefaultListModel<String> getModel() {
