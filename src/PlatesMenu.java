@@ -1,6 +1,8 @@
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+
 import java.awt.event.ActionListener;
 import java.util.Map;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,9 @@ import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PlatesMenu extends JPanel {
 
@@ -24,22 +29,61 @@ public class PlatesMenu extends JPanel {
 	 */
 
 	private Frame frame;
-	private JPanel panel;
-
-
+	private javax.swing.JButton btnAdd;
+	private javax.swing.JButton btnAdminMenu;
+	private javax.swing.JPanel panel;
+	private javax.swing.JScrollPane scrollPane;
 	private DefaultListModel<String> model;
+	final int GAP = 224;
 
 	public PlatesMenu(Frame frame) {
 
 		this.frame = frame;
-
-
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		JButton btnAdminMenu = new JButton("Admin Menu");
-		add(btnAdminMenu);
-		btnAdminMenu.setFont(new Font("Juicebox", Font.BOLD, 20));
-	
+		scrollPane = new javax.swing.JScrollPane();
+		panel = new javax.swing.JPanel();
+		btnAdminMenu = new javax.swing.JButton("Admin Menu");
+		btnAdd = new javax.swing.JButton("Add");
+		
+
+		btnAdminMenu.setFont(new Font("Juicebox", Font.BOLD, 40));
+		btnAdd.setFont(new Font("Juicebox", Font.BOLD, 40));
+		
+		btnAdminMenu.setForeground(Color.ORANGE);
+		btnAdd.setForeground(Color.ORANGE);
+		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+						.addGap(GAP, GAP, GAP)
+						.addComponent(btnAdminMenu, GroupLayout.PREFERRED_SIZE, 50,Short.MAX_VALUE)
+						.addGap(GAP, GAP, GAP)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+						.addGap(GAP, GAP, GAP)
+						.addContainerGap())
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGap(GAP/2, GAP/2, GAP/2)
+						.addGroup(layout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnAdminMenu, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGap(GAP/2, GAP/2, GAP/2)
+						.addContainerGap())
+				);
+		this.setLayout(layout);
+		this.setBackground(Color.BLACK);
+
+
 		btnAdminMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
@@ -48,50 +92,28 @@ public class PlatesMenu extends JPanel {
 			}
 		});
 
-		JButton btnAdd = new JButton("Add");
-		add(btnAdd);
-		btnAdd.setFont(new Font("Juicebox", Font.BOLD, 20));
-		
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.getAddPlateMenu().refresh(frame.getInventory());
 				frame.setContentPane(frame.getAddPlateMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
-				
 
 			}
 		});
-
-		//model = new DefaultListModel<>();
-
-		JScrollPane scrollPane = new JScrollPane();
+		
+		add(btnAdd);
+		add(btnAdminMenu);
+		add(scrollPane);	
+		
+		scrollPane.setViewportView(panel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrollPane);
 
-		panel = new JPanel();
-		scrollPane.setViewportView(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-		//		JList list = new JList(model);
-		//		scrollPane.setViewportView(list);
 		
+		refresh();
 		
-
-//		for (Plate plate : frame.getMenu().getAvailablePlates())
-//		{
-
-		for (Plate plate : frame.getAddPlateMenu().getAllPlates())
-		{
-			PlateItem item = new PlateItem(frame, plate, plate.getName(),String.valueOf(plate.getPrice()));
-			panel.add(item);
-			panel.repaint();
-		}
-
-
-
-
+//
 	}
 
 	public DefaultListModel<String> getModel() {
@@ -102,7 +124,7 @@ public class PlatesMenu extends JPanel {
 		return panel;
 
 	}
-	
+
 	public void refresh() {
 		panel.removeAll();
 		for (Plate plate : frame.getAddPlateMenu().getAllPlates()){	
