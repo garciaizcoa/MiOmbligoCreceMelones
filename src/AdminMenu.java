@@ -2,10 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,22 +35,29 @@ public class AdminMenu extends JPanel {
 		add(btnMainMenu, BorderLayout.NORTH);
 		btnMainMenu.setFont(frame.getFont().deriveFont(50f));
 		btnMainMenu.setForeground(Color.ORANGE);
+		Image imgMain = new ImageIcon(this.getClass().getResource("/main.jpg")).getImage();
+		btnMainMenu.setIcon(new ImageIcon(imgMain)); // ADMIN BUTTON
 
 		JButton btnTableDiagram = new JButton("Table Diagram");
 		add(btnTableDiagram);
 		btnTableDiagram.setFont(frame.getFont().deriveFont(50f));
 		btnTableDiagram.setForeground(Color.ORANGE);
+		Image imgTable = new ImageIcon(this.getClass().getResource("/table.jpg")).getImage();
+		btnTableDiagram.setIcon(new ImageIcon(imgTable)); // ADMIN BUTTON
 
 		JButton btnPlates = new JButton("Plates");
 		add(btnPlates, BorderLayout.WEST);
 		btnPlates.setFont(frame.getFont().deriveFont(50f));
 		btnPlates.setForeground(Color.ORANGE);
+		Image imgPlate = new ImageIcon(this.getClass().getResource("/plate.jpg")).getImage();
+		btnPlates.setIcon(new ImageIcon(imgPlate)); // ADMIN BUTTON
 
 		JButton btnInventory = new JButton("Inventory");
 		add(btnInventory, BorderLayout.EAST);
 		btnInventory.setFont(frame.getFont().deriveFont(50f));
 		btnInventory.setForeground(Color.ORANGE);
-
+		Image imgTask = new ImageIcon(this.getClass().getResource("/tasklist.jpg")).getImage();
+		btnInventory.setIcon(new ImageIcon(imgTask)); // ADMIN BUTTON
 
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
