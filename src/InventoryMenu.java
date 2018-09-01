@@ -1,31 +1,24 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.TextUI;
-
-import java.awt.event.MouseAdapter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 
 public class InventoryMenu extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Frame frame;
@@ -38,6 +31,8 @@ public class InventoryMenu extends JPanel {
 	private JTextFieldHintUI stringHint;
 	private JTextFieldHintUI integerHint;
 
+	private javax.swing.JButton btnAdd;
+	private javax.swing.JButton btnAdminMenu;
 	/**
 	 * Create the panel.
 	 */
@@ -48,17 +43,40 @@ public class InventoryMenu extends JPanel {
 
 		System.out.println("InventoryMenu "+frame.getInventory());
 
-		// Comienza inventoryMenu
-
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
+		setBackground(Color.BLACK);
 
-		JButton btnAdminMenu = new JButton("Admin Menu");
-		add(btnAdminMenu);
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+		scrollPane = new JScrollPane();
+		btnAdminMenu = new JButton();
+		inventoryString = new JTextField();
+		inventoryInteger = new JTextField(); 
+		btnAdd = new JButton();
+
+		btnAdminMenu.setText("Admin Menu");
+		stringHint = new JTextFieldHintUI(" Insert Item",Color.RED);
+		inventoryString.setUI(stringHint);
+		integerHint = new JTextFieldHintUI(" Insert Amount",Color.RED);
+		inventoryInteger.setUI(integerHint);
+		btnAdd.setText("Add");
+		
+		btnAdminMenu.setFont(frame.getFont().deriveFont(40f));
+		btnAdd.setFont(frame.getFont().deriveFont(40f));
+		btnAdminMenu.setForeground(Color.ORANGE);
+		btnAdd.setForeground(Color.ORANGE);
+		inventoryString.getFont().deriveFont(25);
+		inventoryInteger.getFont().deriveFont(25);
+		inventoryString.setAlignmentX(CENTER_ALIGNMENT);
+		inventoryInteger.setAlignmentX(CENTER_ALIGNMENT);
+
+		setLayout();
+		
 		btnAdminMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			frame.getCustomerMenu().refresh();
+				frame.getCustomerMenu().refresh();
 				refreshText();
 				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
@@ -67,69 +85,15 @@ public class InventoryMenu extends JPanel {
 			}
 		}); 
 
-		JPanel editPanel =new JPanel();
-		editPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		add(editPanel);
-
-		JButton btnAdd = new JButton("Add");
-		editPanel.add(btnAdd);
-
-
-
-
-		inventoryString = new JTextField();
-		//inventoryString.setForeground(Color.GRAY);
-		inventoryString.setHorizontalAlignment(WIDTH/2);
-
-		stringHint = new JTextFieldHintUI(" Insert Item",Color.RED);
-		inventoryString.setUI(stringHint);
-
-		editPanel.add(inventoryString);
-
-		inventoryInteger = new JTextField();
-		//		inventoryInteger.setForeground(Color.GRAY);
-		//		inventoryInteger.setHorizontalAlignment(WIDTH/2);
-		//inventoryInteger.setText("Insert Amount");
-
-		integerHint = new JTextFieldHintUI(" Insert Amount",Color.RED);
-		inventoryInteger.setUI(integerHint);
-
-
-
-		//		inventoryInteger.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(inventoryString.getText().equals("")){
-		//					inventoryString.setText("Insert Item");
-		//				}
-		//				inventoryInteger.setText("");
-		//			}
-		//		});
-		//
-		//		inventoryString.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(inventoryInteger.getText().equals("")){
-		//					inventoryInteger.setText("Insert Amount");
-		//				}
-		//				inventoryString.setText("");
-		//			}
-		//		});
-		editPanel.add(inventoryInteger);
-
-		//		DefaultListModel<String> model = new DefaultListModel<>();
-
-		scrollPane = new JScrollPane();
+		add(btnAdminMenu);
+		add(inventoryString);
+		add(inventoryInteger);
+		add(btnAdd);
+		
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
-
-		//		JList<String> invList = new JList<>(model);
-		//		scrollPane.setViewportView(invList);
-
-		panel = new JPanel();
 		scrollPane.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
@@ -176,6 +140,38 @@ public class InventoryMenu extends JPanel {
 		});
 	}
 
+	public void setLayout(){
+		
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(btnAdminMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+								.addComponent(inventoryString)
+								.addComponent(inventoryInteger)
+								.addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+						.addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, 200)
+						.addComponent(btnAdminMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addComponent(inventoryString, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(18, 18, 18)
+						.addComponent(inventoryInteger, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(52, Short.MAX_VALUE))
+				);
+	}
+	
 	public void refresh(Inventory inv) {
 		panel.removeAll();
 		for (Map.Entry<String, Integer> entry : inv.getInventoryList().entrySet()){
