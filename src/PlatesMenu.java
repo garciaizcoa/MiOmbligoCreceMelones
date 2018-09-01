@@ -47,8 +47,8 @@ public class PlatesMenu extends JPanel {
 		btnAdd = new javax.swing.JButton("Add");
 		
 
-		btnAdminMenu.setFont(new Font("Juicebox", Font.BOLD, 40));
-		btnAdd.setFont(new Font("Juicebox", Font.BOLD, 40));
+		btnAdminMenu.setFont(frame.getFont().deriveFont(40f));
+		btnAdd.setFont(frame.getFont().deriveFont(40f));
 		
 		btnAdminMenu.setForeground(Color.ORANGE);
 		btnAdd.setForeground(Color.ORANGE);

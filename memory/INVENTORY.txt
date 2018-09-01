@@ -1,5 +1,4 @@
 huevo 6
-butter 9
 milk 3
 azucar 5
 sauce 6
