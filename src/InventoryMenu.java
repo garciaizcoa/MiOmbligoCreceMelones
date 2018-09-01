@@ -53,7 +53,7 @@ public class InventoryMenu extends JPanel {
 		scrollPane = new JScrollPane();
 		btnAdminMenu = new JButton();
 		inventoryString = new JTextField();
-		inventoryInteger = new JTextField();
+		inventoryInteger = new JTextField(); 
 		btnAdd = new JButton();
 
 		btnAdminMenu.setText("Admin Menu");
