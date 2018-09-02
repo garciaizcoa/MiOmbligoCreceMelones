@@ -40,6 +40,9 @@ public class AddPlateMenu extends JPanel {
 
 	private JTextFieldHintUI stringHint;
 	private JTextFieldHintUI doubleHint;
+	private JScrollPane scrollPane;
+	private JButton btnDone;
+	private JButton btnCancel;
 	
 	private HashSet<Plate> allPlates = new HashSet<>();
 
@@ -54,89 +57,40 @@ public class AddPlateMenu extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
-		JButton btnCancel = new JButton("Cancel");
-		add(btnCancel);
-		btnCancel.setFont(new Font("Juicebox", Font.BOLD, 20));
-
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				refreshText();
-				
-				frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-			}
-		}); 
-
-		JPanel editPanel =new JPanel();
-		editPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		add(editPanel);
-
-		JButton btnDone = new JButton("Done");
-		editPanel.add(btnDone);
-		btnDone.setFont(frame.getFont());
-
+		btnCancel = new JButton("Cancel");
+		btnDone = new JButton("Done");
 		plateString = new JTextField();
-		//		plateString.setText("Name of Plate");
-		//		plateString.setForeground(Color.GRAY);
-		//		plateString.setHorizontalAlignment(WIDTH/2);
-
+		plateDouble = new JTextField();
+		scrollPane = new JScrollPane();
+		panel = new JPanel();
+		
+		btnCancel.setFont(frame.getFont().deriveFont(40f));
+		btnDone.setFont(frame.getFont().deriveFont(40f));
+	
 		stringHint = new JTextFieldHintUI(" Name of Plate",Color.RED);
 		plateString.setUI(stringHint);
-
-
-		editPanel.add(plateString);
-
-		plateDouble = new JTextField();
-
 		doubleHint = new JTextFieldHintUI(" Price",Color.RED);
 		plateDouble.setUI(doubleHint);
 		
-
-
-		//		plateDouble.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(plateString.getText().equals("")){
-		//					plateString.setText("Name of Plate");
-		//				}
-		//				plateDouble.setText("");
-		//			}
-		//		});
-		//		plateDouble.setText("Price");
-		//		plateDouble.setHorizontalAlignment(WIDTH/2);
-		//		plateDouble.setForeground(Color.GRAY);
-		//		plateString.addMouseListener(new MouseAdapter() {
-		//			@Override
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(plateDouble.getText().equals("")){
-		//					plateDouble.setText("Price");
-		//				}
-		//				plateString.setText("");
-		//			}
-		//		});
-
-		editPanel.add(plateDouble);
-
-		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrollPane);
-
-		panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+		add(plateString);
+		add(plateDouble);
+		add(btnCancel);
+		add(btnDone);
+		add(scrollPane);
 
-
+		setLayout();
+		
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet()){
 
 			IngredientOption opt = new IngredientOption(panel, entry.getKey());
 			opt.getCheck().setSelected(false);
-			opt.setFont(new Font("Juicebox", Font.BOLD, 20));
+			opt.setFont(frame.getFont().deriveFont(40f));
 			panel.add(opt);
-			//
-
 		}
 
 
@@ -182,6 +136,15 @@ public class AddPlateMenu extends JPanel {
 			}
 		});
 
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refreshText();
+				
+				frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		}); 
 
 	}
 	
@@ -255,6 +218,38 @@ public class AddPlateMenu extends JPanel {
 		this.getPlateString().setUI(new JTextFieldHintUI("The plate must contain one ingredient",Color.RED));
 
 		return false;
+	}
+	
+public void setLayout(){
+		
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+								.addComponent(plateString)
+								.addComponent(plateDouble)
+								.addComponent(btnDone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+						.addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, 200)
+						.addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addComponent(plateString, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(18, 18, 18)
+						.addComponent(plateDouble, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addComponent(btnDone, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(52, Short.MAX_VALUE))
+				);
 	}
 	
 	public void addToAllPlates(Plate plate){

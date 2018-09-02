@@ -112,8 +112,8 @@ public class PlatesMenu extends JPanel {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		JLabel title = new JLabel("PLATES");
-		title.setFont(new Font("Juicebox", Font.BOLD, 50));
-		title.setLocation(scrollPane.getWidth()/2 - 200, 15);
+		title.setFont(frame.getFont().deriveFont(50f));
+		//title.setLocation(scrollPane.getWidth()/2 - 200, 15);
 		panel.add(title);
 		for (Plate plate : frame.getAddPlateMenu().getAllPlates()){	
 			PlateItem item = new PlateItem(frame, plate, plate.getName(),String.valueOf(plate.getPrice()));

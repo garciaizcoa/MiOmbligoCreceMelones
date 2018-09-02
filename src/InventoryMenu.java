@@ -9,12 +9,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.BoxLayout;
+import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.ImageIcon;
 
 public class InventoryMenu extends JPanel {
@@ -33,6 +35,8 @@ public class InventoryMenu extends JPanel {
 
 	private javax.swing.JButton btnAdd;
 	private javax.swing.JButton btnAdminMenu;
+	
+	private JLabel title;
 	/**
 	 * Create the panel.
 	 */
@@ -90,6 +94,10 @@ public class InventoryMenu extends JPanel {
 		add(inventoryInteger);
 		add(btnAdd);
 		
+		panel.setBackground(Color.WHITE);
+		title = new JLabel("INVENTORY");
+		title.setFont(frame.getFont().deriveFont(50f));
+		panel.add(title);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
@@ -117,6 +125,7 @@ public class InventoryMenu extends JPanel {
 					frame.getInventory().printInventory();
 					//model.clear();
 					panel.removeAll();
+					panel.add(title);
 					for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
 					{
 						//	model.addElement(entry.getKey() + "/" + entry.getValue());
@@ -174,6 +183,7 @@ public class InventoryMenu extends JPanel {
 	
 	public void refresh(Inventory inv) {
 		panel.removeAll();
+		panel.add(title);
 		for (Map.Entry<String, Integer> entry : inv.getInventoryList().entrySet()){
 			InventoryItem item = new InventoryItem(frame, entry.getKey(),String.valueOf(entry.getValue()));
 			panel.add(item);

@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,12 +10,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 public class TableDiagramMenu extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private int numTables;
 
@@ -23,34 +31,32 @@ public class TableDiagramMenu extends JPanel {
 	private JTextField numTablesTextBox;
 	private JPanel buttonPanel;
 	private ArrayList<TableDiagramMenu.Table> tables = new ArrayList<>();
+	private JButton btnBack;
+	private JButton btnEdit;
+	private JScrollPane scrollPane;
 
 	public TableDiagramMenu(Frame frame) {
 
 		this.frame=frame;
 
-		setLayout(new GridLayout(1, 0, 0, 0));
-
 		panel = new JPanel();
-		add(panel);
-
+		panel.setBackground(Color.WHITE);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setSize(800, 800);
+		scrollPane.add(panel);
+		scrollPane.setViewportView(panel);
+		
 		buttonPanel = new JPanel();
-		panel.add(buttonPanel);
+		buttonPanel.setLayout(new GridLayout(1, 0, 0, 0));
 
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		buttonPanel.add(btnBack);
 
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-			}
-		});
-
-		JButton btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Edit");
 		buttonPanel.add(btnEdit);
-
 
 		numTablesTextBox = new JTextField();
 		numTablesTextBox.setVisible(false);
@@ -73,6 +79,13 @@ public class TableDiagramMenu extends JPanel {
 			numTablesTextBox.setText(numTables+"");
 			refreshTables();
 		}
+
+		setLayout();
+		add(buttonPanel);
+		add(scrollPane);
+		
+
+		//Action Listeners
 
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +111,16 @@ public class TableDiagramMenu extends JPanel {
 			}
 		});
 
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				frame.setContentPane(frame.getAdminMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
+
+
 
 	}
 
@@ -105,13 +128,39 @@ public class TableDiagramMenu extends JPanel {
 		panel.removeAll();
 		panel.repaint();
 		panel.revalidate();
-		panel.add(buttonPanel);
+		//panel.add(buttonPanel);
 		for(int i=1;i<=numTables;i++){
 			TableDiagramMenu.Table tab = new Table(i);
 			panel.add(tab);
 			tables.add(tab);
 
 		}
+	}
+
+	public void setLayout() {
+		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(buttonPanel);
+		buttonPanel.setLayout(jPanel2Layout);
+		jPanel2Layout.setHorizontalGroup(
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+						.addContainerGap(292, 292)
+						.addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(numTablesTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(292, 292, 292))
+				);
+		jPanel2Layout.setVerticalGroup(
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(numTablesTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(109, 109, 109))
+				);
 	}
 
 	public Table getTableByNumber(int numTable){
@@ -128,7 +177,9 @@ public class TableDiagramMenu extends JPanel {
 
 		public Table(int tableNumber){
 			this.tableNumber = tableNumber;
-			JButton btnTable = new JButton(tableNumber+"");
+			JButton btnTable = new CircleButton(tableNumber+"");
+			//btnTable.setBackground(Color.BLACK);
+
 			add(btnTable);
 
 			btnTable.addActionListener(new ActionListener() {
@@ -139,62 +190,7 @@ public class TableDiagramMenu extends JPanel {
 					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 					frame.revalidate();
 
-					//					panel.removeAll();
-					//					setLayout(new GridLayout(0, 3, 0, 0));
-					//					
-					//				
-					//					JButton btnBack = new JButton("Back");
-					//					panel.add(btnBack);
-					//					
-					//					btnBack.addActionListener(new ActionListener() {
-					//						public void actionPerformed(ActionEvent e) {
-					//
-					//							panel.removeAll();
-					//							setLayout(new GridLayout(1, 0, 0, 0));
-					//							panel.add(buttonPanel);
-					//							for(int i=1; i<=numTables; i++){
-					//								panel.add(getTableByNumber(i));
-					//							}
-					//							panel.repaint();
-					//							panel.revalidate();
-					//							
-					//						}
-					//					});
-					//					
-					//					JLabel orderDetails = new JLabel("Order of Table #"+tableNumber);
-					//					panel.add(orderDetails);
-					//					
-					//					JButton btnKitcken = new JButton("Kitchen Ticket");
-					//					panel.add(btnKitcken);
-					//					
-					//					btnKitcken.addActionListener(new ActionListener() {
-					//						public void actionPerformed(ActionEvent e) {
-					//
-					//							frame.setContentPane(frame.getKitchenMenu()); //panel = panel you want to change too.
-					//							frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-					//							frame.revalidate(); 
-					//							
-					//						}
-					//					});
-					//					
-					//					JButton btnCustomer = new JButton("Customer Ticket");
-					//					panel.add(btnCustomer);
-					//					
-					//					btnCustomer.addActionListener(new ActionListener() {
-					//						public void actionPerformed(ActionEvent e) {
-					//							
-					//							frame.setContentPane(frame.getCustomerTicketMenu()); //panel = panel you want to change too.
-					//							frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-					//							frame.revalidate(); 
-					//							
-					//							
-					//						}
-					//					});
-					//					
-					//					JList lista = new JList(orderToStrings().toArray());
-					//					panel.add(lista);
-					//					panel.repaint();
-					//					panel.revalidate();
+
 				}
 			});
 
