@@ -69,7 +69,16 @@ public class Save {
 		for(String line: Files.readAllLines(Paths.get("memory/INVENTORY.txt"))){
 			if(!line.equals("Empty")) {
 			String[] arr = line.split(" ");
-			inv.addItemToInventory(arr[0], Integer.parseInt(arr[1]));		
+			String item = new String();
+			for(int i=0; i<arr.length-1; i++){
+				if(arr[i+1] == arr[arr.length-1]){
+					item+= arr[i]; 
+				}
+				else{
+					item+= arr[i]+" ";
+				}
+			}
+			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
 			}
 		}
 	}

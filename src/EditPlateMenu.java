@@ -30,6 +30,9 @@ public class EditPlateMenu extends JPanel {
 
 	private JTextField plateString;
 	private JTextField plateDouble;
+	private JButton btnCancel;
+	private JButton btnDone;
+	private JScrollPane scrollPane;
 
 	private Plate plate;
 
@@ -43,52 +46,35 @@ public class EditPlateMenu extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
-		JButton btnCancel = new JButton("Cancel");
-		add(btnCancel);
-
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-			}
-		}); 
-
-		JPanel editPanel =new JPanel();
-		editPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		add(editPanel);
-
-		JButton btnDone = new JButton("Done");
-		editPanel.add(btnDone);
-
+		btnCancel = new JButton("Cancel");
+		btnDone = new JButton("Done");
+		
 		plateString = new JTextField();
 		plateString.setText("Name of Plate");
 		plateString.setForeground(Color.GRAY);
 		plateString.setHorizontalAlignment(WIDTH/2);
-
-
-		editPanel.add(plateString);
-
-		plateDouble = new JTextField();
 		
+		plateDouble = new JTextField();
 		plateDouble.setText("Price");
 		plateDouble.setHorizontalAlignment(WIDTH/2);
-		plateDouble.setForeground(Color.GRAY);
-		
+		plateDouble.setForeground(Color.GRAY);	
 
-		editPanel.add(plateDouble);
-
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrollPane);
+		
 
 		panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		add(plateString);
+		add(plateDouble);
+		add(btnDone);
+		add(scrollPane);
+		add(btnCancel);
 
-
+		setLayout();
 
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet()){
 
@@ -99,12 +85,22 @@ public class EditPlateMenu extends JPanel {
 
 		}
 
+		//Action Listeners
+		
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
+				frame.setContentPane(frame.getPlatesMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		}); 
+		
 		btnDone.addActionListener(new ActionListener() { //edit existing plate
 			public void actionPerformed(ActionEvent e) {	
 
 				System.out.println("Done was clicked");
-//
+
 				validateDouble(plateDouble.getText());
 
 				if(	validateString(plateString.getText()) && validateCheckBoxes()) { //start if
@@ -120,7 +116,7 @@ public class EditPlateMenu extends JPanel {
 
 					frame.getMenu().printMenu();
 
- 
+
 					for (Plate plato : frame.getMenu().getAvailablePlates()){
 
 						PlateItem item = new PlateItem(frame,plato, plato.getName(),String.valueOf(plato.getPrice()));
@@ -145,6 +141,7 @@ public class EditPlateMenu extends JPanel {
 			}
 		});
 	}
+
 	public void refresh(Inventory inv) {
 		panel.removeAll();
 		for (Map.Entry<String, Integer> entry : inv.getInventoryList().entrySet()){
@@ -158,6 +155,7 @@ public class EditPlateMenu extends JPanel {
 
 		}
 	}
+
 	public boolean validateString(String word) {
 		if(word.trim().length()==0) {
 			this.getPlateString().setText("");
@@ -197,6 +195,39 @@ public class EditPlateMenu extends JPanel {
 
 		return false;
 	}
+
+	public void setLayout(){
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+								.addComponent(plateString)
+								.addComponent(plateDouble)
+								.addComponent(btnDone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+						.addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, 200)
+						.addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addComponent(plateString, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(18, 18, 18)
+						.addComponent(plateDouble, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(27, 27, 27)
+						.addComponent(btnDone, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(52, Short.MAX_VALUE))
+				);
+	}
+
 	public Frame getFrame() {
 		return frame;
 	}
