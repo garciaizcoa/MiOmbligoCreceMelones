@@ -9,6 +9,7 @@ import javax.swing.table.TableColumn;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 
 public class PlateItem extends JPanel {
 
@@ -41,6 +43,13 @@ public class PlateItem extends JPanel {
 		amountLabel= new JLabel(" $"+amount);
 		editButton = new JButton("Edit");
 		removeButton = new JButton("Remove");	
+		removeButton.setBackground(Color.RED); //COLOR BTN
+		removeButton.setContentAreaFilled(false);
+		removeButton.setOpaque(true);
+
+//		btnAdminMenu.setText("Admin Menu");
+		Image imgRemoveBTN = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
+		removeButton.setIcon(new ImageIcon(imgRemoveBTN)); 
 
 		Object[] columns = {"Name", "Price", "Edit", "Remove"};
 		Object[][] data = {{nameLabel.getText(), amountLabel.getText(), editButton, removeButton}};

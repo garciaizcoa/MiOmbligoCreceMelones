@@ -1,4 +1,5 @@
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -7,10 +8,12 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Map;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -22,7 +25,7 @@ public class InventoryItem extends JPanel {
 	
 	private JLabel labelItem;
 	private JLabel labelAmount;
-	private JButton button;
+	private JButton Remove;
 	private JTable table;
 	
 	public InventoryItem(Frame frame, String item , String amount){
@@ -31,10 +34,18 @@ public class InventoryItem extends JPanel {
 		
 		labelItem = new JLabel(item);
 		labelAmount = new JLabel(amount);		
-		button= new JButton("Remove");
+		Remove= new JButton("REMOVE");
+		Remove.setBackground(Color.RED); //COLOR BTN
+		Remove.setContentAreaFilled(false);
+		Remove.setOpaque(true);
+		
+//		Image imgX = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
+//		button.setIcon(new ImageIcon(imgX)); 
+
+		
 		
 		Object[] columns = {"Item", "Amount","Remove"};
-		Object[][] data = {{labelItem.getText(), labelAmount.getText(), button}};
+		Object[][] data = {{labelItem.getText(), labelAmount.getText(), Remove}};
 		table = new JTable(data, columns);
 		
 		table.setLayout(new BoxLayout(table, BoxLayout.Y_AXIS));
@@ -70,7 +81,7 @@ public class InventoryItem extends JPanel {
 		table.setRowHeight(50);
 		add(table);
 		
-		button.addActionListener(new ActionListener() {
+		Remove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Remove was clicked");
 				frame.getInventory().removeFromInventory(item);

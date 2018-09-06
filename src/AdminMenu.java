@@ -28,36 +28,36 @@ public class AdminMenu extends JPanel {
 		setLayout(new GridLayout(1, 4, 1, 5));
 
 		setBorder(new EmptyBorder(200, 50, 200, 50));
-		setBackground(Color.BLACK);
+		setBackground(Color.WHITE);
 
 
 		JButton btnMainMenu = new JButton("Main Menu");
 		add(btnMainMenu, BorderLayout.NORTH);
-		btnMainMenu.setFont(frame.getFont().deriveFont(50f));
-		btnMainMenu.setForeground(Color.ORANGE);
+//		btnMainMenu.setFont(frame.getFont().deriveFont(50f));
+//		btnMainMenu.setForeground(Color.ORANGE);
 		Image imgMain = new ImageIcon(this.getClass().getResource("/main.jpg")).getImage();
-		btnMainMenu.setIcon(new ImageIcon(imgMain)); // ADMIN BUTTON
+		btnMainMenu.setIcon(new ImageIcon(imgMain)); 
 
 		JButton btnTableDiagram = new JButton("Table Diagram");
 		add(btnTableDiagram);
-		btnTableDiagram.setFont(frame.getFont().deriveFont(50f));
-		btnTableDiagram.setForeground(Color.ORANGE);
+//		btnTableDiagram.setFont(frame.getFont().deriveFont(50f));
+//		btnTableDiagram.setForeground(Color.ORANGE);
 		Image imgTable = new ImageIcon(this.getClass().getResource("/table.jpg")).getImage();
-		btnTableDiagram.setIcon(new ImageIcon(imgTable)); // ADMIN BUTTON
+		btnTableDiagram.setIcon(new ImageIcon(imgTable)); 
 
 		JButton btnPlates = new JButton("Plates");
 		add(btnPlates, BorderLayout.WEST);
-		btnPlates.setFont(frame.getFont().deriveFont(50f));
-		btnPlates.setForeground(Color.ORANGE);
+//		btnPlates.setFont(frame.getFont().deriveFont(50f));
+//		btnPlates.setForeground(Color.ORANGE);
 		Image imgPlate = new ImageIcon(this.getClass().getResource("/plate.jpg")).getImage();
-		btnPlates.setIcon(new ImageIcon(imgPlate)); // ADMIN BUTTON
+		btnPlates.setIcon(new ImageIcon(imgPlate));
 
 		JButton btnInventory = new JButton("Inventory");
 		add(btnInventory, BorderLayout.EAST);
-		btnInventory.setFont(frame.getFont().deriveFont(50f));
-		btnInventory.setForeground(Color.ORANGE);
+//		btnInventory.setFont(frame.getFont().deriveFont(50f));
+//		btnInventory.setForeground(Color.ORANGE);
 		Image imgTask = new ImageIcon(this.getClass().getResource("/tasklist.jpg")).getImage();
-		btnInventory.setIcon(new ImageIcon(imgTask)); // ADMIN BUTTON
+		btnInventory.setIcon(new ImageIcon(imgTask)); 
 
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

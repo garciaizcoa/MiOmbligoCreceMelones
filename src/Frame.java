@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -114,6 +115,7 @@ public class Frame extends JFrame  {
 		mainMenu = new JPanel();
 		mainMenu = new JPanel();
 		mainMenu.setLayout(new BorderLayout(0, 0));
+		mainMenu.setBackground(Color.BLACK);
 
 		//		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -159,6 +161,7 @@ public class Frame extends JFrame  {
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("Images/mt.png"));
+			img.getScaledInstance(250, 250, 0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

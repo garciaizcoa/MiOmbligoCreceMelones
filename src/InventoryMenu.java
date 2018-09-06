@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -49,7 +50,7 @@ public class InventoryMenu extends JPanel {
 
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
-		setBackground(Color.BLACK);
+		setBackground(Color.GRAY);
 
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -59,22 +60,38 @@ public class InventoryMenu extends JPanel {
 		inventoryString = new JTextField();
 		inventoryInteger = new JTextField(); 
 		btnAdd = new JButton();
-
-		btnAdminMenu.setText("Admin Menu");
-		stringHint = new JTextFieldHintUI(" Insert Item",Color.RED);
-		inventoryString.setUI(stringHint);
-		integerHint = new JTextFieldHintUI(" Insert Amount",Color.RED);
-		inventoryInteger.setUI(integerHint);
-		btnAdd.setText("Add");
 		
-		btnAdminMenu.setFont(frame.getFont().deriveFont(40f));
-		btnAdd.setFont(frame.getFont().deriveFont(40f));
-		btnAdminMenu.setForeground(Color.ORANGE);
-		btnAdd.setForeground(Color.ORANGE);
-		inventoryString.getFont().deriveFont(25);
-		inventoryInteger.getFont().deriveFont(25);
-		inventoryString.setAlignmentX(CENTER_ALIGNMENT);
-		inventoryInteger.setAlignmentX(CENTER_ALIGNMENT);
+		btnAdminMenu.setBackground(Color.WHITE); //COLOR BTN
+		btnAdminMenu.setContentAreaFilled(false);
+		btnAdminMenu.setOpaque(true);
+
+//		btnAdminMenu.setText("Admin Menu");
+		Image imgAdminBTN = new ImageIcon(this.getClass().getResource("/adminMenu.jpg")).getImage();
+		btnAdminMenu.setIcon(new ImageIcon(imgAdminBTN)); 
+		
+		stringHint = new JTextFieldHintUI(" Insert Item",Color.GRAY);
+		inventoryString.setUI(stringHint);
+		
+		
+		integerHint = new JTextFieldHintUI(" Insert Amount",Color.GRAY);
+		inventoryInteger.setUI(integerHint);
+
+//		btnAdd.setText("Add");
+		
+//		btnAdminMenu.setFont(frame.getFont().deriveFont(40f));
+//		btnAdd.setFont(frame.getFont().deriveFont(40f));
+//		btnAdminMenu.setForeground(Color.ORANGE);
+//		btnAdd.setForeground(Color.ORANGE);
+//		inventoryString.getFont().deriveFont(25);
+//		inventoryInteger.getFont().deriveFont(25);
+//		inventoryString.setAlignmentX(CENTER_ALIGNMENT);
+//		inventoryInteger.setAlignmentX(CENTER_ALIGNMENT);
+		
+		btnAdd.setBackground(Color.WHITE); //COLOR BTN
+		btnAdd.setContentAreaFilled(false);
+		btnAdd.setOpaque(true);
+		Image imgAddBTN = new ImageIcon(this.getClass().getResource("/add.jpg")).getImage();
+		btnAdd.setIcon(new ImageIcon(imgAddBTN)); 
 
 		setLayout();
 		
@@ -201,7 +218,7 @@ public class InventoryMenu extends JPanel {
 	public boolean validateString(String word) {
 		if(word.trim().length()==0) {
 			this.getInventoryString().setText("");
-			this.getInventoryString().setUI(new JTextFieldHintUI("Inventory name must be a word.", Color.RED));
+			this.getInventoryString().setUI(new JTextFieldHintUI("Inventory name must be a word.", Color.GRAY));
 			//this.getInventoryString().setText("Inventory name must be a word.");
 			return false;
 		}
@@ -222,7 +239,7 @@ public class InventoryMenu extends JPanel {
 		}
 		catch(NumberFormatException nfe) {
 			this.getInventoryInteger().setText("");
-			this.getInventoryInteger().setUI(new JTextFieldHintUI("The amount must be a number.", Color.RED));
+			this.getInventoryInteger().setUI(new JTextFieldHintUI("The amount must be a number.", Color.GRAY));
 		}
 	}
 
