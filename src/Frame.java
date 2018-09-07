@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Image;
@@ -113,9 +115,16 @@ public class Frame extends JFrame  {
 		//setBounds(0, 0 ,(int)screenSize.getWidth(), (int)screenSize.getHeight());
 
 		mainMenu = new JPanel();
-		mainMenu = new JPanel();
 		mainMenu.setLayout(new BorderLayout(0, 0));
+		
+
+		
+		
+
+//		mainMenu.setBackground(new java.awt.Color(0, 0, 50));
 		mainMenu.setBackground(Color.BLACK);
+		ImageIcon icon = new ImageIcon("/mt.png");
+		mainMenu.paintComponents(drawImage(icon.getImage(),250,250,getWidth(),getHeight(), this));
 
 		//		mainMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -123,6 +132,9 @@ public class Frame extends JFrame  {
 		JButton clientBTN = new JButton();
 		JLabel jLabel2 = new JLabel();
 
+		
+		
+//		this.getContentPane().add(jLabel2);
 
 		Image imgAdmin = new ImageIcon(this.getClass().getResource("/admin2.png")).getImage();
 		adminBTN.setIcon(new ImageIcon(imgAdmin)); // ADMIN BUTTON
@@ -156,31 +168,29 @@ public class Frame extends JFrame  {
 			}
 		});
 
-		jLabel2.setSize(screenSize.width,screenSize.height);
-
+		jLabel2.setSize(250,250);
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("Images/mt.png"));
-			img.getScaledInstance(250, 250, 0);
+			//			img.getScaledInstance(250, 250, 0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 
-		Image dimg = img.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(),
+		Image dimg = img.getScaledInstance(this.getScreenSize().width/3, this.getScreenSize().height/2,
 				Image.SCALE_SMOOTH);
 
-		//	Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
+//			Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
 
 		ImageIcon imageIcon = new ImageIcon(dimg);
 
 
 
 		jLabel2.setIcon(imageIcon); // NOI18N
-
-
 		mainMenu.add(jLabel2);
-		jLabel2.setBounds(0, 0, 550, 430);
+		
+		//		jLabel2.setBounds(100, 0, 350, 350);
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -194,7 +204,12 @@ public class Frame extends JFrame  {
 				);
 
 		//starting pane
-		setContentPane(mainMenu); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		setContentPane(mainMenu);
+	}
+
+	private Graphics drawImage(Image image, int i, int j, int width, int height, Frame frame) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void setAllFonts(){
