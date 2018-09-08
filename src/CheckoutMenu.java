@@ -1,10 +1,16 @@
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ScrollPaneConstants;
 
@@ -13,16 +19,50 @@ public class CheckoutMenu extends JPanel {
 	private JPanel panel;
 	private Frame frame;
 	
+	private JButton btnBack;
+	private JScrollPane scrollPane_1;
+	private JButton btnOrder;
+	private BufferedImage backgroundImg;
+	
+	
 	public CheckoutMenu(Frame frame) {
-		setLayout(null);
+		//setLayout(null);
 		this.frame=frame;
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
+		scrollPane_1 = new JScrollPane();
+		btnOrder = new JButton("Order!");
+		//btnOrder.setBounds(327, 265, 117, 29);
 		
-		JButton btnOrder = new JButton("Order!");
-		btnOrder.setBounds(327, 265, 117, 29);
-		add(btnOrder);
 		
+		//btnBack.setBounds(166, 5, 117, 29);
+		
+		
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		//scrollPane_1.setBounds(6, 32, 438, 232);
+		
+		
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		scrollPane_1.setViewportView(panel);
+		
+		try {
+			backgroundImg = ImageIO.read(new File("Images/Background.png"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		for(Plate plato :frame.getCustomerMenu().getPlatesList()) {
+			 OrderItem item = new OrderItem(plato, frame); 
+			 panel.add(item);
+		}
+		
+		btnBack.setFont(frame.getFont().deriveFont(40f));
+		btnOrder.setFont(frame.getFont().deriveFont(40f));
+		
+		//Action Listeners
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getCustomerMenu()); //panel = panel you want to change too.
@@ -32,18 +72,6 @@ public class CheckoutMenu extends JPanel {
 				btnOrder.setEnabled(true);
 			}
 		});
-		btnBack.setBounds(166, 5, 117, 29);
-		add(btnBack);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(6, 32, 438, 232);
-		add(scrollPane_1);
-		
-		 panel = new JPanel();
-		 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		scrollPane_1.setViewportView(panel);
 		
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -75,10 +103,13 @@ public class CheckoutMenu extends JPanel {
 			}
 		});
 		
-		for(Plate plato :frame.getCustomerMenu().getPlatesList()) {
-			 OrderItem item = new OrderItem(plato, frame); 
-			 panel.add(item);
-		}
+		setLayout();
+		
+		add(btnBack);
+		add(scrollPane_1);
+		add(btnOrder);
+		
+		
 	}
 	
 	public void refresh() {
@@ -90,5 +121,50 @@ public class CheckoutMenu extends JPanel {
 				panel.revalidate();
 		}
 		
+	}
+	
+	public void setLayout(){
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+	            .addContainerGap(300, 300)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(btnBack,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
+	                    .addComponent(btnOrder,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                        )
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(scrollPane_1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(300, 300))
+        );
+        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addContainerGap(160, 160)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(btnBack,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+	                    .addComponent(btnOrder,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+	                .addGap(18, 18, 18)
+	                .addComponent(scrollPane_1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(46, 46, 46))
+	        );
+}
+	
+	
+	@Override 
+	public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(backgroundImg,0,0, getWidth(),getHeight(), this);
+    }
+	
+	private Graphics drawImage(Image image, int i, int j, int width, int height, CheckoutMenu cm) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

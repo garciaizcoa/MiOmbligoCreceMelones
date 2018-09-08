@@ -1,8 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,13 +24,17 @@ import java.awt.Container;
 import javax.swing.JTable;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 
 import javax.swing.JScrollPane;
@@ -41,6 +48,14 @@ public class CustomerMenu extends JPanel {
 	private int tableNumber = 1;
 
 	private ArrayList<Plate> platesList = new ArrayList<>();
+	
+	private JButton backBTN;
+	private JButton btnTable ;
+	private JButton btnCheckout;
+	private JComboBox<Integer> tableComboBox;
+	private JScrollPane scrollPane_1;
+	private JPanel orderPanel;
+	private BufferedImage backgroundImg;
 
 	/**
 	 * Create the panel.
@@ -51,39 +66,24 @@ public class CustomerMenu extends JPanel {
 		this.frame=frame;
 
 
-
-		/**
-		 * 
-		 */
-
-		/**
-		 * Create the panel.
-		 */
-
 		System.out.println("Customer "+frame.getInventory());
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JPanel orderPanel = new JPanel();
-		add(orderPanel);
-
-
-		JButton backBTN = new JButton("");
-		backBTN.setHorizontalAlignment(SwingConstants.LEFT);
-		backBTN.setForeground(SystemColor.info);
-		backBTN.setBackground(SystemColor.text);
-		backBTN.setIcon(new ImageIcon("C:\\Users\\chris\\Desktop\\backEVER.png"));
-
-
-		backBTN.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("mainMenu was clicked");
-				frame.setContentPane(frame.getMainMenu()); //panel = panel you want to change too.
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-			}
-		});
-
-		JComboBox<Integer> tableComboBox = new JComboBox<>();
+		orderPanel = new JPanel();
+		tableComboBox = new JComboBox<>();
+		backBTN = new JButton("Back");
+		btnCheckout = new JButton("Checkout");
+		btnTable = new JButton("Table #"+ 1);
+		scrollPane_1 = new JScrollPane();
+		panel = new JPanel();
+		
+		try {
+			backgroundImg = ImageIO.read(new File("Images/Background.png"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+	   // this.paintComponent(drawImage(backgroundImg,250,250,getWidth(),getHeight(), this));
 
 		int numTables = 0;
 
@@ -100,10 +100,57 @@ public class CustomerMenu extends JPanel {
 		}
 		tableComboBox.setVisible(false);
 
-		JButton btnCheckout = new JButton("Checkout");
-		add(btnCheckout);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		JButton btnTable = new JButton("Table #"+ tableComboBox.getSelectedItem());
+		scrollPane_1.setViewportView(panel);
+		//orderPanelLayout();
+		
+		backBTN.setFont(frame.getFont().deriveFont(40f));
+		btnCheckout.setFont(frame.getFont().deriveFont(40f));
+		
+		setLayout();
+		add(backBTN);
+		add(scrollPane_1);
+		add(btnCheckout);
+		add(btnTable);
+		add(tableComboBox);
+
+
+		//Action Listeners
+		backBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("mainMenu was clicked");
+				frame.setContentPane(frame.getMainMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
+		
+		btnCheckout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("checkout was clicked");
+
+				platesList.removeAll(platesList);
+				for (Component opt : panel.getComponents()) {
+					if(((ProductPanel) opt).getPlateNumber()!=0) {
+						for(int i=0; i<((ProductPanel) opt).getPlateNumber();i++) {
+
+							platesList.add((((ProductPanel) opt).getSelectedPlate()).clone());
+							System.out.println("comida " +platesList.get(i).getName());
+						}
+					}
+
+				}
+
+
+				frame.setContentPane(frame.getCheckoutMenu()); //panel = panel you want to change too.
+				frame.getCheckoutMenu().refresh();
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
+		
 		btnTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btnTable.getText().contains("Table #")) {
@@ -121,13 +168,50 @@ public class CustomerMenu extends JPanel {
 			}
 		});
 
+		refresh();
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		panel = new JPanel();
-		scrollPane_1.setViewportView(panel);
+	}
+	
+	public void setLayout(){
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	        this.setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+		            .addContainerGap(300, 300)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(55, 55, 55)
+	                        .addComponent(backBTN,javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+	                        .addGap(128, 128, 128)
+	                        .addComponent(btnTable)
+	                        .addGap(18, 18, 18)
+	                        .addComponent(tableComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(128, 128, 128)
+	                        .addComponent(btnCheckout,javax.swing.GroupLayout.DEFAULT_SIZE, 120, 120))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(46, 46, 46)
+	                        .addComponent(scrollPane_1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                .addContainerGap(300, 300))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addContainerGap(160, 160)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(backBTN,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+	                    .addComponent(btnTable)
+	                    .addComponent(tableComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(btnCheckout,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+	                .addGap(18, 18, 18)
+	                .addComponent(scrollPane_1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(46, 46, 46))
+	        );
+	}
+	
+	public void orderPanelLayout(){
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		GroupLayout gl_orderPanel = new GroupLayout(orderPanel);
 		gl_orderPanel.setHorizontalGroup(
@@ -167,37 +251,7 @@ public class CustomerMenu extends JPanel {
 						.addContainerGap())
 				);
 		orderPanel.setLayout(gl_orderPanel);
-
-
-
-		btnCheckout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("checkout was clicked");
-
-				platesList.removeAll(platesList);
-				for (Component opt : panel.getComponents()) {
-					if(((ProductPanel) opt).getPlateNumber()!=0) {
-						for(int i=0; i<((ProductPanel) opt).getPlateNumber();i++) {
-
-							platesList.add((((ProductPanel) opt).getSelectedPlate()).clone());
-							System.out.println("comida " +platesList.get(i).getName());
-						}
-					}
-
-				}
-
-
-				frame.setContentPane(frame.getCheckoutMenu()); //panel = panel you want to change too.
-				frame.getCheckoutMenu().refresh();
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-			}
-		});
-
-		refresh();
-
-
-	}	
+	}
 
 	public void refresh() {
 		panel.removeAll();
@@ -212,6 +266,16 @@ public class CustomerMenu extends JPanel {
 		 
 	}
 
+	@Override 
+	public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(backgroundImg,0,0, getWidth(),getHeight(), this);
+    }
+	
+	private Graphics drawImage(Image image, int i, int j, int width, int height, CustomerMenu cm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	//getters
 	public JPanel getPanel() {
