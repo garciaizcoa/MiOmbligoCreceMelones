@@ -32,16 +32,9 @@ public class CheckoutMenu extends JPanel {
 		btnBack = new JButton("Back");
 		scrollPane_1 = new JScrollPane();
 		btnOrder = new JButton("Order!");
-		//btnOrder.setBounds(327, 265, 117, 29);
-		
-		
-		//btnBack.setBounds(166, 5, 117, 29);
-		
 		
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		//scrollPane_1.setBounds(6, 32, 438, 232);
-		
 		
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
