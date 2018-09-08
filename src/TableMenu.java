@@ -1,47 +1,69 @@
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.Graphics;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
+import javax.swing.ScrollPaneConstants;
 
 
 public class TableMenu extends JPanel {
 	
 	private TableDiagramMenu.Table table;
 	private JPanel orderPanel;
-
+	
+	private JButton btnBack;
+	private JButton btnKitchen;
+	private JButton btnCustomer;
+	private JScrollPane scrollPane;
+	private BufferedImage backgroundImg;
+	
 	public TableMenu(Frame frame) {
 		
 		this.table = null;
-		setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		add(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{75, 134, 148, 0};
-		gbl_panel.rowHeights = new int[]{29, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		btnBack = new JButton("Back");
+		btnKitchen = new JButton("Kitchen Ticket");
+		btnCustomer = new JButton("Customer Ticket");
+		scrollPane = new JScrollPane();
+	
 		
-		JButton btnBack = new JButton("Back");
-		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-		gbc_btnBack.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnBack.insets = new Insets(0, 0, 5, 5);
-		gbc_btnBack.gridx = 0;
-		gbc_btnBack.gridy = 0;
-		panel.add(btnBack, gbc_btnBack);
+		try {
+			backgroundImg = ImageIO.read(new File("Images/Background.png"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
+		btnBack.setFont(frame.getFont().deriveFont(25f));
+		btnKitchen.setFont(frame.getFont().deriveFont(25f));
+		btnCustomer.setFont(frame.getFont().deriveFont(25f));
+		
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		orderPanel = new JPanel();
+		orderPanel.setLayout(new BoxLayout(orderPanel, BoxLayout.Y_AXIS));
+		scrollPane.setViewportView(orderPanel);
+		
+		setLayout();
+		add(btnBack);
+		add(btnCustomer);
+		add(btnKitchen);
+		add(scrollPane);
+		
+		
+		//Action Listeners
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setContentPane(frame.getTableDiagramMenu());
@@ -51,15 +73,7 @@ public class TableMenu extends JPanel {
 			}
 		});
 		
-		JButton btnKitcken = new JButton("Kitchen Ticket");
-		GridBagConstraints gbc_btnKitcken = new GridBagConstraints();
-		gbc_btnKitcken.anchor = GridBagConstraints.NORTH;
-		gbc_btnKitcken.insets = new Insets(0, 0, 5, 5);
-		gbc_btnKitcken.gridx = 1;
-		gbc_btnKitcken.gridy = 0;
-		panel.add(btnKitcken, gbc_btnKitcken);
-		
-		btnKitcken.addActionListener(new ActionListener() {
+		btnKitchen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				frame.getKitchenMenu().setTable(table);
@@ -70,26 +84,6 @@ public class TableMenu extends JPanel {
 				
 			}
 		});
-		
-		JButton btnCustomer = new JButton("Customer Ticket");
-		GridBagConstraints gbc_btnCustomer = new GridBagConstraints();
-		gbc_btnCustomer.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCustomer.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnCustomer.gridx = 2;
-		gbc_btnCustomer.gridy = 0;
-		panel.add(btnCustomer, gbc_btnCustomer);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 1;
-		panel.add(scrollPane, gbc_scrollPane);
-		
-		orderPanel = new JPanel();
-		orderPanel.setLayout(new BoxLayout(orderPanel, BoxLayout.Y_AXIS));
-		scrollPane.setViewportView(orderPanel);
 		
 		btnCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,5 +118,53 @@ public class TableMenu extends JPanel {
 			this.table=table;
 			setOrderPanel();
 		}
+		
+		public void setLayout(){
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	        this.setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+		            .addContainerGap(300, 300)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(50, 50, 50)
+	                        .addComponent(btnBack,200, 200, 200)
+	                        .addGap(50, 50,50)
+	                        .addComponent(btnKitchen,200, 200, 200)
+	                        .addGap(50, 50, 50)
+	                        .addComponent(btnCustomer,200, 200, 200))
+	                    .addGroup(layout.createSequentialGroup()
+	                    	.addGap(55, 55, 55)
+	                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                .addContainerGap(300, 300))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addContainerGap(160, 160)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(btnBack,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+	                    .addComponent(btnKitchen,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+	                    .addComponent(btnCustomer,javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+	                .addGap(18, 18, 18)
+	                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(46, 46, 46))
+	        );
+	}
+		
+		
+		@Override 
+		public void paintComponent(Graphics g){
+	        super.paintComponent(g);
+	        g.drawImage(backgroundImg,0,0, getWidth(),getHeight(), this);
+	    }
+		
+		private Graphics drawImage(Image image, int i, int j, int width, int height, CheckoutMenu cm) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 	
 }
