@@ -1,6 +1,8 @@
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+
+import java.awt.Font;
 import java.awt.GridLayout;
 
 public class IngredientOption extends JPanel {
@@ -17,14 +19,13 @@ public class IngredientOption extends JPanel {
 		
 		check = new JCheckBox(ingredient);
 		this.add(check);
+		check.setFont(new Font("Lucida Grande", 0,24));
 		
 		combo =  new JComboBox<>();
 		for(int i=0;i<10;i++) {
 			combo.addItem(i);
 		}
-		this.add(combo);
-		
-		
+		this.add(combo);		
 	}
 	
 	public JCheckBox getCheck() {
