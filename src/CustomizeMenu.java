@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.JScrollPane;
+
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -29,7 +31,11 @@ public class CustomizeMenu extends JPanel {
 		
 		this.plate=null;
 		this.frame = frame;
-		JButton btnBack = new JButton("Back");
+		this.setBackground(Color.WHITE);
+		JButton btnBack = new JButton("Back");btnBack.setBackground(Color.WHITE); //COLOR BTN
+		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(true);
+		btnBack.setContentAreaFilled(false);
 		add(btnBack);
 		
 		btnBack.addActionListener(new ActionListener() {
@@ -65,11 +71,15 @@ public class CustomizeMenu extends JPanel {
 		public ItemOption(String name) {
 			setLayout(new GridLayout(1, 0, 0, 0));
 
-
+			this.setBackground(Color.WHITE);
 			JLabel lblName = new JLabel(name);
 			add(lblName);
 
 			JButton btnExtra = new JButton("Extra");
+			btnExtra.setBackground(Color.WHITE); //COLOR BTN
+			btnExtra.setContentAreaFilled(false);
+			btnExtra.setOpaque(true);
+			btnExtra.setContentAreaFilled(false);
 			add(btnExtra);
 			
 			//VERIFICAR SI HAY SUFICIENTES INGREDIENTES
@@ -83,6 +93,10 @@ public class CustomizeMenu extends JPanel {
 			});
 			
 			JButton btnRemove = new JButton("Remove Ingredient");
+			btnRemove.setBackground(Color.WHITE); //COLOR BTN
+			btnRemove.setContentAreaFilled(false);
+			btnRemove.setOpaque(true);
+			btnRemove.setContentAreaFilled(false);
 			add(btnRemove);
 
 			btnRemove.addActionListener(new ActionListener() {

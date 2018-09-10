@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -65,7 +66,7 @@ public class CustomerMenu extends JPanel {
 
 		this.frame=frame;
 
-
+		this.setBackground(Color.BLACK);
 		System.out.println("Customer "+frame.getInventory());
 		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -115,6 +116,24 @@ public class CustomerMenu extends JPanel {
 		add(btnCheckout);
 		add(btnTable);
 		add(tableComboBox);
+		
+		backBTN.setBackground(Color.WHITE); //COLOR BTN
+		backBTN.setContentAreaFilled(false);
+		backBTN.setOpaque(true);
+		backBTN.setContentAreaFilled(false);
+		backBTN.setFocusPainted(false);
+		backBTN.setBorder(new LineBorder(Color.WHITE));
+         
+		btnCheckout.setBackground(Color.WHITE); //COLOR BTN
+		btnCheckout.setContentAreaFilled(false);
+		btnCheckout.setOpaque(true);
+		btnCheckout.setContentAreaFilled(false);
+		btnCheckout.setFocusPainted(false);
+		btnCheckout.setBorder(new LineBorder(Color.WHITE));
+		
+		btnTable.setBackground(Color.WHITE); //COLOR BTN
+		btnTable.setContentAreaFilled(false);
+		btnTable.setOpaque(true);
 
 
 		//Action Listeners

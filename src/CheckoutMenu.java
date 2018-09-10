@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.LineBorder;
 
 public class CheckoutMenu extends JPanel {
 	
@@ -28,10 +30,24 @@ public class CheckoutMenu extends JPanel {
 	public CheckoutMenu(Frame frame) {
 		//setLayout(null);
 		this.frame=frame;
+		this.setBackground(Color.BLACK);
 		
 		btnBack = new JButton("Back");
+		btnBack.setBackground(Color.WHITE); //COLOR BTN
+		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(true);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorder(new LineBorder(Color.WHITE));
+         
 		scrollPane_1 = new JScrollPane();
 		btnOrder = new JButton("Order!");
+		btnOrder.setBackground(Color.WHITE); //COLOR BTN
+		btnOrder.setContentAreaFilled(false);
+		btnOrder.setOpaque(true);
+		btnOrder.setContentAreaFilled(false);
+		btnOrder.setFocusPainted(false);
+		btnOrder.setBorder(new LineBorder(Color.WHITE));
 		
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
