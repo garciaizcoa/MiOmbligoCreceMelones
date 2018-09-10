@@ -55,7 +55,7 @@ public class CustomizeMenu extends JPanel {
 		 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		scrollPane.setViewportView(panel);
 		
-		lblExtraMessage = new JLabel("Yo existo!");
+		lblExtraMessage = new JLabel("Yo existo");
 		lblExtraMessage.setVisible(false);
 		add(lblExtraMessage);
 //		panel.setLayout(new FormLayout(new ColumnSpec[] {},
