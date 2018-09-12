@@ -2,11 +2,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -14,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Map;
-
 import javax.swing.BoxLayout;
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 
 public class PlateItem extends JPanel {
@@ -40,7 +34,7 @@ public class PlateItem extends JPanel {
 
 		nameLabel= new JLabel(name);
 		nameLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 40));
-		amountLabel= new JLabel(" $"+amount);
+		amountLabel= new JLabel("$ "+amount);
 		editButton = new JButton("Edit");
 		removeButton = new JButton("Remove");	
 		removeButton.setBackground(Color.RED); //COLOR BTN

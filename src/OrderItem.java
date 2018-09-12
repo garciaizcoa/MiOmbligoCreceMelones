@@ -1,8 +1,8 @@
 import javax.swing.JPanel;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -19,6 +19,8 @@ public class OrderItem extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel lblNewLabel = new JLabel(plate.getName());
+		lblNewLabel.setFont(new Font("Century Gothic", Font.LAYOUT_RIGHT_TO_LEFT, 30));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel);
 		
 		JButton btnCustomize = new JButton("Customize");
