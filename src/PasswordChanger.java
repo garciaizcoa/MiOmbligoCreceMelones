@@ -228,7 +228,7 @@ public class PasswordChanger extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			
 				textField.setText("");
-				frame.setContentPane(frame.getAdminMenu());
+				frame.setContentPane(frame.getSettingMenu());
 				
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 

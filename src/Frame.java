@@ -108,7 +108,7 @@ public class Frame extends JFrame  {
 		this.kitchenMenu = new KitchenMenu(this);
 		this.customerTicketMenu = new CustomerTicketMenu(this);
 		this.passwordMenu = new PasswordMenu(this);
-//		this.settingMenu = new SettingMenu(this);
+		this.settingMenu = new SettingMenu(this);
 		this.passwordChanger = new PasswordChanger(this);
 
 

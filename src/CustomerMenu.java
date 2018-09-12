@@ -120,16 +120,12 @@ public class CustomerMenu extends JPanel {
 		backBTN.setBackground(Color.WHITE); //COLOR BTN
 		backBTN.setContentAreaFilled(false);
 		backBTN.setOpaque(true);
-		backBTN.setContentAreaFilled(false);
-		backBTN.setFocusPainted(false);
-		backBTN.setBorder(new LineBorder(Color.WHITE));
+	
          
 		btnCheckout.setBackground(Color.WHITE); //COLOR BTN
 		btnCheckout.setContentAreaFilled(false);
 		btnCheckout.setOpaque(true);
-		btnCheckout.setContentAreaFilled(false);
-		btnCheckout.setFocusPainted(false);
-		btnCheckout.setBorder(new LineBorder(Color.WHITE));
+		
 		
 		btnTable.setBackground(Color.WHITE); //COLOR BTN
 		btnTable.setContentAreaFilled(false);

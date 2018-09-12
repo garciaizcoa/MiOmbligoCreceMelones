@@ -28,13 +28,16 @@ public class ProductPanel extends JPanel {
 
 		this.plate = plate;
 		JButton productBtn = new JButton("");
+		productBtn.setBackground(Color.WHITE);
 		productBtn.setText(plate.getName());
 		//productBtn.setIcon(null);
 
 		JButton menos = new JButton("-");
-		menos.setFont(new Font("Tahoma", Font.PLAIN, 6));
+		menos.setBackground(Color.WHITE);
+
+		menos.setFont(new Font("Tahoma", Font.PLAIN, 3));
 		menos.setForeground(Color.BLACK);
-		menos.setIcon(null);
+//		menos.setIcon(null);
 		menos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent menos) {
 				cantidad = Integer.parseInt(number.getText());
@@ -51,7 +54,9 @@ public class ProductPanel extends JPanel {
 		number.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		JButton mas = new JButton("+");
-		mas.setFont(new Font("Tahoma", Font.PLAIN, 6));
+		mas.setBackground(Color.WHITE);
+
+		mas.setFont(new Font("Tahoma", Font.PLAIN, 3));
 		mas.setForeground(Color.BLACK);
 		mas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent mas) {
@@ -90,6 +95,11 @@ public class ProductPanel extends JPanel {
 						.addContainerGap())
 				);
 		this.setLayout(gl_productPanel);
+		
+		
+		number.setFont(frame.getFont().deriveFont(15f));
+//		mas.setFont(frame.getFont().deriveFont(5f));
+		productBtn.setFont(frame.getFont().deriveFont(20f));
 	}
 
 	//getters
