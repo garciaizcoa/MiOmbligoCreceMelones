@@ -3,6 +3,7 @@ import java.awt.Component;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -19,7 +20,7 @@ public class PasswordMenu extends JPanel{
 	private JButton jButton1;
 	private JButton jButtonBack;
 	private JButton jButton0;
-	private JButton jButton12;
+	private JButton jButtonEnter;
 	private JButton jButton2;
 	private JButton jButton3;
 	private JButton jButton4;
@@ -58,10 +59,10 @@ public class PasswordMenu extends JPanel{
 		jButton9 = new JButton();
 		jButtonBack = new JButton();
 		jButton0 = new JButton();
-		jButton12 = new JButton();
+		jButtonEnter = new JButton();
 		
 		textField.setText("****");
-
+		
 		jButton1.setText("1");
 		jButton2.setText("2");
 		jButton3.setText("3");
@@ -73,7 +74,7 @@ public class PasswordMenu extends JPanel{
 		jButton9.setText("9");
 		jButtonBack.setText("Back");
 		jButton0.setText("0");
-		jButton12.setText("Enter");
+		jButtonEnter.setText("Enter");
 		
 		jButton1.setBackground(Color.WHITE);
 		jButton2.setBackground(Color.WHITE);
@@ -86,7 +87,7 @@ public class PasswordMenu extends JPanel{
 		jButton9.setBackground(Color.WHITE);
 		jButton0.setBackground(Color.WHITE);
 		jButtonBack.setBackground(Color.WHITE);
-		jButton12.setBackground(Color.WHITE);
+		jButtonEnter.setBackground(Color.WHITE);
 		
 		jButton1.setFont(frame.getFont().deriveFont(25f));
 		jButton2.setFont(frame.getFont().deriveFont(25f));
@@ -99,7 +100,7 @@ public class PasswordMenu extends JPanel{
 		jButton9.setFont(frame.getFont().deriveFont(25f));
 		jButton0.setFont(frame.getFont().deriveFont(25f));
 		jButtonBack.setFont(frame.getFont().deriveFont(25f));
-		jButton12.setFont(frame.getFont().deriveFont(25f));
+		jButtonEnter.setFont(frame.getFont().deriveFont(25f));
 
 
 		
@@ -116,24 +117,16 @@ public class PasswordMenu extends JPanel{
 		add(panel);
 		
 		panel.setBackground(Color.decode("#FFCC33"));
-//		panel.setBackground(Color.WHITE);
-		buttonActions();
-		
-		
+		buttonActions();		
 
 	}
-	
-	
-
 	
 	public void buttonActions() {
 		
 		jButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				textField.setText(textField.getText() + "1");
-
-				
+				textField.setText(textField.getText() + "1");		
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
@@ -231,12 +224,19 @@ public class PasswordMenu extends JPanel{
 				frame.revalidate(); 
 			}
 		});
+			
 		
-		
-		
-		jButton12.addActionListener(new ActionListener() {
+		jButtonEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("0000")) {
+				
+				String passw = new String();
+				try {
+					passw = Save.readPassword();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				if(textField.getText().equals(passw)) {
 					textField.setText("");
 					frame.setContentPane(frame.getAdminMenu());
 
@@ -245,14 +245,9 @@ public class PasswordMenu extends JPanel{
 					
 				}
 			}
-		});
-		
-	
-		
+		});		
 	}
 
-
-	
 	public void setLayout() {
 
 		javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel);
@@ -289,7 +284,7 @@ public class PasswordMenu extends JPanel{
 						.addGap(0, 0, 0)
 						.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, 0)
-						.addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(jButtonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
 
 				);
 
@@ -314,7 +309,7 @@ public class PasswordMenu extends JPanel{
 						.addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addComponent(jButtonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
 
 				);
 

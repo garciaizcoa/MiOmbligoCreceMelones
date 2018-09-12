@@ -70,6 +70,13 @@ public class Save {
 		}
 		return 0;
 	}
+	
+	public static String readPassword() throws IOException{
+		for(String line: Files.readAllLines(Paths.get("memory/PASSWORD.txt"))){
+			return line;
+		}
+		return "0000";
+	}
 
 	public static void readInitialInventory(Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/INVENTORY.txt"))){
@@ -89,22 +96,22 @@ public class Save {
 		}
 	}
 
-	public static void readInitialPassword(PasswordChanger password) throws IOException{
-		for(String line: Files.readAllLines(Paths.get("memory/PASSWORD.txt"))){
-			if(!line.equals("Empty")) {
-			String[] arr = line.split(" ");
-			String pass = new String();
-			for(int i=0; i<arr.length-1; i++){
-				if(arr[i+1] == arr[arr.length-1]){
-					pass+= arr[i]; 
-				}
-			}
-			pass= password.getPassword();
-//			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
-			
-			}
-		}
-	}
+//	public static void readInitialPassword(PasswordChanger password) throws IOException{
+//		for(String line: Files.readAllLines(Paths.get("memory/PASSWORD.txt"))){
+//			if(!line.equals("Empty")) {
+//			String[] arr = line.split(" ");
+//			String pass = new String();
+//			for(int i=0; i<arr.length-1; i++){
+//				if(arr[i+1] == arr[arr.length-1]){
+//					pass+= arr[i]; 
+//				}
+//			}
+//			pass= password.getPassword();
+////			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
+//			
+//			}
+//		}
+//	}
 
 	public static void readInitialAddPlatesMenu(AddPlateMenu apm, Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/PLATES.txt"))){

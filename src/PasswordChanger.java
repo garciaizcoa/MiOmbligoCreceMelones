@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,7 +11,7 @@ public class PasswordChanger extends JPanel {
 	private JButton jButton1;
 	private JButton jButtonBack;
 	private JButton jButton0;
-	private JButton jButton12;
+	private JButton jButtonSave;
 	private JButton jButton2;
 	private JButton jButton3;
 	private JButton jButton4;
@@ -31,9 +32,7 @@ public class PasswordChanger extends JPanel {
 	public PasswordChanger(Frame frm) {
 
 		this.frame = frm;
-		
 	
-		
 		textField = new javax.swing.JTextField();
 		panel = new JPanel();
 		jPanel1 = new JPanel();
@@ -48,8 +47,7 @@ public class PasswordChanger extends JPanel {
 		jButton9 = new JButton();
 		jButtonBack = new JButton();
 		jButton0 = new JButton();
-		jButton12 = new JButton();
-		
+		jButtonSave = new JButton();	
 
 		jButton1.setText("1");
 		jButton2.setText("2");
@@ -62,7 +60,7 @@ public class PasswordChanger extends JPanel {
 		jButton9.setText("9");
 		jButtonBack.setText("Back");
 		jButton0.setText("0");
-		jButton12.setText("Save");
+		jButtonSave.setText("Save");
 		
 		jButton1.setBackground(Color.WHITE);
 		jButton2.setBackground(Color.WHITE);
@@ -75,7 +73,7 @@ public class PasswordChanger extends JPanel {
 		jButton9.setBackground(Color.WHITE);
 		jButton0.setBackground(Color.WHITE);
 		jButtonBack.setBackground(Color.WHITE);
-		jButton12.setBackground(Color.WHITE);
+		jButtonSave.setBackground(Color.WHITE);
 		
 		jButton1.setFont(frame.getFont().deriveFont(25f));
 		jButton2.setFont(frame.getFont().deriveFont(25f));
@@ -88,10 +86,15 @@ public class PasswordChanger extends JPanel {
 		jButton9.setFont(frame.getFont().deriveFont(25f));
 		jButton0.setFont(frame.getFont().deriveFont(25f));
 		jButtonBack.setFont(frame.getFont().deriveFont(25f));
-		jButton12.setFont(frame.getFont().deriveFont(25f));
-
-
+		jButtonSave.setFont(frame.getFont().deriveFont(25f));
 		
+		try {
+			password = Save.readPassword();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		String s = textField.getText();
 		
 		frame.getContentPane().setLayout(new javax.swing.BoxLayout(frame.getContentPane(), javax.swing.BoxLayout.Y_AXIS));
@@ -114,6 +117,12 @@ public class PasswordChanger extends JPanel {
 	
 	public void setPassword() {
 		password = textField.getText();
+		try {
+			Save.savePassword(password);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String getPassword() {
@@ -224,30 +233,22 @@ public class PasswordChanger extends JPanel {
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
-		});
+		});	
 		
-		
-		
-		jButton12.addActionListener(new ActionListener() {
+		jButtonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				if(textField.getText().equals("0000")) {
 					setPassword();
 					System.out.println(getPassword());
 					textField.setText("");
 					frame.setContentPane(frame.getAdminMenu());
-
 					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 					frame.revalidate(); 
 					
 //				}
 			}
-		});
-		
-	
-		
+		});	
 	}
-
-
 	
 	public void setLayout() {
 
@@ -285,7 +286,7 @@ public class PasswordChanger extends JPanel {
 						.addGap(0, 0, 0)
 						.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, 0)
-						.addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
 
 				);
 
@@ -310,11 +311,9 @@ public class PasswordChanger extends JPanel {
 						.addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
 
 				);
-
-
 
 	}
 }
