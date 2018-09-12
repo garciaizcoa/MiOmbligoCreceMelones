@@ -33,6 +33,7 @@ public class AdminMenu extends JPanel {
 
 		JButton btnMainMenu = new JButton("Main Menu");
 		add(btnMainMenu, BorderLayout.NORTH);
+		btnMainMenu.setBackground(Color.WHITE);
 //		btnMainMenu.setFont(frame.getFont().deriveFont(50f));
 //		btnMainMenu.setForeground(Color.ORANGE);
 		Image imgMain = new ImageIcon(this.getClass().getResource("/main.jpg")).getImage();
@@ -40,6 +41,8 @@ public class AdminMenu extends JPanel {
 
 		JButton btnTableDiagram = new JButton("Table Diagram");
 		add(btnTableDiagram);
+		btnTableDiagram.setBackground(Color.WHITE);
+
 //		btnTableDiagram.setFont(frame.getFont().deriveFont(50f));
 //		btnTableDiagram.setForeground(Color.ORANGE);
 		Image imgTable = new ImageIcon(this.getClass().getResource("/table.jpg")).getImage();
@@ -47,6 +50,7 @@ public class AdminMenu extends JPanel {
 
 		JButton btnPlates = new JButton("Plates");
 		add(btnPlates, BorderLayout.WEST);
+		btnPlates.setBackground(Color.WHITE);
 //		btnPlates.setFont(frame.getFont().deriveFont(50f));
 //		btnPlates.setForeground(Color.ORANGE);
 		Image imgPlate = new ImageIcon(this.getClass().getResource("/plate.jpg")).getImage();
@@ -54,10 +58,29 @@ public class AdminMenu extends JPanel {
 
 		JButton btnInventory = new JButton("Inventory");
 		add(btnInventory, BorderLayout.EAST);
-//		btnInventory.setFont(frame.getFont().deriveFont(50f));
-//		btnInventory.setForeground(Color.ORANGE);
+		btnInventory.setBackground(Color.WHITE);
 		Image imgTask = new ImageIcon(this.getClass().getResource("/tasklist.jpg")).getImage();
 		btnInventory.setIcon(new ImageIcon(imgTask)); 
+
+		
+		JButton settingBtn = new JButton("Setting");
+		add(settingBtn, BorderLayout.EAST);
+		settingBtn.setBackground(Color.WHITE);
+		Image imgSetting = new ImageIcon(this.getClass().getResource("/Setting.png")).getImage();
+		settingBtn.setIcon(new ImageIcon(imgSetting)); 
+
+//		btnInventory.setFont(frame.getFont().deriveFont(50f));
+//		btnInventory.setForeground(Color.ORANGE);
+
+		settingBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Settings was clicked");
+				frame.setContentPane(frame.getPasswordChanger()); //panel = panel you want to change too.
+				frame.getInventoryMenu().getScrollPane().setViewportView(frame.getInventoryMenu().getPanel());
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
 
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

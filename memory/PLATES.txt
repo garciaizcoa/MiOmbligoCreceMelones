@@ -1,3 +1,2 @@
-toast  1.0  butter  1  pan  1
 pan  1.0  pan  1
 cake  3.0  huevo  1  milk  1  azucar  1

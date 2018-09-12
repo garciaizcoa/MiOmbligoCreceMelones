@@ -43,7 +43,10 @@ public class Frame extends JFrame  {
 	private TableMenu tableMenu;
 	private KitchenMenu kitchenMenu;
 	private CustomerTicketMenu customerTicketMenu;
-
+	private PasswordMenu passwordMenu;
+	private SettingMenu settingMenu;
+	private PasswordChanger passwordChanger;
+	
 	private Dimension screenSize;
 	private Font JuiceboxFont;
 
@@ -104,6 +107,10 @@ public class Frame extends JFrame  {
 		this.tableMenu = new TableMenu(this);
 		this.kitchenMenu = new KitchenMenu(this);
 		this.customerTicketMenu = new CustomerTicketMenu(this);
+		this.passwordMenu = new PasswordMenu(this);
+//		this.settingMenu = new SettingMenu(this);
+		this.passwordChanger = new PasswordChanger(this);
+
 
 		System.out.println("frame ");
 		this.getInventory().printInventory();
@@ -115,7 +122,7 @@ public class Frame extends JFrame  {
 		//setBounds(0, 0 ,(int)screenSize.getWidth(), (int)screenSize.getHeight());
 
 		mainMenu = new JPanel();
-		mainMenu.setLayout(new BorderLayout(0, 0));
+		mainMenu.setLayout(new BorderLayout(250, 0));
 		
 
 		
@@ -162,7 +169,8 @@ public class Frame extends JFrame  {
 		adminBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Admin clicked");
-				setContentPane(adminMenu); //panel = panel you want to change too.
+//				setContentPane(adminMenu); //panel = panel you want to change too.
+				setContentPane(passwordMenu);
 				repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				revalidate(); 
 			}
@@ -287,9 +295,16 @@ public class Frame extends JFrame  {
 	public CustomerTicketMenu getCustomerTicketMenu() {
 		return customerTicketMenu;
 	}
-
-
-
+	public PasswordMenu getPasswordMenu() {
+		return passwordMenu;
+	}
+	public PasswordChanger getPasswordChanger() {
+		return passwordChanger;
+	}
+	public SettingMenu getSettingMenu() {
+		return settingMenu;
+	}
+	
 
 
 }

@@ -58,6 +58,12 @@ public class Save {
 		Files.write(path, tableNum.getBytes(), StandardOpenOption.CREATE);
 	}
 	
+	public static void savePassword(String password) throws IOException{
+		Path path = Paths.get("memory/PASSWORD.txt");
+		Files.delete(path);
+		Files.write(path, password.getBytes(), StandardOpenOption.CREATE);
+	}
+	
 	public static int readTableNumber() throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/TABLES.txt"))){
 			return Integer.parseInt(line);
@@ -79,6 +85,23 @@ public class Save {
 				}
 			}
 			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
+			}
+		}
+	}
+
+	public static void readInitialPassword(PasswordChanger password) throws IOException{
+		for(String line: Files.readAllLines(Paths.get("memory/PASSWORD.txt"))){
+			if(!line.equals("Empty")) {
+			String[] arr = line.split(" ");
+			String pass = new String();
+			for(int i=0; i<arr.length-1; i++){
+				if(arr[i+1] == arr[arr.length-1]){
+					pass+= arr[i]; 
+				}
+			}
+			pass= password.getPassword();
+//			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
+			
 			}
 		}
 	}
