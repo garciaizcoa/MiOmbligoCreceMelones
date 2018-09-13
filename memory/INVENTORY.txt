@@ -2,5 +2,4 @@ huevo 6
 milk 3
 carne 5
 azucar 5
-sauce 6
 pan 10

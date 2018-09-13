@@ -25,63 +25,30 @@ public class InventoryItem extends JPanel {
 	
 	private JLabel labelItem;
 	private JLabel labelAmount;
-	private JButton Remove;
-	private JTable table;
+	private JButton btnRemove;
 	
 	public InventoryItem(Frame frame, String item , String amount){
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		this.setSize(250, 50);
+		new BoxLayout(this, BoxLayout.X_AXIS);
 		
 		
 		labelItem = new JLabel(item);
 		labelAmount = new JLabel(amount);		
-		Remove= new JButton("REMOVE");
-		Remove.setBackground(Color.RED); //COLOR BTN
-		Remove.setContentAreaFilled(false);
-		Remove.setOpaque(true);
+		btnRemove= new JButton("REMOVE");
+		btnRemove.setContentAreaFilled(false);
+		btnRemove.setOpaque(true);
 		
-//		Image imgX = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
-//		button.setIcon(new ImageIcon(imgX)); 
-
+		labelItem.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
+		labelAmount.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
 		
+		btnRemove.setLocation(270- btnRemove.WIDTH, 50/2);
 		
-		Object[] columns = {"Item", "Amount","Remove"};
-		Object[][] data = {{labelItem.getText(), labelAmount.getText(), Remove}};
-		table = new JTable(data, columns);
+		add(labelItem);
+		add(labelAmount);
+		add(btnRemove);
 		
-		table.setLayout(new BoxLayout(table, BoxLayout.Y_AXIS));
-		
-		TableColumn col;
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			col = table.getColumnModel().getColumn(i);
-			col.setMaxWidth(250);
-			if (i == 2) { 
-				ButtonRenderer br = new ButtonRenderer();
-				col.setCellRenderer(br);
-				col.setCellEditor(br.getButtonEditor());
-			}
-			
-		}
-		
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-						.addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-						)
-				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-						)
-				);
-		
-		table.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 30));
-		table.setRowHeight(50);
-		add(table);
-		
-		Remove.addActionListener(new ActionListener() {
+		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Remove was clicked");
 				frame.getInventory().removeFromInventory(item);

@@ -2,7 +2,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.table.TableColumn;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -27,64 +26,37 @@ public class PlateItem extends JPanel {
 	private JTable table;
 
 	public PlateItem(Frame frame, Plate plate, String name, String amount) {
+		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setSize(250, 50);
 		setBackground(Color.WHITE);
 
 		this.plate=plate;
 
 		nameLabel= new JLabel(name);
-		nameLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 40));
+		nameLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
 		amountLabel= new JLabel("$ "+amount);
+		amountLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
 		editButton = new JButton("Edit");
-		removeButton = new JButton("Remove");	
-		removeButton.setBackground(Color.RED); //COLOR BTN
-		removeButton.setContentAreaFilled(false);
-		removeButton.setOpaque(true);
+		editButton.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
+		removeButton = new JButton("Remove");
+		removeButton.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
+//		removeButton.setContentAreaFilled(false);
+//		removeButton.setOpaque(true);
 
 //		btnAdminMenu.setText("Admin Menu");
-		Image imgRemoveBTN = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
-		removeButton.setIcon(new ImageIcon(imgRemoveBTN)); 
-
-		Object[] columns = {"Name", "Price", "Edit", "Remove"};
-		Object[][] data = {{nameLabel.getText(), amountLabel.getText(), editButton, removeButton}};
-		table = new JTable(data, columns);
+//		Image imgRemoveBTN = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
+//		removeButton.setIcon(new ImageIcon(imgRemoveBTN)); 
 		
-		table.setLayout(new BoxLayout(table, BoxLayout.Y_AXIS));
+		JLabel space = new JLabel("   ");
 		
-
-		TableColumn col;
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			col = table.getColumnModel().getColumn(i);
-			col.setMaxWidth(250);
-			if (i == 2 || i==3) { 
-				ButtonRenderer br = new ButtonRenderer();
-				col.setCellRenderer(br);
-				col.setCellEditor(br.getButtonEditor());
-			}
-			
-		}
+		add(nameLabel);
+		add(amountLabel);
+		add(space);
+		add(editButton);
+		add(removeButton);
 		
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-						.addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()
-						)
-				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-						)
-				);
-		
-		table.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 30));
-		table.setRowHeight(50);
-		add(table);
-		
-
+		//Action Listeners
 		removeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {											
 				System.out.println("Remove was clicked");

@@ -27,6 +27,7 @@ import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 
 
@@ -102,7 +103,10 @@ public class AddPlateMenu extends JPanel {
 				validateDouble(plateDouble.getText());
 
 				if(	validateString(plateString.getText()) && validateCheckBoxes()) { //start if
-					Plate plate = new Plate(plateString.getText(), Double.parseDouble(plateDouble.getText()), frame.getInventory());
+					DecimalFormat df = new DecimalFormat("#.##");
+					Double pd =  Double.parseDouble(plateDouble.getText());
+					Double price = Double.parseDouble(df.format(pd));
+					Plate plate = new Plate(plateString.getText(), price, frame.getInventory());
 					frame.getMenu().addPlate(plate);
 					allPlates.add(plate);
 

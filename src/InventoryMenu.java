@@ -75,17 +75,6 @@ public class InventoryMenu extends JPanel {
 		
 		integerHint = new JTextFieldHintUI(" Insert Amount",Color.GRAY);
 		inventoryInteger.setUI(integerHint);
-
-//		btnAdd.setText("Add");
-		
-//		btnAdminMenu.setFont(frame.getFont().deriveFont(40f));
-//		btnAdd.setFont(frame.getFont().deriveFont(40f));
-//		btnAdminMenu.setForeground(Color.ORANGE);
-//		btnAdd.setForeground(Color.ORANGE);
-//		inventoryString.getFont().deriveFont(25);
-//		inventoryInteger.getFont().deriveFont(25);
-//		inventoryString.setAlignmentX(CENTER_ALIGNMENT);
-//		inventoryInteger.setAlignmentX(CENTER_ALIGNMENT);
 		
 		btnAdd.setBackground(Color.WHITE); //COLOR BTN
 		btnAdd.setContentAreaFilled(false);

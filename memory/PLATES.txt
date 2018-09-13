@@ -1,2 +1,2 @@
-pan  1.0  pan  1
-cake  3.0  huevo  1  milk  1  azucar  1
+Carne dulce  8.51  carne  1  azucar  1
+Revoltillo  5.0  huevo  3  milk  1  pan  1
