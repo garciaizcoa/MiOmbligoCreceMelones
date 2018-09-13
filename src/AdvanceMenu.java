@@ -50,6 +50,9 @@ public class AdvanceMenu extends JPanel {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setContentPane(frame.getSettingMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
 			}
 		});
 		btnBack.setBackground(Color.WHITE);

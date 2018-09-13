@@ -107,7 +107,7 @@ public class PasswordMenu extends JPanel{
 		jButtonEnter.setFont(frame.getFont().deriveFont(25f));
 		jButtonClear.setFont(frame.getFont().deriveFont(25f));
 		
-		jButtonBack.setForeground(Color.WHITE);
+		jButtonBack.setForeground(Color.BLACK);
 
 		
 		frame.getContentPane().setLayout(new javax.swing.BoxLayout(frame.getContentPane(), javax.swing.BoxLayout.Y_AXIS));
