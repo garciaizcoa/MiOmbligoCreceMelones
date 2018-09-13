@@ -34,7 +34,7 @@ public class PlatesMenu extends JPanel {
 	private javax.swing.JPanel panel;
 	private javax.swing.JScrollPane scrollPane;
 	private DefaultListModel<String> model;
-	final int GAP = 224;
+	final int GAP = 15;
 
 	public PlatesMenu(Frame frame) {
 
@@ -47,11 +47,14 @@ public class PlatesMenu extends JPanel {
 		btnAdd = new javax.swing.JButton("Add");
 		
 
-		btnAdminMenu.setFont(frame.getFont().deriveFont(40f));
-		btnAdd.setFont(frame.getFont().deriveFont(40f));
+		btnAdminMenu.setFont(frame.getFont().deriveFont(30f));
+		btnAdd.setFont(frame.getFont().deriveFont(30f));
 		
-		btnAdminMenu.setForeground(Color.ORANGE);
-		btnAdd.setForeground(Color.ORANGE);
+		
+		btnAdminMenu.setBackground(Color.WHITE);
+		btnAdd.setBackground(Color.WHITE);
+
+
 		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(Color.WHITE);

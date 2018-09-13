@@ -46,6 +46,7 @@ public class Frame extends JFrame  {
 	private PasswordMenu passwordMenu;
 	private SettingMenu settingMenu;
 	private PasswordChanger passwordChanger;
+	private AdvanceMenu advanceMenu;
 	
 	private Dimension screenSize;
 	private Font JuiceboxFont;
@@ -110,6 +111,7 @@ public class Frame extends JFrame  {
 		this.passwordMenu = new PasswordMenu(this);
 		this.settingMenu = new SettingMenu(this);
 		this.passwordChanger = new PasswordChanger(this);
+		this.advanceMenu = new AdvanceMenu(this);
 
 
 		System.out.println("frame ");
@@ -126,7 +128,10 @@ public class Frame extends JFrame  {
 		
 
 //		mainMenu.setBackground(new java.awt.Color(0, 0, 50));
-		mainMenu.setBackground(Color.BLACK);
+		mainMenu.setBackground(Color.decode("#000e1b"));
+		
+		
+		
 		ImageIcon icon = new ImageIcon("/mt.png");
 		mainMenu.paintComponents(drawImage(icon.getImage(),250,250,getWidth(),getHeight(), this));
 
@@ -145,15 +150,22 @@ public class Frame extends JFrame  {
 		mainMenu.add(adminBTN);
 
 		//adminBTN.setBounds(360, 370, 146, 30);
-		adminBTN.setBounds((int) (this.getScreenSize().width*.75), (int) (this.getScreenSize().height*.75), 146, 30);
+		adminBTN.setBounds((int) (this.getScreenSize().width*.75), (int) (this.getScreenSize().height*.75), 150, 33);
 
 		Image imgClient = new ImageIcon(this.getClass().getResource("/CLIENT.png")).getImage();
 		clientBTN.setIcon(new ImageIcon(imgClient)); // CLIENT BUTTON
 		mainMenu.add(clientBTN);
 
 		//clientBTN.setBounds(40, 370, 146, 30);
-		clientBTN.setBounds((int) (this.getScreenSize().width*.25)-146, (int) (this.getScreenSize().height*.75), 146, 30);
+		clientBTN.setBounds((int) (this.getScreenSize().width*.25)-146, (int) (this.getScreenSize().height*.75), 150, 33);
 
+		clientBTN.setBackground(Color.WHITE); //COLOR BTN
+		clientBTN.setContentAreaFilled(false);
+		clientBTN.setOpaque(true);
+		
+		adminBTN.setBackground(Color.WHITE); //COLOR BTN
+		adminBTN.setContentAreaFilled(false);
+		adminBTN.setOpaque(true);
 
 		clientBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,8 +195,10 @@ public class Frame extends JFrame  {
 		}
 
 
-		Image dimg = img.getScaledInstance(this.getScreenSize().width/3, this.getScreenSize().height/2,
+		Image dimg = img.getScaledInstance(this.getScreenSize().width/2, this.getScreenSize().width/2,
 				Image.SCALE_SMOOTH);
+		
+		
 
 //			Image backgroundIMG = new ImageIcon(this.getClass().getResource("/mt.png")).getImage();
 
@@ -193,6 +207,7 @@ public class Frame extends JFrame  {
 
 
 		jLabel2.setIcon(imageIcon); // NOI18N
+		jLabel2.setHorizontalAlignment(WIDTH/2);
 		mainMenu.add(jLabel2);
 		
 		//		jLabel2.setBounds(100, 0, 350, 350);
@@ -201,7 +216,7 @@ public class Frame extends JFrame  {
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(mainMenu, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(mainMenu, GroupLayout.Alignment.CENTER, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				);
 		layout.setVerticalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -300,6 +315,9 @@ public class Frame extends JFrame  {
 	}
 	public SettingMenu getSettingMenu() {
 		return settingMenu;
+	}
+	public AdvanceMenu getAdvanceMenu() {
+		return advanceMenu;
 	}
 	
 

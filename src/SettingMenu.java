@@ -39,6 +39,13 @@ public class SettingMenu extends JPanel{
 				frame.revalidate(); 
 			}
 		});
+		advance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.setContentPane(frame.getAdvanceMenu());
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
 		backBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.setContentPane(frame.getAdminMenu());

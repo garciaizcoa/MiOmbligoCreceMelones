@@ -5,9 +5,11 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class PasswordChanger extends JPanel {
+
 	private JButton jButton1;
 	private JButton jButtonBack;
 	private JButton jButton0;
@@ -20,20 +22,21 @@ public class PasswordChanger extends JPanel {
 	private JButton jButton7;
 	private JButton jButton8;
 	private JButton jButton9;
+	private JButton jButtonClear;
 	private JPanel jPanel1;
-	private JTextField textField;
+	private JPasswordField textField;
 	private JPanel panel;
 	private Frame frame;
-	
-	
+
+
 	private String password;
 	// End of variables declaration 
-	
+
 	public PasswordChanger(Frame frm) {
 
 		this.frame = frm;
-	
-		textField = new javax.swing.JTextField();
+
+		textField = new javax.swing.JPasswordField();
 		panel = new JPanel();
 		jPanel1 = new JPanel();
 		jButton1 = new JButton();
@@ -48,6 +51,8 @@ public class PasswordChanger extends JPanel {
 		jButtonBack = new JButton();
 		jButton0 = new JButton();
 		jButtonSave = new JButton();	
+		jButtonClear = new JButton();	
+
 
 		jButton1.setText("1");
 		jButton2.setText("2");
@@ -61,7 +66,8 @@ public class PasswordChanger extends JPanel {
 		jButtonBack.setText("Back");
 		jButton0.setText("0");
 		jButtonSave.setText("Save");
-		
+		jButtonClear.setText("Clear");
+
 		jButton1.setBackground(Color.WHITE);
 		jButton2.setBackground(Color.WHITE);
 		jButton3.setBackground(Color.WHITE);
@@ -73,8 +79,9 @@ public class PasswordChanger extends JPanel {
 		jButton9.setBackground(Color.WHITE);
 		jButton0.setBackground(Color.WHITE);
 		jButtonBack.setBackground(Color.WHITE);
-		jButtonSave.setBackground(Color.WHITE);
-		
+		jButtonSave.setBackground(Color.decode("#007f00"));
+		jButtonClear.setBackground(Color.RED);
+
 		jButton1.setFont(frame.getFont().deriveFont(25f));
 		jButton2.setFont(frame.getFont().deriveFont(25f));
 		jButton3.setFont(frame.getFont().deriveFont(25f));
@@ -87,6 +94,11 @@ public class PasswordChanger extends JPanel {
 		jButton0.setFont(frame.getFont().deriveFont(25f));
 		jButtonBack.setFont(frame.getFont().deriveFont(25f));
 		jButtonSave.setFont(frame.getFont().deriveFont(25f));
+		jButtonClear.setFont(frame.getFont().deriveFont(25f));
+
+		jButtonSave.setForeground(Color.WHITE);
+		jButtonClear.setForeground(Color.WHITE);
+
 		
 		try {
 			password = Save.readPassword();
@@ -94,11 +106,10 @@ public class PasswordChanger extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		String s = textField.getText();
-		
+
+
 		frame.getContentPane().setLayout(new javax.swing.BoxLayout(frame.getContentPane(), javax.swing.BoxLayout.Y_AXIS));
-		
+
 		setLayout(new java.awt.GridLayout(1, 1));
 
 		textField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -106,17 +117,16 @@ public class PasswordChanger extends JPanel {
 		setLayout();
 
 		add(panel);
-		
+
 		panel.setBackground(Color.decode("#FFCC33"));
-//		panel.setBackground(Color.WHITE);
+		//		panel.setBackground(Color.WHITE);
 		buttonActions();
-		
-		
+
+
 
 	}
-	
+
 	public void setPassword() {
-		password = textField.getText();
 		try {
 			Save.savePassword(password);
 		} catch (IOException e) {
@@ -124,132 +134,139 @@ public class PasswordChanger extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void buttonActions() {
-		
+
 		jButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "1");
 
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
-		
+
 		jButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "2");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "3");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "4");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "5");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "6");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "7");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "8");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "9");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
 		jButton0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText(textField.getText() + "0");
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});
-		
+
 		jButtonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				textField.setText("");
 				frame.setContentPane(frame.getSettingMenu());
-				
+
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 
 			}
 		});	
-		
+
 		jButtonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				if(textField.getText().equals("0000")) {
-					setPassword();
-					System.out.println(getPassword());
-					textField.setText("");
-					frame.setContentPane(frame.getAdminMenu());
-					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-					frame.revalidate(); 
-					
-//				}
+				setPassword();
+				System.out.println(getPassword());
+				textField.setText("");
+				frame.setContentPane(frame.getAdminMenu());
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 	
 			}
 		});	
+
+
+		jButtonClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText("");
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});	
+
 	}
-	
+
 	public void setLayout() {
 
 		javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel);
@@ -282,11 +299,16 @@ public class PasswordChanger extends JPanel {
 						.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
 				.addGroup(panel1Layout.createSequentialGroup()
 						.addGap(550, 550, 550)
-						.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, 0)
 						.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, 0)
 						.addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+				.addGroup(panel1Layout.createSequentialGroup()
+						.addGap(550, 550, 550)
+						.addGap(0, 0, 0)
+						.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
 
 				);
 
@@ -309,9 +331,11 @@ public class PasswordChanger extends JPanel {
 								.addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
 						.addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
 
 				);
 

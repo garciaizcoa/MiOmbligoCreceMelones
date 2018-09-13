@@ -31,7 +31,7 @@ public class KitchenMenu extends JPanel {
 		this.table=null;
 
 		//setLayout(new GridLayout(0, 3, 0, 0));
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.BLACK);
 		
 		btnBack = new JButton("Back");
 		btnBack.setBackground(Color.WHITE); //COLOR BTN

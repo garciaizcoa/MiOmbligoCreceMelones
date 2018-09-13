@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 
 import javax.swing.JPanel;
-
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
@@ -17,10 +17,10 @@ public class PasswordMenu extends JPanel{
 
 	// Variables declaration - do not modify                     
 
+
 	private JButton jButton1;
 	private JButton jButtonBack;
 	private JButton jButton0;
-	private JButton jButtonEnter;
 	private JButton jButton2;
 	private JButton jButton3;
 	private JButton jButton4;
@@ -29,11 +29,13 @@ public class PasswordMenu extends JPanel{
 	private JButton jButton7;
 	private JButton jButton8;
 	private JButton jButton9;
+	private JButton jButtonEnter;
+	private JButton jButtonClear;
 	private JPanel jPanel1;
-	private JTextField textField;
+	private JPasswordField textField;
 	private JPanel panel;
 	private Frame frame;
-	
+
 	private SettingMenu pass;
 	
 	private String password;
@@ -45,7 +47,7 @@ public class PasswordMenu extends JPanel{
 //		this.pass = pass;
 	
 		
-		textField = new javax.swing.JTextField();
+		textField = new JPasswordField();
 		panel = new JPanel();
 		jPanel1 = new JPanel();
 		jButton1 = new JButton();
@@ -60,9 +62,8 @@ public class PasswordMenu extends JPanel{
 		jButtonBack = new JButton();
 		jButton0 = new JButton();
 		jButtonEnter = new JButton();
-		
-		textField.setText("****");
-		
+		jButtonClear = new JButton();
+				
 		jButton1.setText("1");
 		jButton2.setText("2");
 		jButton3.setText("3");
@@ -75,6 +76,8 @@ public class PasswordMenu extends JPanel{
 		jButtonBack.setText("Back");
 		jButton0.setText("0");
 		jButtonEnter.setText("Enter");
+		jButtonClear.setText("Clear");
+
 		
 		jButton1.setBackground(Color.WHITE);
 		jButton2.setBackground(Color.WHITE);
@@ -86,8 +89,9 @@ public class PasswordMenu extends JPanel{
 		jButton8.setBackground(Color.WHITE);
 		jButton9.setBackground(Color.WHITE);
 		jButton0.setBackground(Color.WHITE);
-		jButtonBack.setBackground(Color.WHITE);
+		jButtonBack.setBackground(Color.BLACK);
 		jButtonEnter.setBackground(Color.WHITE);
+		jButtonClear.setBackground(Color.WHITE);
 		
 		jButton1.setFont(frame.getFont().deriveFont(25f));
 		jButton2.setFont(frame.getFont().deriveFont(25f));
@@ -101,10 +105,10 @@ public class PasswordMenu extends JPanel{
 		jButton0.setFont(frame.getFont().deriveFont(25f));
 		jButtonBack.setFont(frame.getFont().deriveFont(25f));
 		jButtonEnter.setFont(frame.getFont().deriveFont(25f));
-
-
+		jButtonClear.setFont(frame.getFont().deriveFont(25f));
 		
-		String s = textField.getText();
+		jButtonBack.setForeground(Color.WHITE);
+
 		
 		frame.getContentPane().setLayout(new javax.swing.BoxLayout(frame.getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 		
@@ -280,13 +284,19 @@ public class PasswordMenu extends JPanel{
 						.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
 				.addGroup(panel1Layout.createSequentialGroup()
 						.addGap(550, 550, 550)
-						.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, 0)
 						.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, 0)
 						.addComponent(jButtonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
 
+				.addGroup(panel1Layout.createSequentialGroup()
+						.addGap(550, 550, 550)
+						.addGap(0, 0, 0)
+						.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+
 				);
+
 
 		panel1Layout.setVerticalGroup(
 
@@ -307,12 +317,13 @@ public class PasswordMenu extends JPanel{
 								.addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
 						.addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButtonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addComponent(jButtonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
 
 				);
-
 
 
 	}

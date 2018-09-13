@@ -57,11 +57,24 @@ public class CustomerTicketMenu extends JPanel {
 		amountsPanel = new JPanel();
 		lblPendingPay = new JLabel("Pending");
 		lblBeingPayed = new JLabel("Paying");
+		
+		paidPanel.setBackground(Color.WHITE);
+		unpaidPanel.setBackground(Color.WHITE);
+
+		
+		btnBack.setBackground(Color.WHITE); //COLOR BTN
+		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(true);
+		
+		btnPay.setBackground(Color.WHITE); //COLOR BTN
+		btnPay.setContentAreaFilled(false);
+		btnPay.setOpaque(true);
+		
 			
 		lblPendingPay.setFont(frame.getFont().deriveFont(40f));
 		lblBeingPayed.setFont(frame.getFont().deriveFont(40f));
-		btnBack.setFont(frame.getFont().deriveFont(40f));
-		btnPay.setFont(frame.getFont().deriveFont(40f));
+		btnBack.setFont(frame.getFont().deriveFont(25f));
+		btnPay.setFont(frame.getFont().deriveFont(25f));
 		
 		try {
 			backgroundImg = ImageIO.read(new File("Images/Background.png"));
