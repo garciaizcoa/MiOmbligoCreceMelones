@@ -46,6 +46,7 @@ public class CustomerTicketMenu extends JPanel {
 		this.table=null;
 		this.totalAmount=0;
 		this.taxAmount=0;
+		this.setBackground(Color.BLACK);
 		
 		btnBack = new JButton("Back");
 		btnPay = new JButton("Pay");

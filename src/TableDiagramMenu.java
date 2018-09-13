@@ -3,13 +3,17 @@ import javax.swing.JScrollPane;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -34,11 +38,12 @@ public class TableDiagramMenu extends JPanel {
 	private JButton btnBack;
 	private JButton btnEdit;
 	private JScrollPane scrollPane;
+	private BufferedImage backgroundImg;
 
 	public TableDiagramMenu(Frame frame) {
 
 		this.frame=frame;
-
+		this.setBackground(Color.BLACK);
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		
@@ -53,10 +58,19 @@ public class TableDiagramMenu extends JPanel {
 		buttonPanel.setLayout(new GridLayout(1, 0, 0, 0));
 
 		btnBack = new JButton("Back");
+		btnBack.setBackground(Color.WHITE); //COLOR BTN
+		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(true);
 		buttonPanel.add(btnBack);
 
 		btnEdit = new JButton("Edit");
+		btnEdit.setBackground(Color.WHITE); //COLOR BTN
+		btnEdit.setContentAreaFilled(false);
+		btnEdit.setOpaque(true);
 		buttonPanel.add(btnEdit);
+		
+		btnBack.setFont(frame.getFont().deriveFont(40f));
+		btnEdit.setFont(frame.getFont().deriveFont(40f));
 
 		numTablesTextBox = new JTextField();
 		numTablesTextBox.setVisible(false);
@@ -84,7 +98,12 @@ public class TableDiagramMenu extends JPanel {
 		add(buttonPanel);
 		add(scrollPane);
 		
-
+		try {
+			backgroundImg = ImageIO.read(new File("Images/Background.png"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		//Action Listeners
 
 		btnEdit.addActionListener(new ActionListener() {
@@ -140,6 +159,7 @@ public class TableDiagramMenu extends JPanel {
 	public void setLayout() {
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(buttonPanel);
 		buttonPanel.setLayout(jPanel2Layout);
+		buttonPanel.setBackground(new Color(0,0,0,0));
 		jPanel2Layout.setHorizontalGroup(
 				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup()
@@ -263,5 +283,12 @@ public class TableDiagramMenu extends JPanel {
 	public int getNumTables() {
 		return numTables;
 	}
+	
+	@Override 
+	public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(backgroundImg,0,0, getWidth(),getHeight(), this);
+    }
+	
 
 }

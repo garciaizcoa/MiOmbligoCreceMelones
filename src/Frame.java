@@ -125,9 +125,6 @@ public class Frame extends JFrame  {
 		mainMenu.setLayout(new BorderLayout(250, 0));
 		
 
-		
-		
-
 //		mainMenu.setBackground(new java.awt.Color(0, 0, 50));
 		mainMenu.setBackground(Color.BLACK);
 		ImageIcon icon = new ImageIcon("/mt.png");

@@ -31,9 +31,18 @@ public class KitchenMenu extends JPanel {
 		this.table=null;
 
 		//setLayout(new GridLayout(0, 3, 0, 0));
-
+		this.setBackground(Color.WHITE);
+		
 		btnBack = new JButton("Back");
+		btnBack.setBackground(Color.WHITE); //COLOR BTN
+		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(true);
+		
 		btnOrderUp = new JButton("Order Up!");
+		btnOrderUp.setBackground(Color.WHITE); //COLOR BTN
+		btnOrderUp.setContentAreaFilled(false);
+		btnOrderUp.setOpaque(true);
+		
 		scrollPane = new JScrollPane();
 		orderPanel = new JPanel();
 		
@@ -51,8 +60,8 @@ public class KitchenMenu extends JPanel {
 			e2.printStackTrace();
 		}
 
-		btnBack.setFont(frame.getFont().deriveFont(40f));
-		btnOrderUp.setFont(frame.getFont().deriveFont(40f));
+		btnBack.setFont(frame.getFont().deriveFont(25f));
+		btnOrderUp.setFont(frame.getFont().deriveFont(25f));
 
 		setLayout();
 

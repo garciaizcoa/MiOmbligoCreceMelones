@@ -33,12 +33,24 @@ public class TableMenu extends JPanel {
 	public TableMenu(Frame frame) {
 		
 		this.table = null;
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.BLACK);
 		
 		btnBack = new JButton("Back");
 		btnKitchen = new JButton("Kitchen Ticket");
 		btnCustomer = new JButton("Customer Ticket");
 		scrollPane = new JScrollPane();
+		
+		btnBack.setBackground(Color.WHITE); //COLOR BTN
+		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(true);
+		
+		btnKitchen.setBackground(Color.WHITE); //COLOR BTN
+		btnKitchen.setContentAreaFilled(false);
+		btnKitchen.setOpaque(true);
+		
+		btnCustomer.setBackground(Color.WHITE); //COLOR BTN
+		btnCustomer.setContentAreaFilled(false);
+		btnCustomer.setOpaque(true);
 	
 		
 		try {
@@ -56,8 +68,11 @@ public class TableMenu extends JPanel {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		orderPanel = new JPanel();
+		orderPanel.setFont(frame.getFont().deriveFont(25f));
 		orderPanel.setLayout(new BoxLayout(orderPanel, BoxLayout.Y_AXIS));
 		scrollPane.setViewportView(orderPanel);
+		
+		orderPanel.setBackground(Color.WHITE);
 		
 		setLayout();
 		add(btnBack);
