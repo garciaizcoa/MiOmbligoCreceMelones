@@ -34,19 +34,21 @@ public class PlateItem extends JPanel {
 		this.plate=plate;
 
 		nameLabel= new JLabel(name);
-		nameLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
-		amountLabel= new JLabel("$ "+amount);
-		amountLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
+		nameLabel.setFont(frame.getFont().deriveFont(18f));
+		amountLabel= new JLabel(" $ "+amount);
+		amountLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 15));
 		editButton = new JButton("Edit");
-		editButton.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
-		removeButton = new JButton("Remove");
+		editButton.setFont(frame.getFont().deriveFont(25f));
+		editButton.setBackground(Color.WHITE);
+		removeButton = new JButton();
 		removeButton.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 20));
 //		removeButton.setContentAreaFilled(false);
 //		removeButton.setOpaque(true);
 
 //		btnAdminMenu.setText("Admin Menu");
-//		Image imgRemoveBTN = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
-//		removeButton.setIcon(new ImageIcon(imgRemoveBTN)); 
+		removeButton.setBackground(Color.RED);
+		Image imgRemoveBTN = new ImageIcon(this.getClass().getResource("/x.png")).getImage();
+		removeButton.setIcon(new ImageIcon(imgRemoveBTN)); 
 		
 		JLabel space = new JLabel("   ");
 		
