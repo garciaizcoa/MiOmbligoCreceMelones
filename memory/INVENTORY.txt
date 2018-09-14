@@ -1,5 +1,5 @@
-huevo 6
-milk 3
-carne 5
-azucar 5
-pan 10
+huevo 36
+milk 29
+carne 35
+azucar 35
+pan 40

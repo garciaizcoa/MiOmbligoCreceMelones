@@ -84,6 +84,7 @@ public class TableMenu extends JPanel {
 		//Action Listeners
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				orderPanel.removeAll();
 				frame.setContentPane(frame.getTableDiagramMenu());
 				frame.repaint();
 				frame.revalidate();
@@ -119,7 +120,7 @@ public class TableMenu extends JPanel {
 	}
 
 	public void setOrderPanel() {
-		orderPanel.removeAll();
+		//orderPanel.removeAll();
 		JLabel orderDetails = new JLabel("Order of Table #"+table.getTableNumber());
 		orderPanel.add(orderDetails);
 		
@@ -182,6 +183,10 @@ public class TableMenu extends JPanel {
 		private Graphics drawImage(Image image, int i, int j, int width, int height, CheckoutMenu cm) {
 			// TODO Auto-generated method stub
 			return null;
+		}
+		
+		public JPanel getOrderPanel(){
+			return orderPanel;
 		}
 		
 	

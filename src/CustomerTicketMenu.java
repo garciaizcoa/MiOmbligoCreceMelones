@@ -111,9 +111,12 @@ public class CustomerTicketMenu extends JPanel {
 		//Action Listeners
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				removePaidFromOrderPanel();
 				paidPanel.removeAll();
 				refreshTotalAmount();
-
+				frame.setContentPane(frame.getCustomerTicketMenu()); //panel = panel you want to change too.
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
 			}
 		});
 
@@ -214,6 +217,15 @@ public class CustomerTicketMenu extends JPanel {
 		lblTotal.revalidate();
 	}
 
+	private void removePaidFromOrderPanel(){
+		TableMenu tm = frame.getTableMenu();
+		
+		for(Component cmp : paidPanel.getComponents()){
+			tm.getOrderPanel().remove(cmp);
+		}
+		
+		
+	}
 
 	//setters
 
