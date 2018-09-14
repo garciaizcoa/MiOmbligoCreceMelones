@@ -15,30 +15,32 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SpringLayout;
+import javax.swing.BoxLayout;
+import javax.swing.DropMode;
+import java.awt.GridLayout;
 
 public class AdvanceMenu extends JPanel {
 	
 	
 	Frame frame;
 	private JTextField textField;
+	private String percent;
 	
 	public AdvanceMenu(Frame frame){
 		
 		
 		this.frame = frame;
 		this.setBackground(Color.WHITE);
+		percent = "%";
 		
+		JLabel lblCurrentTax = new JLabel("0" + percent);
+		lblCurrentTax.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		
-		
-	
-	
-		
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setColumns(10);
-		
+		JLabel lblTax = new JLabel("Set Tax");
+		lblTax.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTax.setFont(frame.getFont().deriveFont(35f));
+		lblCurrentTax.setFont(frame.getFont().deriveFont(15f));
+
 		
 		
 		JButton btnSave = new JButton("Save Tax");
@@ -47,66 +49,87 @@ public class AdvanceMenu extends JPanel {
 			}
 		});
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setContentPane(frame.getSettingMenu()); //panel = panel you want to change too.
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-			}
-		});
-		btnBack.setBackground(Color.WHITE);
-		btnBack.setFont(frame.getFont().deriveFont(25f));
-
-		
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setContentPane(frame.getSettingMenu()); //panel = panel you want to change too.
-				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-				frame.revalidate(); 
-
-			}
-		});
-		
-		btnSave.setFont(frame.getFont().deriveFont(25f));
-		btnSave.setBackground(Color.WHITE);
-		
+				
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-				
+						frame.setContentPane(frame.getSettingMenu()); //panel = panel you want to change too.
+						frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+						frame.revalidate(); 
+		
 					}
 				});
-		
-		JLabel current = new JLabel("Current Tax");
-		current.setFont(frame.getFont().deriveFont(20f));
-		
-		JLabel lblCurrentTax = new JLabel("0.00");
-		
-		JLabel lblTax = new JLabel("Set Tax");
-		lblTax.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTax.setFont(frame.getFont().deriveFont(35f));
-		lblTax.setFont(frame.getFont().deriveFont(35f));
-		SpringLayout springLayout = new SpringLayout();
-		springLayout.putConstraint(SpringLayout.NORTH, btnBack, 0, SpringLayout.NORTH, current);
-		springLayout.putConstraint(SpringLayout.WEST, btnBack, 200, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.NORTH, lblCurrentTax, 13, SpringLayout.SOUTH, current);
-		springLayout.putConstraint(SpringLayout.EAST, lblCurrentTax, 0, SpringLayout.EAST, current);
-		springLayout.putConstraint(SpringLayout.NORTH, current, 142, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, current, -64, SpringLayout.EAST, this);
-		springLayout.putConstraint(SpringLayout.NORTH, btnSave, 6, SpringLayout.SOUTH, textField);
-		springLayout.putConstraint(SpringLayout.EAST, btnSave, -10, SpringLayout.EAST, textField);
-		springLayout.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblTax);
-		springLayout.putConstraint(SpringLayout.EAST, textField, -249, SpringLayout.EAST, this);
-		springLayout.putConstraint(SpringLayout.NORTH, lblTax, 28, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblTax, 51, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, lblTax, -275, SpringLayout.EAST, this);
-		setLayout(springLayout);
-		add(btnBack);
-		add(btnSave);
-		add(textField);
-		add(lblCurrentTax);
-		add(current);
-		add(lblTax);
+				
+				btnSave.setFont(frame.getFont().deriveFont(25f));
+				btnSave.setBackground(Color.WHITE);
+				
+						btnSave.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+						
+							}
+						});
+						
+						
+	
+						
+						
+						textField = new JTextField();
+						
+								textField.setHorizontalAlignment(SwingConstants.CENTER);
+								textField.setColumns(2);
+						
+						JButton btnBack = new JButton("Back");
+						btnBack.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								frame.setContentPane(frame.getSettingMenu()); //panel = panel you want to change too.
+								frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+								frame.revalidate(); 
+							}
+						});
+						
+						JLabel current = new JLabel("Current Tax");
+						current.setFont(frame.getFont().deriveFont(20f));
+						btnBack.setBackground(Color.WHITE);
+						btnBack.setFont(frame.getFont().deriveFont(25f));
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setAutoCreateContainerGaps(true);
+		groupLayout.setAutoCreateGaps(true);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblTax, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+							.addGap(41)
+							.addComponent(btnSave))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(current, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCurrentTax, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+							.addGap(122)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(lblTax, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(current, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblCurrentTax)))
+					.addContainerGap(99, Short.MAX_VALUE))
+		);
+		setLayout(groupLayout);
 	
 		
 	}

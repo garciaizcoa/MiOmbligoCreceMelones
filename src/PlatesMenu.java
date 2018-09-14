@@ -39,14 +39,18 @@ public class PlatesMenu extends JPanel {
 	public PlatesMenu(Frame frame) {
 
 		this.frame = frame;
+		this.setBackground(Color.WHITE);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
+		
+		
 		scrollPane = new javax.swing.JScrollPane();
 		panel = new javax.swing.JPanel();
 		btnAdminMenu = new javax.swing.JButton("Admin Menu");
 		btnAdd = new javax.swing.JButton("Add");
 		
 
+		scrollPane.setBackground(Color.WHITE);
 		btnAdminMenu.setFont(frame.getFont().deriveFont(30f));
 		btnAdd.setFont(frame.getFont().deriveFont(30f));
 		

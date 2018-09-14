@@ -55,6 +55,7 @@ public class AddPlateMenu extends JPanel {
 
 		System.out.println("AddPlateMenu "+frame.getInventory());
 
+		this.setBackground(Color.WHITE);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
@@ -66,7 +67,10 @@ public class AddPlateMenu extends JPanel {
 		panel = new JPanel();
 		
 		btnCancel.setFont(frame.getFont().deriveFont(40f));
+		btnCancel.setBackground(Color.WHITE);
 		btnDone.setFont(frame.getFont().deriveFont(40f));
+		btnDone.setBackground(Color.WHITE);
+
 	
 		stringHint = new JTextFieldHintUI(" Name of Plate",Color.RED);
 		plateString.setUI(stringHint);

@@ -42,12 +42,19 @@ public class EditPlateMenu extends JPanel {
 		System.out.println("Edit mode, activate!!!");
 
 		plate= null;
+		
+		this.setBackground(Color.WHITE);
 
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
 		btnCancel = new JButton("Cancel");
 		btnDone = new JButton("Done");
+		
+		btnCancel.setFont(frame.getFont().deriveFont(30f));
+		btnDone.setFont(frame.getFont().deriveFont(30f));
+
+
 		
 		plateString = new JTextField();
 		plateString.setText("Name of Plate");
@@ -67,6 +74,13 @@ public class EditPlateMenu extends JPanel {
 		panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		btnCancel.setFont(frame.getFont().deriveFont(30f));
+		btnDone.setFont(frame.getFont().deriveFont(30f));
+		
+		btnCancel.setBackground(Color.WHITE);
+		btnDone.setBackground(Color.WHITE);
+
 		
 		add(plateString);
 		add(plateDouble);

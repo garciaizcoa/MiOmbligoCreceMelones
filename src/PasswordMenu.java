@@ -228,6 +228,16 @@ public class PasswordMenu extends JPanel{
 				frame.revalidate(); 
 			}
 		});
+		
+		jButtonClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				textField.setText("");
+				
+				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+				frame.revalidate(); 
+			}
+		});
 			
 		
 		jButtonEnter.addActionListener(new ActionListener() {

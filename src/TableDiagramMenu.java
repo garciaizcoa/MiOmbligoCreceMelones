@@ -93,7 +93,7 @@ public class TableDiagramMenu extends JPanel {
 			numTablesTextBox.setText(numTables+"");
 			refreshTables();
 		}
-
+//5
 		setLayout();
 		add(buttonPanel);
 		add(scrollPane);
