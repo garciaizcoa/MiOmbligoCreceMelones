@@ -3,6 +3,7 @@ import javax.swing.JScrollPane;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -45,14 +46,14 @@ public class TableDiagramMenu extends JPanel {
 		this.frame=frame;
 		this.setBackground(Color.BLACK);
 		panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-
+		panel.setBackground(Color.WHITE);		
 		scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setSize(800, 800);
+		scrollPane.setPreferredSize(new Dimension(900, 500));
+		panel.setLayout(new GridLayout(0, 5, 0, 0));
 		scrollPane.add(panel);
 		scrollPane.setViewportView(panel);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 0, 0, 0));
@@ -126,6 +127,7 @@ public class TableDiagramMenu extends JPanel {
 						numTablesTextBox.setVisible(false);
 						btnEdit.setText("Edit");
 					}
+					scrollPane.revalidate();
 				}
 			}
 		});
