@@ -1,23 +1,19 @@
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
 
 public class TableMenu extends JPanel {
 	
@@ -119,12 +115,12 @@ public class TableMenu extends JPanel {
 		
 	}
 
-	public void setOrderPanel() {
-		//orderPanel.removeAll();
-		JLabel orderDetails = new JLabel("Order of Table #"+table.getTableNumber());
+	public void setOrderPanel(TableDiagramMenu.Table tb) {
+		orderPanel.removeAll();
+		JLabel orderDetails = new JLabel("Order of Table #"+tb.getTableNumber());
 		orderPanel.add(orderDetails);
 		
-		JList lista = new JList(table.orderToStrings().toArray());
+		JList lista = new JList(tb.orderToStrings().toArray());
 		orderPanel.add(lista);
 		orderPanel.repaint();
 		orderPanel.revalidate();
@@ -135,7 +131,7 @@ public class TableMenu extends JPanel {
 	
 		public void setTable(TableDiagramMenu.Table table) {
 			this.table=table;
-			setOrderPanel();
+			setOrderPanel(table);
 		}
 		
 		public void setLayout(){
@@ -149,8 +145,8 @@ public class TableMenu extends JPanel {
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 	                    .addGroup(layout.createSequentialGroup()
 	                        .addGap(50, 50, 50)
-	                        .addComponent(btnBack, 200, 200, 200)
-	                        .addGap(50, 50, 50)
+	                        .addComponent(btnBack,200, 200, 200)
+	                        .addGap(50, 50,50)
 	                        .addComponent(btnKitchen,200, 200, 200)
 	                        .addGap(50, 50, 50)
 	                        .addComponent(btnCustomer,200, 200, 200))
