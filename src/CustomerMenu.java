@@ -158,7 +158,6 @@ public class CustomerMenu extends JPanel {
 
 				}
 
-
 				frame.setContentPane(frame.getCheckoutMenu()); //panel = panel you want to change too.
 				frame.getCheckoutMenu().refresh();
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.

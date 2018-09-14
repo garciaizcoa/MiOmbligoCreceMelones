@@ -27,17 +27,16 @@ public class ProductPanel extends JPanel {
 	public ProductPanel(Frame frame, Plate plate) {
 
 		this.plate = plate;
-		JButton productBtn = new JButton("");
+		JButton productBtn = new JButton();
 		productBtn.setBackground(Color.WHITE);
 		productBtn.setText(plate.getName());
-		//productBtn.setIcon(null);
 
 		JButton menos = new JButton("-");
 		menos.setBackground(Color.WHITE);
 
 		menos.setFont(new Font("Tahoma", Font.PLAIN, 3));
 		menos.setForeground(Color.BLACK);
-//		menos.setIcon(null);
+		
 		menos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent menos) {
 				cantidad = Integer.parseInt(number.getText());
@@ -98,7 +97,6 @@ public class ProductPanel extends JPanel {
 		
 		
 		number.setFont(frame.getFont().deriveFont(15f));
-//		mas.setFont(frame.getFont().deriveFont(5f));
 		productBtn.setFont(frame.getFont().deriveFont(20f));
 	}
 
