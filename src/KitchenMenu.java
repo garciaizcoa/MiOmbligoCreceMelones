@@ -84,7 +84,8 @@ public class KitchenMenu extends JPanel {
 
 		btnOrderUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
+				orderPanel.removeAll();
 				//frame.setContentPane(frame.getKitchenMenu()); //panel = panel you want to change too.
 				frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 				frame.revalidate(); 

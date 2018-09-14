@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class ItemToPay extends JPanel{
@@ -22,8 +23,9 @@ public class ItemToPay extends JPanel{
 
 		JLabel lblName = new JLabel(plate.getName());
 		add(lblName);
-
-		JLabel lblPrice = new JLabel("$ " +Double.toString(plate.getPrice()));
+		
+		DecimalFormat df = new DecimalFormat("0.00");
+		JLabel lblPrice = new JLabel("$ " +df.format(plate.getPrice()));
 		add(lblPrice);
 
 		JLabel lblExtras = new JLabel("");

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -26,7 +27,7 @@ public class CustomerTicketMenu extends JPanel {
 	private JLabel lblTotal;
 	private JLabel lblExtras;
 	private BufferedImage backgroundImg;
-	
+	private JLabel lblTax;
 	private JLabel lblPendingPay;
 	private JLabel lblBeingPayed;
 
@@ -91,7 +92,7 @@ public class CustomerTicketMenu extends JPanel {
 		scrollPane_paid.setViewportView(paidPanel);
 
 		amountsPanel.setLayout(new BoxLayout(amountsPanel, BoxLayout.Y_AXIS));
-		JLabel lblTax = new JLabel("Tax: ");
+		lblTax = new JLabel("Tax: " + taxAmount);
 		amountsPanel.add(lblTax);
 
 		lblExtras = new JLabel("Extras: ");
@@ -211,9 +212,12 @@ public class CustomerTicketMenu extends JPanel {
 			}
 
 		}
-
-		lblTotal.setText("Total: "+ totalAmount);
-		lblExtras.setText("Extras: "+ extrasAmount);
+		taxAmount = (totalAmount *frame.getAdvanceMenu().getTax());
+		totalAmount = (totalAmount *frame.getAdvanceMenu().getTax())+ totalAmount ;
+		DecimalFormat df = new DecimalFormat("0.00");
+		lblTax.setText("Tax:  $"+ df.format(taxAmount));
+		lblTotal.setText("Total:  $"+ df.format(totalAmount));
+		lblExtras.setText("Extras:  $"+ df.format(extrasAmount));
 		lblTotal.repaint();
 		lblTotal.revalidate();
 	}
@@ -238,10 +242,6 @@ public class CustomerTicketMenu extends JPanel {
 	}
 	public void setExtrasAmount(int amount) {
 		this.extrasAmount=amount;
-	}
-
-	public void setTaxAmount(int tax) {
-		this.taxAmount=tax;
 	}
 
 
