@@ -48,12 +48,15 @@ public class TableDiagramMenu extends JPanel {
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);		
 		scrollPane = new JScrollPane();
-		scrollPane.setPreferredSize(new Dimension(900, 500));
+		scrollPane.setPreferredSize(new Dimension(900, 450));
 		panel.setLayout(new GridLayout(0, 5, 0, 0));
 		scrollPane.add(panel);
 		scrollPane.setViewportView(panel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.getViewport().setBackground(Color.BLACK);
+		scrollPane.getViewport().setForeground(Color.WHITE);
+
 
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 0, 0, 0));
