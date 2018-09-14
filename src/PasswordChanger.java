@@ -127,6 +127,7 @@ public class PasswordChanger extends JPanel {
 	}
 
 	public void setPassword() {
+		password = textField.getText();
 		try {
 			Save.savePassword(password);
 		} catch (IOException e) {

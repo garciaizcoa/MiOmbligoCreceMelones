@@ -19,7 +19,7 @@ public class SettingMenu extends JPanel{
 		this.frame = frame;
 		
 		JButton changePassBtn = new JButton("Change Password");
-		JButton advance = new JButton("Advance");
+		JButton advance = new JButton("Advanced");
 		JButton backBTN = new JButton("Back");
 		
 		changePassBtn.setBackground(Color.WHITE);

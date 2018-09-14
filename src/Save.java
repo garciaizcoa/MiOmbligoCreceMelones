@@ -14,15 +14,14 @@ public class Save {
 		Path path = Paths.get("memory/INVENTORY.txt");
 		Files.delete(path);
 		if(!inv.getInventoryList().isEmpty()) {
-		for(Entry<String, Integer> e : inv.getInventoryList().entrySet()){
-			Files.write(path, (e.getKey()+" "+Integer.toString(e.getValue())).getBytes(),StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-			Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
-		}
+			for(Entry<String, Integer> e : inv.getInventoryList().entrySet()){
+				Files.write(path, (e.getKey()+" "+Integer.toString(e.getValue())).getBytes(),StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+				Files.write(path, "\n".getBytes(),StandardOpenOption.APPEND);
+			}
 		}
 		else {
 			Files.write(path, "Empty".getBytes(), StandardOpenOption.CREATE);
 		}
-		//
 	}
 
 	public static void saveToMenu(Plate plate) throws IOException{
@@ -51,26 +50,26 @@ public class Save {
 		}
 
 	}
-	
+
 	public static void saveTableNumber(String tableNum) throws IOException{
 		Path path = Paths.get("memory/TABLES.txt");
 		Files.delete(path);
 		Files.write(path, tableNum.getBytes(), StandardOpenOption.CREATE);
 	}
-	
+
 	public static void savePassword(String password) throws IOException{
 		Path path = Paths.get("memory/PASSWORD.txt");
 		Files.delete(path);
 		Files.write(path, password.getBytes(), StandardOpenOption.CREATE);
 	}
-	
+
 	public static int readTableNumber() throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/TABLES.txt"))){
 			return Integer.parseInt(line);
 		}
 		return 0;
 	}
-	
+
 	public static String readPassword() throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/PASSWORD.txt"))){
 			return line;
@@ -81,49 +80,47 @@ public class Save {
 	public static void readInitialInventory(Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/INVENTORY.txt"))){
 			if(!line.equals("Empty")) {
-			String[] arr = line.split(" ");
-			String item = new String();
-			for(int i=0; i<arr.length-1; i++){
-				if(arr[i+1] == arr[arr.length-1]){
-					item+= arr[i]; 
+				String[] arr = line.split(" ");
+				String item = new String();
+				for(int i=0; i<arr.length-1; i++){
+					if(arr[i+1] == arr[arr.length-1]){
+						item+= arr[i]; 
+					}
+					else{
+						item+= arr[i]+" ";
+					}
 				}
-				else{
-					item+= arr[i]+" ";
-				}
-			}
-			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
+				inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
 			}
 		}
 	}
-
-//	public static void readInitialPassword(PasswordChanger password) throws IOException{
-//		for(String line: Files.readAllLines(Paths.get("memory/PASSWORD.txt"))){
-//			if(!line.equals("Empty")) {
-//			String[] arr = line.split(" ");
-//			String pass = new String();
-//			for(int i=0; i<arr.length-1; i++){
-//				if(arr[i+1] == arr[arr.length-1]){
-//					pass+= arr[i]; 
-//				}
-//			}
-//			pass= password.getPassword();
-////			inv.addItemToInventory(item, Integer.parseInt(arr[arr.length-1]));		
-//			
-//			}
-//		}
-//	}
 
 	public static void readInitialAddPlatesMenu(AddPlateMenu apm, Inventory inv) throws IOException{
 		for(String line: Files.readAllLines(Paths.get("memory/PLATES.txt"))){
 			if(!line.equals("Empty")){
-			String[] arr = line.split("  ");
-			Plate plt = new Plate(arr[0], Double.parseDouble(arr[1]), inv);
-			for(int i=2; i< arr.length; i+=2){
-				plt.addIngredient(arr[i], Integer.parseInt(arr[i+1]));
-			}
-			apm.addToAllPlates(plt);
+				String[] arr = line.split("  ");
+				Plate plt = new Plate(arr[0], Double.parseDouble(arr[1]), inv);
+				for(int i=2; i< arr.length; i+=2){
+					plt.addIngredient(arr[i], Integer.parseInt(arr[i+1]));
+				}
+				apm.addToAllPlates(plt);
 			}
 		}
 
 	}
+	
+	public static void saveTax(String tax) throws IOException{
+		Path path = Paths.get("memory/TAX.txt");
+		Files.delete(path);
+		Files.write(path, tax.getBytes(), StandardOpenOption.CREATE);
+	}
+	
+	public static String readTax() throws IOException{
+		for(String line: Files.readAllLines(Paths.get("memory/TAX.txt"))){
+			return line;
+		}
+		return "1";
+	}
+	
+	
 }

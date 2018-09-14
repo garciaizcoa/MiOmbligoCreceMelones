@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -29,7 +30,8 @@ public class ProductPanel extends JPanel {
 		this.plate = plate;
 		JButton productBtn = new JButton();
 		productBtn.setBackground(Color.WHITE);
-		productBtn.setText(plate.getName()+"  $"+plate.getPrice());
+		DecimalFormat df = new DecimalFormat("0.00");
+		productBtn.setText(plate.getName()+"  $"+df.format(plate.getPrice()));
 
 		JButton menos = new JButton("-");
 		menos.setBackground(Color.WHITE);

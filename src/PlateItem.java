@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -35,7 +36,9 @@ public class PlateItem extends JPanel {
 
 		nameLabel= new JLabel(name);
 		nameLabel.setFont(frame.getFont().deriveFont(18f));
-		amountLabel= new JLabel(" $ "+amount);
+		DecimalFormat df = new DecimalFormat("0.00");
+		Double amt = Double.parseDouble(amount);		
+		amountLabel= new JLabel(" $ "+df.format(amt));
 		amountLabel.setFont(new Font("Century Gothic", Font.LAYOUT_LEFT_TO_RIGHT, 15));
 		editButton = new JButton("Edit");
 		editButton.setFont(frame.getFont().deriveFont(25f));
