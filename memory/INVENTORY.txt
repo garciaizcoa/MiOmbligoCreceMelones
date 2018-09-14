@@ -1,5 +1,16 @@
+arroz 90
 huevo 36
-milk 29
+tomate 55
+alitas 130
+biftec 65
+habichuelas 90
+papas 70
+cebolla 80
 carne 35
-azucar 35
+tortilla 65
+pollo 46
+lechuga 55
+pescado 60
+salsa alfredo 25
+pasta 43
 pan 40

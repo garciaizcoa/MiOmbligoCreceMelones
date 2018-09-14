@@ -1,2 +1,10 @@
-Carne dulce  8.51  carne  1  azucar  1
+Ensalada  4.0  tomate  1  lechuga  1
+pasta alfredo  12.0  salsa alfredo  1  pasta  1  pollo  1
 Revoltillo  5.0  huevo  3  milk  1  pan  1
+Arroz con Habichuelas  3.0  arroz  1  habichuelas  1
+Classic Burger  10.95  tomate  1  carne  1  pan  2  lechuga  1
+Fish Tacos  9.99  pescado  4  tortilla  3  lechuga  3
+Burrito de pollo  8.35  tomate  1  cebolla  1  tortilla  1  pollo  1  lechuga  1
+Fish and Chips  6.0  pescado  2  papas  2
+Biftec encebollado  7.0  biftec  1  cebolla  0
+Alitas con papas  5.55  alitas  5  papas  1

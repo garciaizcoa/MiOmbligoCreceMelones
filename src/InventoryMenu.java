@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -104,11 +105,13 @@ public class InventoryMenu extends JPanel {
 		title = new JLabel("INVENTORY");
 		title.setFont(frame.getFont().deriveFont(50f));
 		panel.add(title);
+		scrollPane.setPreferredSize(new Dimension(500,800));
+		panel.setLayout(new GridLayout(0,1,0,0));
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrollPane);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);	
 		scrollPane.add(panel);
-
+		scrollPane.setViewportView(panel);
+		add(scrollPane);
 
 		for (Map.Entry<String, Integer> entry : frame.getInventory().getInventoryList().entrySet())
 		{

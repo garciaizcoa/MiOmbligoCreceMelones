@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 
 import javax.swing.JTable;
 import java.awt.FlowLayout;
@@ -99,8 +100,10 @@ public class CustomerMenu extends JPanel {
 				tableComboBox.addItem(i);
 			}
 		}
-		tableComboBox.setVisible(false);
+		tableComboBox.setVisible(false);	
 
+		scrollPane_1.setPreferredSize(new Dimension(950, 450));
+		panel.setLayout(new GridLayout(0,2,0,0));
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
