@@ -29,7 +29,7 @@ public class ProductPanel extends JPanel {
 		this.plate = plate;
 		JButton productBtn = new JButton();
 		productBtn.setBackground(Color.WHITE);
-		productBtn.setText(plate.getName());
+		productBtn.setText(plate.getName()+"  $"+plate.getPrice());
 
 		JButton menos = new JButton("-");
 		menos.setBackground(Color.WHITE);

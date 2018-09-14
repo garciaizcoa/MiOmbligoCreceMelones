@@ -17,6 +17,7 @@ public class OrderItem extends JPanel {
 	
 	public OrderItem(Plate plate, Frame frame) {
 		
+		this.plate = plate;
 		this.frame=frame;
 		setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -57,6 +58,8 @@ public class OrderItem extends JPanel {
 		});
 	}
 
-	
+	public Plate getPlate(){
+		return plate;
+	}
 	
 }

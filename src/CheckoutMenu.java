@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -88,9 +90,8 @@ public class CheckoutMenu extends JPanel {
 				System.out.println("printing menu");
 				frame.getMenu().printMenu();
 				
-				panel.removeAll();
 				TableDiagramMenu.Table tab = frame.getTableDiagramMenu().getTableByNumber(frame.getCustomerMenu().getTableNumber());
-				tab.setOrderOfTable(frame.getCustomerMenu().getPlatesList());
+				OrderItems(tab);
 				JLabel thanku = new JLabel("Your order has been placed!");
 				thanku.setAlignmentX(CENTER_ALIGNMENT);
 				Ticket tk = new Ticket(frame.getMenu(), frame.getInventory());
@@ -100,6 +101,7 @@ public class CheckoutMenu extends JPanel {
 				}
 				frame.getCustomerMenu().refresh();
 				frame.getInventoryMenu().refresh(frame.getInventory());
+				panel.removeAll();
 				panel.add(thanku);
 				panel.repaint();
 				panel.revalidate();
@@ -112,7 +114,15 @@ public class CheckoutMenu extends JPanel {
 		add(btnBack);
 		add(scrollPane_1);
 		add(btnOrder);
-		
+			
+	}
+	
+	public void OrderItems(TableDiagramMenu.Table tab){
+		ArrayList<Plate> al = new ArrayList<>();
+		for(Component cmp: panel.getComponents()){
+			al.add(((OrderItem) cmp).getPlate());
+		}
+		tab.setOrderOfTable(al);
 		
 	}
 	

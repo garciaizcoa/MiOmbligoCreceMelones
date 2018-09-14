@@ -46,14 +46,14 @@ public class TableDiagramMenu extends JPanel {
 		this.setBackground(Color.BLACK);
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setSize(800, 800);
 		scrollPane.add(panel);
 		scrollPane.setViewportView(panel);
-		
+
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 0, 0, 0));
 
@@ -68,7 +68,7 @@ public class TableDiagramMenu extends JPanel {
 		btnEdit.setContentAreaFilled(false);
 		btnEdit.setOpaque(true);
 		buttonPanel.add(btnEdit);
-		
+
 		btnBack.setFont(frame.getFont().deriveFont(40f));
 		btnEdit.setFont(frame.getFont().deriveFont(40f));
 
@@ -93,11 +93,11 @@ public class TableDiagramMenu extends JPanel {
 			numTablesTextBox.setText(numTables+"");
 			refreshTables();
 		}
-//5
+
 		setLayout();
 		add(buttonPanel);
 		add(scrollPane);
-		
+
 		try {
 			backgroundImg = ImageIO.read(new File("Images/Background.png"));
 		} catch (IOException e2) {
@@ -190,9 +190,10 @@ public class TableDiagramMenu extends JPanel {
 
 	public class Table extends JPanel{
 
-
 		private int tableNumber;
 		private ArrayList<Plate> orderOfTable = new ArrayList<>();
+		private TableMenu tableMenu;
+		private Table currTable = this;
 
 
 		public Table(int tableNumber){
@@ -204,19 +205,14 @@ public class TableDiagramMenu extends JPanel {
 
 			btnTable.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
-					frame.getTableMenu().setTable(getTableByNumber(tableNumber));
+//getTableByNumber(tableNumber)
+					frame.getTableMenu().setTable(currTable);
 					frame.setContentPane(frame.getTableMenu());
 					frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
 					frame.revalidate();
-
-
 				}
 			});
-
 		}
-
-
 
 		public int getTableNumber(){
 			return tableNumber;
@@ -258,8 +254,8 @@ public class TableDiagramMenu extends JPanel {
 			}
 			return atr;
 		}
+	
 	}
-
 
 
 	public boolean validateNum(String num){
@@ -283,12 +279,12 @@ public class TableDiagramMenu extends JPanel {
 	public int getNumTables() {
 		return numTables;
 	}
-	
+
 	@Override 
 	public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(backgroundImg,0,0, getWidth(),getHeight(), this);
-    }
-	
+		super.paintComponent(g);
+		g.drawImage(backgroundImg,0,0, getWidth(),getHeight(), this);
+	}
+
 
 }
